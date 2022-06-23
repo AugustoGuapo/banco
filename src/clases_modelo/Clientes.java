@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author user
  */
 public class Clientes {
-    private String ID;
+    private int ID;
     private String nombre;
     private String numeroDeDocumento;
     private LocalDate fechaDeNacimiento;
@@ -22,14 +22,14 @@ public class Clientes {
     /**
      * @return the systemID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the systemID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 

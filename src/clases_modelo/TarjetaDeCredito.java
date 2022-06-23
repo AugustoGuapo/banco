@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author user
  */
 public class TarjetaDeCredito {
-    private String ID;
+    private int ID;
     private String numeroDeTarjeta;
     private LocalDate fechaDeVencimiento;
     private String CVV;
@@ -23,14 +23,14 @@ public class TarjetaDeCredito {
     /**
      * @return the ID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -148,7 +148,7 @@ public class TarjetaDeCredito {
     private int contarTDCs(TarjetaDeCredito[] arreglo, String id) {
         int salida=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID().equals(id))
+            if(arreglo[i].getID() == ID)
                 salida++;
         }
         return salida;
@@ -158,7 +158,7 @@ public class TarjetaDeCredito {
         int[] posiciones = new int[contarTDCs(arreglo, id)];
         int posicion=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID().equals(id)) {
+            if (arreglo[i].getID() == ID) {
                 posiciones[posicion]=i;
                 posicion++;
             }  

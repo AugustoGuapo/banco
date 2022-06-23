@@ -70,7 +70,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
-        tbxUsuari = new javax.swing.JTextField();
+        tbxUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(getPreferredSize());
@@ -194,7 +194,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                             .addComponent(tbxNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tbxEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbxUsuari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tbxUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tbxNumTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +251,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                     .addComponent(tbxNumTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbxUsuari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbxUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +298,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Email invalido");
                 throw new Exception("Email invalido");
             }
-            if (idNumberValidation(tbxDocumento.getText())) {
+            if (idNumberValidation()) {
                 clienteNuevo.setNumeroDeDocumento(tbxDocumento.getText());
             } else {
                 JOptionPane.showMessageDialog(this, "Documento invalido");
@@ -306,9 +306,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
             clienteNuevo.setFechaDeNacimiento(convertirFecha(dtcFechaNacimiento.getDate()));
             clienteNuevo.setSexo(rbtSexo.getSelection().getActionCommand());
-            clienteNuevo.setNumeroTelefono(tbxUsuari.getText());
+            clienteNuevo.setNumeroTelefono(tbxNumTelefono.getText());
             if(validarUsuario())
-                BaseDeDatos.usuariosPendientes.add(tbxNumTelefono.getText());
+                BaseDeDatos.usuariosPendientes.add(tbxUsuario.getText());
             else
                 throw new ArithmeticException();
             if (Arrays.equals(jPasswordField1.getPassword(),jPasswordField2.getPassword()))
@@ -319,22 +319,20 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             BaseDeDatos.tiposDeCuentaPendientes.add(rbtCuenta.getSelection().getActionCommand());
         } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(rootPane, "Nombre de usuario no disponible");
-        } catch (NullPointerException ne) {
-            JOptionPane.showMessageDialog(rootPane, "Contraseñas no coinciden");
-        } catch (Exception ex) {
+        }  catch (Exception ex) {
             Logger.getLogger(CreacionDeCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private boolean idNumberValidation(String idNumber) {
+    private boolean idNumberValidation() {
         boolean salida = true;
-        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaClientes(); i++) {
-            if (BaseDeDatos.sistema.getCliente(i).getNumeroDeDocumento().equals(idNumber)) {
+        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaClientes()-1; i++) {
+            if(tbxDocumento.getText().equals(BaseDeDatos.sistema.getCliente(i).getNumeroDeDocumento())) 
                 salida = false;
-            }
-            if(BaseDeDatos.clientesPendientes.get(i).getID().equals(idNumber)){
+        }
+        for (int i = 0; i < BaseDeDatos.clientesPendientes.size(); i++) {
+            if(tbxDocumento.getText().equals(BaseDeDatos.clientesPendientes.get(i).getNumeroDeDocumento()))
                 salida = false;
-            }
         }
         return salida;
     }
@@ -372,11 +370,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private boolean validarUsuario() {
         boolean salida = true;
         for (int i = 0; i < BaseDeDatos.login.getCantUsuarios(); i++) {
-            if(tbxNumTelefono.getText().equals(BaseDeDatos.login.getUsuario(i))) 
+            if(tbxUsuario.getText().equals(BaseDeDatos.login.getUsuario(i))) 
                 salida = false;
         }
         for (int i = 0; i < BaseDeDatos.usuariosPendientes.size(); i++) {
-            if(tbxNumTelefono.getText().equals(BaseDeDatos.usuariosPendientes.get(i)))
+            if(tbxUsuario.getText().equals(BaseDeDatos.usuariosPendientes.get(i)))
                 salida = false;
         }
         return salida;
@@ -450,6 +448,6 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField tbxEmail;
     private javax.swing.JTextField tbxNombre;
     private javax.swing.JTextField tbxNumTelefono;
-    private javax.swing.JTextField tbxUsuari;
+    private javax.swing.JTextField tbxUsuario;
     // End of variables declaration//GEN-END:variables
 }

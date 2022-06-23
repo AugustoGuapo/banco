@@ -279,7 +279,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         eliminarClientePendiente();
         llenarComboBox();
         
-        BaseDeDatos.cuentaDeID = String.valueOf(Integer.parseInt(BaseDeDatos.cuentaDeID +1));
+        BaseDeDatos.cuentaDeID++;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void eliminarClientePendiente() {

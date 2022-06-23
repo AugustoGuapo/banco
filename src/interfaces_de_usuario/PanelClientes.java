@@ -4,6 +4,9 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.Clientes;
+import clases_modelo.Cuentas;
+
 /**
  *
  * @author user
@@ -17,6 +20,13 @@ public class PanelClientes extends javax.swing.JFrame {
         this.setContentPane(new PlantillaInterfacesGrandes());
         initComponents();
     }
+    
+    Clientes clienteSesionIniciada = BaseDeDatos.sistema.getCliente(BaseDeDatos.IDsesionIniciada);
+    String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
+    Cuentas cuenta = BaseDeDatos.sistema.getCuenta(BaseDeDatos.IDsesionIniciada);
+    String nroCuenta = cuenta.getNumeroCuenta();
+    String saldo = String.valueOf(cuenta.getSaldo());
+    String tipoDeCuenta = cuenta.getTipoDeCuenta();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,22 +37,128 @@ public class PanelClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        tagSaldo = new javax.swing.JLabel();
+        lblNroCuenta = new javax.swing.JLabel();
+        tagConsignar = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        tagRetirar = new javax.swing.JLabel();
+        bienvenidaUsuario = new javax.swing.JLabel();
+        tagNroCuenta = new javax.swing.JLabel();
+        tagTipoCuenta = new javax.swing.JLabel();
+        lblTipoCuenta = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tagSaldo.setText("Saldo");
+
+        lblNroCuenta.setText(nroCuenta);
+
+        tagConsignar.setText("Consignar");
+
+        lblSaldo.setText(saldo);
+
+        tagRetirar.setText("Retirar");
+
+        bienvenidaUsuario.setText(bienvenida);
+
+        tagNroCuenta.setText("Número de cuenta");
+
+        tagTipoCuenta.setText("Tipo de cuenta");
+
+        lblTipoCuenta.setText("jLabel9");
+
+        jLabel1.setText("Saldo total");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tagConsignar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tagRetirar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblNroCuenta)
+                                .addGap(315, 315, 315)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTipoCuenta))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSaldo)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(tagNroCuenta)
+                                    .addGap(251, 251, 251)
+                                    .addComponent(tagSaldo))
+                                .addComponent(bienvenidaUsuario))
+                            .addComponent(jLabel1))
+                        .addGap(30, 30, 30)
+                        .addComponent(tagTipoCuenta)))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bienvenidaUsuario)
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tagSaldo)
+                    .addComponent(tagNroCuenta)
+                    .addComponent(tagTipoCuenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNroCuenta)
+                    .addComponent(lblSaldo)
+                    .addComponent(lblTipoCuenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tagConsignar)
+                    .addComponent(tagRetirar))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Posición Consolidada", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(110, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void actualizarCuenta() {
+        BaseDeDatos.sistema.setCuenta(cuenta, BaseDeDatos.IDsesionIniciada);
+    }
+    public String pronombreSaludo() {
+        if (clienteSesionIniciada.getSexo().equals("Masculino"))
+            return "Sr. ";
+        else
+            return "Sra. ";
+    }
     /**
      * @param args the command line arguments
      */
@@ -79,5 +195,17 @@ public class PanelClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bienvenidaUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lblNroCuenta;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JLabel lblTipoCuenta;
+    private javax.swing.JLabel tagConsignar;
+    private javax.swing.JLabel tagNroCuenta;
+    private javax.swing.JLabel tagRetirar;
+    private javax.swing.JLabel tagSaldo;
+    private javax.swing.JLabel tagTipoCuenta;
     // End of variables declaration//GEN-END:variables
 }

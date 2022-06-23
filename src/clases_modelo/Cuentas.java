@@ -9,7 +9,7 @@ package clases_modelo;
  * @author user
  */
 public class Cuentas {
-    private String ID;
+    private int ID;
     private String numeroCuenta;
     private String tipoDeCuenta;
     private float saldo;
@@ -17,14 +17,14 @@ public class Cuentas {
     /**
      * @return the ID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -81,7 +81,7 @@ public class Cuentas {
     private int contarCuentas(Cuentas[] arreglo, String id) {
         int salida=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID().equals(id))
+            if(arreglo[i].getID() == ID)
                 salida++;
         }
         return salida;
@@ -91,7 +91,7 @@ public class Cuentas {
         int[] posiciones = new int[contarCuentas(arreglo, id)];
         int posicion=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID().equals(id)) {
+            if (arreglo[i].getID() == ID) {
                 posiciones[posicion]=i;
                 posicion++;
             }  

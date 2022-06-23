@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author user
  */
 public class Empleados {
-    private String ID;
+    private int ID;
     private String nombre;
     private String numeroDeDocumento;
     private LocalDate fechaDeNacimiento;
@@ -23,14 +23,14 @@ public class Empleados {
     /**
      * @return the ID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 

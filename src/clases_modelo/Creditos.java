@@ -9,7 +9,7 @@ package clases_modelo;
  * @author user
  */
 public class Creditos {
-    private String ID;
+    private int ID;
     private String tipoDeCredito;
     private float tasaDeInteres;
     private float monto;
@@ -20,14 +20,14 @@ public class Creditos {
     /**
      * @return the ID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -119,7 +119,7 @@ public class Creditos {
     private int contarCreditos(Creditos[] arreglo, String id) {
         int salida=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID().equals(id))
+            if(arreglo[i].getID() == ID)
                 salida++;
         }
         return salida;
@@ -129,7 +129,7 @@ public class Creditos {
         int[] posiciones = new int[contarCreditos(arreglo, id)];
         int posicion=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID().equals(id)) {
+            if (arreglo[i].getID() == ID) {
                 posiciones[posicion]=i;
                 posicion++;
             }  

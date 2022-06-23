@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class BdParaInicioSesion {
     private String[] usuarios;
     private String[] contraseñas;
-    private ArrayList<String> ID = new ArrayList();
+    private ArrayList<Integer> ID = new ArrayList();
     
     public BdParaInicioSesion() {
         usuarios = new String[1];
@@ -41,11 +41,11 @@ public class BdParaInicioSesion {
         return contraseñas[pos];
     }
     
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID.add(ID);
     }
     
-    public String getID(int pos) {
+    public int getID(int pos) {
         return ID.get(pos);
     }
     

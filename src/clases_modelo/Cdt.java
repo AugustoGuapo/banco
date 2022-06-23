@@ -9,7 +9,7 @@ package clases_modelo;
  * @author user
  */
 public class Cdt {
-    private String ID;
+    private int ID;
     private float tasaDeInteres;
     private int plazo;
     private float montoDepositado;
@@ -19,14 +19,14 @@ public class Cdt {
     /**
      * @return the ID
      */
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
     
@@ -124,7 +124,7 @@ public class Cdt {
     private int contarCDTs(Cdt[] arreglo, String id) {
         int salida=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID().equals(id))
+            if(arreglo[i].getID()==ID)
                 salida++;
         }
         return salida;
@@ -134,7 +134,7 @@ public class Cdt {
         int[] posiciones = new int[contarCDTs(arreglo, id)];
         int posicion=0;
         for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID().equals(id)) {
+            if (arreglo[i].getID() == ID) {
                 posiciones[posicion]=i;
                 posicion++;
             }  
