@@ -6,6 +6,8 @@ package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
+import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -19,14 +21,13 @@ public class PanelClientes extends javax.swing.JFrame {
     public PanelClientes() {
         this.setContentPane(new PlantillaInterfacesGrandes());
         initComponents();
+        incializarVentana();
     }
     
     Clientes clienteSesionIniciada = BaseDeDatos.sistema.getCliente(BaseDeDatos.IDsesionIniciada);
     String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
-    Cuentas cuenta = BaseDeDatos.sistema.getCuenta(BaseDeDatos.IDsesionIniciada);
-    String nroCuenta = cuenta.getNumeroCuenta();
-    String saldo = String.valueOf(cuenta.getSaldo());
-    String tipoDeCuenta = cuenta.getTipoDeCuenta();
+    ArrayList <Cuentas>cuentasCliente = new ArrayList();
+    int contador = 0;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,27 +41,24 @@ public class PanelClientes extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         tagSaldo = new javax.swing.JLabel();
-        lblNroCuenta = new javax.swing.JLabel();
-        tagConsignar = new javax.swing.JLabel();
-        lblSaldo = new javax.swing.JLabel();
-        tagRetirar = new javax.swing.JLabel();
+        lbl1NroCuenta = new javax.swing.JLabel();
+        lbl1Saldo = new javax.swing.JLabel();
         bienvenidaUsuario = new javax.swing.JLabel();
         tagNroCuenta = new javax.swing.JLabel();
         tagTipoCuenta = new javax.swing.JLabel();
-        lblTipoCuenta = new javax.swing.JLabel();
+        lbl1TipoCuenta = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lbl2NroCuenta = new javax.swing.JLabel();
+        lbl2Saldo = new javax.swing.JLabel();
+        lbl2TipoCuenta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tagSaldo.setText("Saldo");
 
-        lblNroCuenta.setText(nroCuenta);
+        lbl1NroCuenta.setText("esto es una prueba");
 
-        tagConsignar.setText("Consignar");
-
-        lblSaldo.setText(saldo);
-
-        tagRetirar.setText("Retirar");
+        lbl1Saldo.setText("esto es una preuba");
 
         bienvenidaUsuario.setText(bienvenida);
 
@@ -68,9 +66,15 @@ public class PanelClientes extends javax.swing.JFrame {
 
         tagTipoCuenta.setText("Tipo de cuenta");
 
-        lblTipoCuenta.setText("jLabel9");
+        lbl1TipoCuenta.setText("jLabel9");
 
         jLabel1.setText("Saldo total");
+
+        lbl2NroCuenta.setText("jLabel2");
+
+        lbl2Saldo.setText("jLabel3");
+
+        lbl2TipoCuenta.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,28 +84,31 @@ public class PanelClientes extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tagConsignar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tagRetirar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNroCuenta)
-                                .addGap(315, 315, 315)))
+                        .addComponent(lbl1NroCuenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTipoCuenta))
+                        .addComponent(lbl1TipoCuenta))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSaldo)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(tagNroCuenta)
-                                    .addGap(251, 251, 251)
-                                    .addComponent(tagSaldo))
-                                .addComponent(bienvenidaUsuario))
-                            .addComponent(jLabel1))
-                        .addGap(30, 30, 30)
-                        .addComponent(tagTipoCuenta)))
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lbl1Saldo)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tagNroCuenta)
+                                        .addGap(251, 251, 251)
+                                        .addComponent(tagSaldo))
+                                    .addComponent(bienvenidaUsuario))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lbl2NroCuenta)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl2Saldo))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(tagTipoCuenta))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl2TipoCuenta)))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,17 +123,21 @@ public class PanelClientes extends javax.swing.JFrame {
                     .addComponent(tagTipoCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNroCuenta)
-                    .addComponent(lblSaldo)
-                    .addComponent(lblTipoCuenta))
+                    .addComponent(lbl1NroCuenta)
+                    .addComponent(lbl1Saldo)
+                    .addComponent(lbl1TipoCuenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl2NroCuenta)
+                    .addComponent(lbl2Saldo)
+                    .addComponent(lbl2TipoCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(79, 79, 79)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tagConsignar)
-                    .addComponent(tagRetirar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
+
+        if (cuentasCliente.size()==1)
+        lbl2NroCuenta.setText(null);
 
         jTabbedPane2.addTab("Posición Consolidada", jPanel1);
 
@@ -150,8 +161,15 @@ public class PanelClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void actualizarCuenta() {
-        BaseDeDatos.sistema.setCuenta(cuenta, BaseDeDatos.IDsesionIniciada);
+    public void actualizarCuentas() {
+        int pos = 0;
+        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaCuentas(); i++) {
+            if(cuentasCliente.get(pos).getID() == BaseDeDatos.sistema.getCuenta(i).getID()) {
+                BaseDeDatos.sistema.setCuenta(cuentasCliente.get(pos),i);
+                pos++;
+            }
+                
+        }
     }
     public String pronombreSaludo() {
         if (clienteSesionIniciada.getSexo().equals("Masculino"))
@@ -159,6 +177,35 @@ public class PanelClientes extends javax.swing.JFrame {
         else
             return "Sra. ";
     }
+    
+    public final void incializarVentana() {
+        buscarCuentas();
+        llenarEtiquetas();
+    }
+    public void buscarCuentas() {
+        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaCuentas() -1; i++) {
+            if(BaseDeDatos.sistema.getCuenta(i).getID() == clienteSesionIniciada.getID())
+                cuentasCliente.add(BaseDeDatos.sistema.getCuenta(i));
+        }
+    }
+    
+    public void llenarEtiquetas() {
+       javax.swing.JLabel[] etiquetasCuenta1 = {lbl1NroCuenta, lbl1Saldo,lbl1TipoCuenta};
+       javax.swing.JLabel[] etiquetasCuenta2 = {lbl2NroCuenta, lbl2Saldo, lbl2TipoCuenta};
+       javax.swing.JLabel[][] etiquetas = {etiquetasCuenta1, etiquetasCuenta2};
+        for (int i = 0; i < cuentasCliente.size(); i++) {
+            etiquetas[i][0].setText(cuentasCliente.get(i).getNumeroCuenta());
+            etiquetas[i][1].setText(String.valueOf(cuentasCliente.get(i).getSaldo()));
+            etiquetas[i][2].setText(cuentasCliente.get(i).getTipoDeCuenta());
+        }
+        if (cuentasCliente.size()==1) {
+            for (int i = 0; i < 3; i++) {
+                etiquetasCuenta2[i].setText(null);
+            }
+            lbl2NroCuenta.setText("Haga clic si desea pedir una nueva cuenta");
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -199,12 +246,13 @@ public class PanelClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JLabel lblNroCuenta;
-    private javax.swing.JLabel lblSaldo;
-    private javax.swing.JLabel lblTipoCuenta;
-    private javax.swing.JLabel tagConsignar;
+    private javax.swing.JLabel lbl1NroCuenta;
+    private javax.swing.JLabel lbl1Saldo;
+    private javax.swing.JLabel lbl1TipoCuenta;
+    private javax.swing.JLabel lbl2NroCuenta;
+    private javax.swing.JLabel lbl2Saldo;
+    private javax.swing.JLabel lbl2TipoCuenta;
     private javax.swing.JLabel tagNroCuenta;
-    private javax.swing.JLabel tagRetirar;
     private javax.swing.JLabel tagSaldo;
     private javax.swing.JLabel tagTipoCuenta;
     // End of variables declaration//GEN-END:variables

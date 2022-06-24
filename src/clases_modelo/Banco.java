@@ -20,10 +20,10 @@ public class Banco {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //InicioSesion ventana = new InicioSesion();
+        InicioSesion ventana = new InicioSesion();
         //CreacionDeCuenta ventana = new CreacionDeCuenta();
         //PanelEmpleados ventana = new PanelEmpleados();
-        PanelClientes ventana = new PanelClientes();
+        //PanelClientes ventana = new PanelClientes();
         ventana.setVisible(true);
     }
     

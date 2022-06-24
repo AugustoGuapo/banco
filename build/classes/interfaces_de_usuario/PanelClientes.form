@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -57,39 +57,44 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="tagConsignar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="tagRetirar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblNroCuenta" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="315" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="lbl1NroCuenta" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblTipoCuenta" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl1TipoCuenta" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblSaldo" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="tagNroCuenta" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                                          <Component id="tagSaldo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="lbl1Saldo" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="tagNroCuenta" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+                                              <Component id="tagSaldo" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="bienvenidaUsuario" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="bienvenidaUsuario" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lbl2NroCuenta" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="lbl2Saldo" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="tagTipoCuenta" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="tagTipoCuenta" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="lbl2TipoCuenta" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace pref="95" max="32767" attributes="0"/>
@@ -109,18 +114,19 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNroCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTipoCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1NroCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1Saldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1TipoCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl2NroCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl2Saldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl2TipoCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tagConsignar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tagRetirar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="127" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -131,28 +137,14 @@
                 <Property name="text" type="java.lang.String" value="Saldo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblNroCuenta">
+            <Component class="javax.swing.JLabel" name="lbl1NroCuenta">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="nroCuenta" type="code"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="esto es una prueba"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="tagConsignar">
+            <Component class="javax.swing.JLabel" name="lbl1Saldo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consignar"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblSaldo">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="saldo" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="tagRetirar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Retirar"/>
+                <Property name="text" type="java.lang.String" value="esto es una preuba"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="bienvenidaUsuario">
@@ -172,7 +164,7 @@
                 <Property name="text" type="java.lang.String" value="Tipo de cuenta"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblTipoCuenta">
+            <Component class="javax.swing.JLabel" name="lbl1TipoCuenta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel9"/>
               </Properties>
@@ -180,6 +172,24 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Saldo total"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl2NroCuenta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel2"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if (cuentasCliente.size()==1)&#xa;    lbl2NroCuenta.setText(null);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl2Saldo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel3"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl2TipoCuenta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel2"/>
               </Properties>
             </Component>
           </SubComponents>

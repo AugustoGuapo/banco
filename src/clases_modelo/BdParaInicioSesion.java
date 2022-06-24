@@ -63,8 +63,8 @@ public class BdParaInicioSesion {
     
     public int verificarPosicionUsuario(String nombre) {
         int posicion =-1;
-        for (int i = 0; i<usuarios.length; i++) {
-            if(usuarios[i].equals(nombre)) {
+        for (int i = 0; i<usuarios.length-1; i++) {
+            if(usuarios[i].equalsIgnoreCase(nombre)) {
                 posicion=i;
                 break;
             }

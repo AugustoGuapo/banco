@@ -18,7 +18,7 @@ public class BaseDeDatos {
     public static ArrayList<String> usuariosPendientes = new ArrayList();
     public static ArrayList<String> contraseñasPendientes = new ArrayList();
     public static ArrayList<String> tiposDeCuentaPendientes = new ArrayList();
-    public static int cuentaDeID = 0;
+    public static int contadorParaId = 0;
     public static int IDsesionIniciada;
     
     

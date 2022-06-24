@@ -121,8 +121,9 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(BaseDeDatos.login.verificarClave(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))) {
-            new PanelEmpleados().setVisible(true);
-            BaseDeDatos.cuentaDeID = BaseDeDatos.login.getID(BaseDeDatos.login.verificarPosicionUsuario(jTextField1.getText()));
+            new PanelClientes().setVisible(true);
+            this.setVisible(false);
+            BaseDeDatos.contadorParaId = BaseDeDatos.login.getID(BaseDeDatos.login.verificarPosicionUsuario(jTextField1.getText()));
         }
         else 
             JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");

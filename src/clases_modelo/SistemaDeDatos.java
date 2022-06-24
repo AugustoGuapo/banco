@@ -46,6 +46,7 @@ public class SistemaDeDatos {
     
     public void setCuenta(Cuentas cuenta, int pos) {
         listaCuentas[pos] = cuenta;
+        aumentarListaCuentas();
     }
     
     public Cuentas getCuenta(int pos) {

@@ -33,6 +33,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         this.setSize(400, 500);
     }
 
+    Clientes clienteNuevo = new Clientes();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,44 +288,59 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Clientes clienteNuevo = new Clientes();
+            agregarCorreoElectronico();
+            agregarDocumentoIdentidad();
             clienteNuevo.setNombre(tbxNombre.getText());
-            //Write a regex for email validation
-            String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-            Pattern patternEmail = Pattern.compile(regexEmail, Pattern.CASE_INSENSITIVE);
-            if (patternEmail.matcher(tbxEmail.getText()).matches()) {
-                clienteNuevo.setCorreoElectronico(tbxEmail.getText());
-            } else {
-                JOptionPane.showMessageDialog(this, "Email invalido");
-                throw new Exception("Email invalido");
-            }
-            if (idNumberValidation()) {
-                clienteNuevo.setNumeroDeDocumento(tbxDocumento.getText());
-            } else {
-                JOptionPane.showMessageDialog(this, "Documento invalido");
-                throw new Exception("Documento invalido");
-            }
             clienteNuevo.setFechaDeNacimiento(convertirFecha(dtcFechaNacimiento.getDate()));
             clienteNuevo.setSexo(rbtSexo.getSelection().getActionCommand());
             clienteNuevo.setNumeroTelefono(tbxNumTelefono.getText());
-            if(validarUsuario())
-                BaseDeDatos.usuariosPendientes.add(tbxUsuario.getText());
-            else
-                throw new ArithmeticException();
-            if (Arrays.equals(jPasswordField1.getPassword(),jPasswordField2.getPassword()))
-                BaseDeDatos.contraseñasPendientes.add(String.valueOf(jPasswordField1.getPassword()));
-            else
-                throw new NullPointerException();
+            agregarNombreUsuario();
+            agregarContraseña(); 
             BaseDeDatos.clientesPendientes.add(clienteNuevo);
             BaseDeDatos.tiposDeCuentaPendientes.add(rbtCuenta.getSelection().getActionCommand());
-        } catch (ArithmeticException e) {
-            JOptionPane.showMessageDialog(rootPane, "Nombre de usuario no disponible");
-        }  catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(CreacionDeCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private boolean idNumberValidation() {
+    private void agregarCorreoElectronico() throws Exception {
+        String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        Pattern patternEmail = Pattern.compile(regexEmail, Pattern.CASE_INSENSITIVE);
+        if (patternEmail.matcher(tbxEmail.getText()).matches()) {
+            clienteNuevo.setCorreoElectronico(tbxEmail.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Email invalido");
+            throw new Exception("Email invalido");
+        }
+    }
+
+    private void agregarDocumentoIdentidad() throws Exception {
+        if (validacionDocumento()) {
+            clienteNuevo.setNumeroDeDocumento(tbxDocumento.getText());
+        } else {
+            JOptionPane.showMessageDialog(this, "Documento invalido");
+            throw new Exception("Documento invalido");
+        }
+    }
+
+    private void agregarNombreUsuario() throws Exception {
+        if(validarUsuario())
+            BaseDeDatos.usuariosPendientes.add(tbxUsuario.getText());
+        else{
+            JOptionPane.showMessageDialog(this, "Nombre de usuario no disponible");
+            throw new Exception("Nombre de usuario no disponible");
+        }
+    }
+
+    private void agregarContraseña() throws Exception {
+        if (Arrays.equals(jPasswordField1.getPassword(),jPasswordField2.getPassword()))
+            BaseDeDatos.contraseñasPendientes.add(String.valueOf(jPasswordField1.getPassword()));
+        else{
+            throw new Exception("Contraseñas no coinciden");
+        }
+    }
+
+    private boolean validacionDocumento() {
         boolean salida = true;
         for (int i = 0; i < BaseDeDatos.sistema.tamañoListaClientes()-1; i++) {
             if(tbxDocumento.getText().equals(BaseDeDatos.sistema.getCliente(i).getNumeroDeDocumento())) 

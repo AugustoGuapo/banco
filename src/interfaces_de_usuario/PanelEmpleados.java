@@ -265,21 +265,22 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Cuentas cuentaNueva = new Cuentas();
-        clienteSeleccionado.setID(BaseDeDatos.cuentaDeID );
-        cuentaNueva.setID(BaseDeDatos.cuentaDeID );
+        clienteSeleccionado.setID(BaseDeDatos.contadorParaId);
+        cuentaNueva.setID(BaseDeDatos.contadorParaId);
         indClienteSeleccionado = jComboBox1.getSelectedIndex();
         cuentaNueva.setTipoDeCuenta(BaseDeDatos.tiposDeCuentaPendientes.get(indClienteSeleccionado));
         cuentaNueva.setNumeroCuenta(crearNumeroCuenta());
         BaseDeDatos.sistema.setCliente(clienteSeleccionado, BaseDeDatos.sistema.tamañoListaClientes()-1);
-        BaseDeDatos.login.setID(BaseDeDatos.cuentaDeID );
+        BaseDeDatos.login.setID(BaseDeDatos.contadorParaId );
         BaseDeDatos.login.setUsuario(BaseDeDatos.usuariosPendientes.get(indClienteSeleccionado));
         BaseDeDatos.login.setContraseña(BaseDeDatos.contraseñasPendientes.get(indClienteSeleccionado));
+        BaseDeDatos.sistema.setCuenta(cuentaNueva, BaseDeDatos.sistema.tamañoListaCuentas()-1);
         
         jTextArea1.setText("");
         eliminarClientePendiente();
         llenarComboBox();
         
-        BaseDeDatos.cuentaDeID++;
+        BaseDeDatos.contadorParaId++;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void eliminarClientePendiente() {
