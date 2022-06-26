@@ -4,6 +4,7 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.Clientes;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -130,15 +131,18 @@ public class CambioDeContraseña extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         InicioSesion is = new InicioSesion();
-        int posicionUsuario = BaseDeDatos.login.verificarPosicionUsuario(jTextField1.getText());
-        if (Arrays.equals(jPasswordField1.getPassword(), jPasswordField2.getPassword())) {
-            BaseDeDatos.login.setContraseña(String.valueOf(jPasswordField1.getPassword()), posicionUsuario);
-            JOptionPane.showMessageDialog(rootPane, "¡Cambio de contraseña exitoso!");
-            is.setVisible(true);
-            this.setVisible(false);
-        }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "Revise los datos");
+        for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
+            if(BaseDeDatos.sistema.getCliente(i).getCredenciales().getUsuario().equals(jTextField1.getText())) {
+                if (Arrays.equals(jPasswordField1.getPassword(), jPasswordField2.getPassword())) {
+                    BaseDeDatos.sistema.getCliente(i).getCredenciales().setContraseña(String.valueOf(jPasswordField1.getPassword()));
+                    JOptionPane.showMessageDialog(rootPane, "¡Cambio de contraseña exitoso!");
+                    is.setVisible(true);
+                    this.setVisible(false);
+                }
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "Revise los datos");
+                }
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

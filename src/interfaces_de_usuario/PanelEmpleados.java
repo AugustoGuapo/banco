@@ -6,7 +6,11 @@ package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
+import javax.swing.DefaultComboBoxModel;
+
 
 /**
  *
@@ -25,7 +29,10 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }
     Clientes clienteSeleccionado;
     String ID = "0";
-    int indClienteSeleccionado;
+    int indiceClienteSeleccionado;
+    int idClienteSeleccionado;
+    ArrayList<Integer> indicesClientesPendientes = new ArrayList();
+    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,11 +79,6 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setSelectedIndex(-1);
-        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox1MouseClicked(evt);
-            }
-        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -133,7 +135,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Cuentas pendientes", jPanel2);
+        jTabbedPane1.addTab("Nuevos clientes", jPanel2);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -200,7 +202,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Creditos pendientes", jPanel3);
+        jTabbedPane1.addTab("Productos pendientes", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -213,7 +215,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
             .addGap(0, 371, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab3", jPanel4);
+        jTabbedPane1.addTab("Base de datos clientes", jPanel4);
 
         jLabel3.setText("Cerrar sesión");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -264,35 +266,22 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Cuentas cuentaNueva = new Cuentas();
-        clienteSeleccionado.setID(BaseDeDatos.contadorParaId);
-        cuentaNueva.setID(BaseDeDatos.contadorParaId);
-        indClienteSeleccionado = jComboBox1.getSelectedIndex();
-        cuentaNueva.setTipoDeCuenta(BaseDeDatos.tiposDeCuentaPendientes.get(indClienteSeleccionado));
-        cuentaNueva.setNumeroCuenta(crearNumeroCuenta());
-        BaseDeDatos.sistema.setCliente(clienteSeleccionado, BaseDeDatos.sistema.tamañoListaClientes()-1);
-        BaseDeDatos.login.setID(BaseDeDatos.contadorParaId );
-        BaseDeDatos.login.setUsuario(BaseDeDatos.usuariosPendientes.get(indClienteSeleccionado));
-        BaseDeDatos.login.setContraseña(BaseDeDatos.contraseñasPendientes.get(indClienteSeleccionado));
-        BaseDeDatos.sistema.setCuenta(cuentaNueva, BaseDeDatos.sistema.tamañoListaCuentas()-1);
-        
-        jTextArea1.setText("");
-        eliminarClientePendiente();
+        BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).setEstado("Activo");
+        BaseDeDatos.buscarCuentaPendientePorID(idClienteSeleccionado).setEstado("Activo");
         llenarComboBox();
-        
-        BaseDeDatos.contadorParaId++;
+        jTextArea1.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void eliminarClientePendiente() {
-        BaseDeDatos.clientesPendientes.remove(indClienteSeleccionado);
-        BaseDeDatos.usuariosPendientes.remove(indClienteSeleccionado);
-        BaseDeDatos.contraseñasPendientes.remove(indClienteSeleccionado);
-        BaseDeDatos.tiposDeCuentaPendientes.remove(indClienteSeleccionado);
+        BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).setEstado("Inactivo");
+        BaseDeDatos.buscarCuentaPendientePorID(idClienteSeleccionado).setEstado("Inactivo");
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        indClienteSeleccionado = jComboBox1.getSelectedIndex();
+        indiceClienteSeleccionado = jComboBox1.getSelectedIndex();
         eliminarClientePendiente();
+        jTextArea1.setText("");
+        llenarComboBox();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -301,29 +290,40 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if(jComboBox1.getSelectedIndex()!=-1)
+        if(jComboBox1.getSelectedIndex()!=-1) {
             llenarTextArea();
+            indiceClienteSeleccionado = indicesClientesPendientes.get(jComboBox1.getSelectedIndex());
+            idClienteSeleccionado = BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).getID();
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        llenarTextArea();
-    }//GEN-LAST:event_jComboBox1MouseClicked
-
+    
+    private void buscarIndicesClientesPendientes() {
+        indicesClientesPendientes.clear();
+        for (int i = 0; i<BaseDeDatos.sistema.cantClientes(); i++) {
+            if(BaseDeDatos.sistema.getCliente(i).getEstado().equals("Pendiente"))
+            indicesClientesPendientes.add(i);
+        }
+    }
+    
     private void llenarComboBox() {
         jComboBox1.removeAllItems();
-        for (int i = 0; i < BaseDeDatos.clientesPendientes.size(); i++) {
-            jComboBox1.addItem(BaseDeDatos.clientesPendientes.get(i).getNombre());
+        modelo.removeAllElements();
+        buscarIndicesClientesPendientes();
+        for (Integer i : indicesClientesPendientes) {
+            modelo.addElement(BaseDeDatos.sistema.getCliente(i).getNombre());
         }
+        jComboBox1.setModel(modelo);
         jComboBox1.setSelectedIndex(-1);
+
     }
     
     private void llenarTextArea() {
         if(jComboBox1.getSelectedIndex()!=-1){
-        clienteSeleccionado = BaseDeDatos.clientesPendientes.get(jComboBox1.getSelectedIndex());
+        clienteSeleccionado = BaseDeDatos.sistema.getCliente(indicesClientesPendientes.get(jComboBox1.getSelectedIndex()));
         String[] atributos = {clienteSeleccionado.getNombre(), clienteSeleccionado.getFechaDeNacimiento().toString(), 
             clienteSeleccionado.getNumeroDeDocumento(), clienteSeleccionado.getSexo(), 
             clienteSeleccionado.getCorreoElectronico(), clienteSeleccionado.getNumeroTelefono(), 
-            BaseDeDatos.tiposDeCuentaPendientes.get(jComboBox1.getSelectedIndex())};
+            BaseDeDatos.buscarCuentaPendientePorID(clienteSeleccionado.getID()).getTipoDeCuenta()};
         String datosCliente = String.format("""
                                       Nombre: %s
                                       Fecha de Nacimiento: %s
@@ -337,14 +337,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     }
     
-    private String crearNumeroCuenta() {
-        String salida="";
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            salida+= random.nextInt(9);
-        }
-        return salida;        
-    }
+
     /**
      * @param args the command line arguments
      */

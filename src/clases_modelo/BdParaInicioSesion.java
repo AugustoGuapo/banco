@@ -14,6 +14,7 @@ public class BdParaInicioSesion {
     private String[] usuarios;
     private String[] contraseñas;
     private ArrayList<Integer> ID = new ArrayList();
+    private ArrayList<String> estado = new ArrayList();
     
     public BdParaInicioSesion() {
         usuarios = new String[1];
@@ -45,10 +46,21 @@ public class BdParaInicioSesion {
         this.ID.add(ID);
     }
     
+    public void cambiarEstado(String estado, int pos) {
+        this.estado.set(pos, estado);
+    }
+    
     public int getID(int pos) {
         return ID.get(pos);
     }
     
+    public void setEstado(String estado) {
+        this.estado.add(estado);
+    }
+    
+    public String getEstado(int pos) {
+        return estado.get(pos);
+    }
     private void aumentarArregloUsuarios() {
         String[] auxiliar = usuarios;
         usuarios = new String[auxiliar.length+1];

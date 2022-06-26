@@ -4,6 +4,7 @@
  */
 package clases_modelo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -12,109 +13,40 @@ import java.util.Arrays;
  */
 public class SistemaDeDatos {
     
-    Clientes[] listaClientes;
-    Empleados[] listaEmpleados;
-    Cuentas[] listaCuentas;
-    Creditos[] listaCreditos;
-    TarjetaDeCredito[] listaTarjetasDeCredito;
-    Cdt[] listaCDT;
+    private ArrayList<Clientes> listaClientes;
+    
+    
+    
     
     public SistemaDeDatos(){
-        listaClientes= new Clientes[1];
-        listaEmpleados = new Empleados[1];
-        listaCuentas = new Cuentas[1];
-        listaCreditos = new Creditos[1];
-        listaTarjetasDeCredito = new TarjetaDeCredito[1];
-        listaCDT = new Cdt[1];
+        listaClientes = new ArrayList();
     }
+
     
-    public void setCliente(Clientes cliente, int pos) {
-        listaClientes[pos] = cliente;
+    
+    
+    public void añadirCliente(Clientes cliente) {
+        listaClientes.add(cliente);
     }
     
     public Clientes getCliente(int pos) {
-        return listaClientes[pos];
+        return listaClientes.get(pos);
     }
     
-    public void setEmpleado(Empleados empleado, int pos) {
-        listaEmpleados[pos] = empleado;
+    public int cantClientes() {
+        return listaClientes.size();
     }
     
-    public Empleados getEmpleado(int pos) {
-        return listaEmpleados[pos];
+    public Clientes buscarClientePorID(int id) {
+        Clientes cliente = new Clientes();
+        for (int i = 0; i < listaClientes.size(); i++) {
+            if(listaClientes.get(i).getID()==id)
+                cliente = listaClientes.get(i);
+        }
+        return cliente;
     }
     
-    public void setCuenta(Cuentas cuenta, int pos) {
-        listaCuentas[pos] = cuenta;
-        aumentarListaCuentas();
-    }
     
-    public Cuentas getCuenta(int pos) {
-        return listaCuentas[pos];
-    }
     
-    public void setCredito(Creditos credito, int pos) {
-        listaCreditos[pos] = credito;
-    }
     
-    public Creditos getCredito(int pos) {
-        return listaCreditos[pos];
-    }
-    
-    public void setTarjetaDeCredito(TarjetaDeCredito tdc, int pos) {
-        listaTarjetasDeCredito[pos] = tdc;
-    }
-    
-    public TarjetaDeCredito getTarjetaDeCredito(int pos) {
-        return listaTarjetasDeCredito[pos];
-    }
-    
-    public void setCDT(Cdt cdt, int pos) {
-        listaCDT[pos] = cdt;
-    }
-    
-    public Cdt getCDT(int pos) {
-        return listaCDT[pos];
-    }
-    
-    public int tamañoListaClientes() {
-        return listaClientes.length;
-    }
-        
-    public int tamañoListaCuentas() {
-        return listaCuentas.length;
-    }    
-    public int tamañoListaCreditos() {
-        return listaCreditos.length;
-    }    
-        
-    public int tamañoListaTDC() {
-        return listaTarjetasDeCredito.length;
-    }
-    public int tamañoListaCDT() {
-        return listaCDT.length;
-    } 
-    public void aumentarListaClientes() {
-        listaClientes = Arrays.copyOf(listaClientes, listaClientes.length+1);
-    }
-
-    public void aumentarListaEmpleados() {
-        listaEmpleados = Arrays.copyOf(listaEmpleados, listaEmpleados.length+1);
-    }
-
-    public void aumentarListaCuentas() {
-        listaCuentas = Arrays.copyOf(listaCuentas, listaCuentas.length+1);
-    }
-
-    public void aumentarListaCreditos() {
-        listaCreditos = Arrays.copyOf(listaCreditos, listaCreditos.length+1);
-    }
-
-    public void aumentarListaTarjetasDeCredito() {
-        listaTarjetasDeCredito = Arrays.copyOf(listaTarjetasDeCredito, listaTarjetasDeCredito.length+1);
-    }
-
-    public void aumentarListaCDT() {
-        listaCDT = Arrays.copyOf(listaCDT, listaCDT.length+1);
-    }
 }

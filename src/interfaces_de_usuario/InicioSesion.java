@@ -53,6 +53,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/logo_banco_verde.png")).getImage()
@@ -105,6 +106,14 @@ public class InicioSesion extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, -1, -1));
 
+        jLabel6.setText("jLabel6");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,13 +129,21 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(BaseDeDatos.login.verificarClave(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))) {
-            new PanelClientes().setVisible(true);
-            this.setVisible(false);
-            BaseDeDatos.contadorParaId = BaseDeDatos.login.getID(BaseDeDatos.login.verificarPosicionUsuario(jTextField1.getText()));
+        for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
+            Clientes aux =BaseDeDatos.sistema.getCliente(i);
+            if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))) {
+                if(aux.getEstado().equals("Activo")) {
+                    BaseDeDatos.IDsesionIniciada = aux.getID();
+                    new PanelClientes().setVisible(true);
+                    this.setVisible(false);
+                    return;
+                }
+                else 
+                    JOptionPane.showMessageDialog(this, "Su usuario se encuentra pendiente o inactivo");
+            } 
+            
         }
-        else 
-            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -146,6 +163,11 @@ public class InicioSesion extends javax.swing.JFrame {
         new PanelEmpleados().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        new pruebas().setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -192,6 +214,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;

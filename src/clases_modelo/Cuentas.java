@@ -4,6 +4,8 @@
  */
 package clases_modelo;
 
+import java.util.Random;
+
 /**
  *
  * @author user
@@ -13,6 +15,7 @@ public class Cuentas {
     private String numeroCuenta;
     private String tipoDeCuenta;
     private float saldo;
+    private String estado;
 
     /**
      * @return the ID
@@ -35,12 +38,6 @@ public class Cuentas {
         return numeroCuenta;
     }
 
-    /**
-     * @param numeroCuenta the numeroCuenta to set
-     */
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
 
     /**
      * @return the tipoDeCuenta
@@ -97,5 +94,28 @@ public class Cuentas {
             }  
         }
         return posiciones;
+    }
+    
+        public void crearNumeroCuenta() {
+        String salida="";
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            salida+= random.nextInt(9);
+        }
+        numeroCuenta = salida;      
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

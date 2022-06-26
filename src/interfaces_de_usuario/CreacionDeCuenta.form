@@ -66,6 +66,22 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="2" attributes="0">
+                              <Component id="jLabel8" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton1" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="2" attributes="0">
+                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -79,31 +95,16 @@
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tbxNombre" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="tbxDocumento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="tbxEmail" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="tbxUsuario" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="dtcFechaNacimiento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="tbxNumTelefono" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="jPasswordField1" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="jPasswordField2" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabel8" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="2" attributes="0">
-                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="117" pref="117" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tbxNombre" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="tbxDocumento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="tbxEmail" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="tbxUsuario" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="dtcFechaNacimiento" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="tbxNumTelefono" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="jPasswordField1" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="jPasswordField2" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -123,8 +124,10 @@
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -180,7 +183,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="51" max="32767" attributes="0"/>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
@@ -203,6 +206,7 @@
         <Component class="javax.swing.JTextField" name="tbxDocumento">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbxDocumentoActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbxDocumentoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -230,6 +234,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tbxNumTelefono">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbxNumTelefonoKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbxNumTelefonoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

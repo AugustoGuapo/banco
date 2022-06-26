@@ -19,6 +19,7 @@ public class TarjetaDeCredito {
     private float montoAdeudado;
     private int nroCuotasAdeudadas;
     private int nroCuotasPagadas;
+    private String estado;
 
     /**
      * @return the ID
@@ -164,5 +165,19 @@ public class TarjetaDeCredito {
             }  
         }
         return posiciones;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

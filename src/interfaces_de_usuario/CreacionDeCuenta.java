@@ -5,6 +5,8 @@
 package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
+import clases_modelo.Cuentas;
+import java.awt.Color;
 
 import java.text.Format;
 import java.time.LocalDate;
@@ -34,6 +36,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     }
 
     Clientes clienteNuevo = new Clientes();
+    Cuentas cuentaNueva = new Cuentas();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,6 +92,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                 tbxDocumentoActionPerformed(evt);
             }
         });
+        tbxDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tbxDocumentoKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Correo electrónico");
 
@@ -97,6 +105,15 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         dtcFechaNacimiento.setMaxSelectableDate(restarAños(LocalDate.now()));
 
         jLabel5.setText("Número telefónico");
+
+        tbxNumTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tbxNumTelefonoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tbxNumTelefonoKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Contraseña");
 
@@ -180,6 +197,18 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel8)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(213, 213, 213)
+                                .addComponent(jRadioButton2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -192,28 +221,16 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tbxNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbxEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbxUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbxNumTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel8)
-                            .addComponent(jButton1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(117, 117, 117)
-                                .addComponent(jRadioButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2)))))
+                            .addComponent(jRadioButton1)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tbxNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tbxEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tbxUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tbxNumTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -226,8 +243,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel11))
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButton2)
+                        .addComponent(jRadioButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -271,7 +289,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(38, 38, 38))
         );
@@ -288,20 +306,37 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            agregarCorreoElectronico();
-            agregarDocumentoIdentidad();
-            clienteNuevo.setNombre(tbxNombre.getText());
-            clienteNuevo.setFechaDeNacimiento(convertirFecha(dtcFechaNacimiento.getDate()));
-            clienteNuevo.setSexo(rbtSexo.getSelection().getActionCommand());
-            clienteNuevo.setNumeroTelefono(tbxNumTelefono.getText());
-            agregarNombreUsuario();
-            agregarContraseña(); 
-            BaseDeDatos.clientesPendientes.add(clienteNuevo);
-            BaseDeDatos.tiposDeCuentaPendientes.add(rbtCuenta.getSelection().getActionCommand());
+            recogerDatosCliente();
+            recogerDatosCuenta();
+            clienteNuevo = new Clientes();
+            cuentaNueva = new Cuentas();
+            BaseDeDatos.contadorParaId++;
         } catch (Exception ex) {
             Logger.getLogger(CreacionDeCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void recogerDatosCuenta() {
+        cuentaNueva.setTipoDeCuenta(rbtCuenta.getSelection().getActionCommand());
+        cuentaNueva.setEstado("Pendiente");
+        cuentaNueva.setID(BaseDeDatos.contadorParaId);
+        cuentaNueva.crearNumeroCuenta();
+        clienteNuevo.añadirProductos(cuentaNueva);
+    }
+
+    private void recogerDatosCliente() throws Exception {
+        agregarCorreoElectronico();
+        agregarDocumentoIdentidad();
+        clienteNuevo.setNombre(tbxNombre.getText());
+        clienteNuevo.setFechaDeNacimiento(convertirFecha(dtcFechaNacimiento.getDate()));
+        clienteNuevo.setSexo(rbtSexo.getSelection().getActionCommand());
+        clienteNuevo.setNumeroTelefono(tbxNumTelefono.getText());
+        agregarNombreUsuario();
+        agregarContraseña();
+        clienteNuevo.setID(BaseDeDatos.contadorParaId);
+        clienteNuevo.setEstado("Pendiente");
+        BaseDeDatos.sistema.añadirCliente(clienteNuevo);
+    }
 
     private void agregarCorreoElectronico() throws Exception {
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -325,7 +360,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
     private void agregarNombreUsuario() throws Exception {
         if(validarUsuario())
-            BaseDeDatos.usuariosPendientes.add(tbxUsuario.getText());
+            clienteNuevo.getCredenciales().setUsuario(tbxUsuario.getText());
         else{
             JOptionPane.showMessageDialog(this, "Nombre de usuario no disponible");
             throw new Exception("Nombre de usuario no disponible");
@@ -334,20 +369,17 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
     private void agregarContraseña() throws Exception {
         if (Arrays.equals(jPasswordField1.getPassword(),jPasswordField2.getPassword()))
-            BaseDeDatos.contraseñasPendientes.add(String.valueOf(jPasswordField1.getPassword()));
+           clienteNuevo.getCredenciales().setContraseña(String.valueOf(jPasswordField1.getPassword()));
         else{
+            JOptionPane.showMessageDialog(this, "Contraseñas no coinciden");
             throw new Exception("Contraseñas no coinciden");
         }
     }
 
     private boolean validacionDocumento() {
         boolean salida = true;
-        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaClientes()-1; i++) {
+        for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
             if(tbxDocumento.getText().equals(BaseDeDatos.sistema.getCliente(i).getNumeroDeDocumento())) 
-                salida = false;
-        }
-        for (int i = 0; i < BaseDeDatos.clientesPendientes.size(); i++) {
-            if(tbxDocumento.getText().equals(BaseDeDatos.clientesPendientes.get(i).getNumeroDeDocumento()))
                 salida = false;
         }
         return salida;
@@ -379,18 +411,38 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private void tbxDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxDocumentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbxDocumentoActionPerformed
+
+    private void tbxDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxDocumentoKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+        if (!numeros || tbxNumTelefono.getText().length()==10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tbxDocumentoKeyTyped
+
+    private void tbxNumTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxNumTelefonoKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+        if (!numeros || tbxNumTelefono.getText().length()==10) {
+            evt.consume();
+        }
+        if(tbxNumTelefono.getText().length()!=10) {
+          tbxNumTelefono.setForeground(Color.red);  
+        }
+    }//GEN-LAST:event_tbxNumTelefonoKeyTyped
+
+    private void tbxNumTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxNumTelefonoKeyReleased
+        if(tbxNumTelefono.getText().length()==10)
+            tbxNumTelefono.setForeground(Color.black);
+    }//GEN-LAST:event_tbxNumTelefonoKeyReleased
     private LocalDate convertirFecha(Date fecha) {
         return fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     private boolean validarUsuario() {
         boolean salida = true;
-        for (int i = 0; i < BaseDeDatos.login.getCantUsuarios(); i++) {
-            if(tbxUsuario.getText().equals(BaseDeDatos.login.getUsuario(i))) 
-                salida = false;
-        }
-        for (int i = 0; i < BaseDeDatos.usuariosPendientes.size(); i++) {
-            if(tbxUsuario.getText().equals(BaseDeDatos.usuariosPendientes.get(i)))
+        for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
+            if(tbxUsuario.getText().equals(BaseDeDatos.sistema.getCliente(i).getCredenciales().getUsuario())) 
                 salida = false;
         }
         return salida;

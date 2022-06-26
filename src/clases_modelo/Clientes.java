@@ -5,6 +5,7 @@
 package clases_modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,14 @@ public class Clientes {
     private String correoElectronico;
     private String numeroTelefono;
     private String sexo;
+    private String estado;
+    private Credenciales credenciales;
+    private ArrayList<Object> productos;
 
+    public Clientes() {
+        credenciales = new Credenciales();
+        productos = new ArrayList();
+    }
     /**
      * @return the systemID
      */
@@ -116,6 +124,52 @@ public class Clientes {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the credenciales
+     */
+    public Credenciales getCredenciales() {
+        return credenciales;
+    }
+
+    /**
+     * @param credenciales the credenciales to set
+     */
+    public void setCredenciales(Credenciales credenciales) {
+        this.credenciales = credenciales;
+    }
+
+    /**
+     * @return the productos at 
+     * @param pos
+     */
+    public Object getProductos(int pos) {
+        return productos.get(pos);
+    }
+
+    /**
+     * @param productos the productos to set
+     */
+    public void añadirProductos(Object productos) {
+        this.productos.add(productos);
+    }
     
+    public int cantidadDeProductos() {
+        return productos.size();
+    }
     
 }

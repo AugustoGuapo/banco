@@ -4,7 +4,7 @@
  */
 package interfaces_de_usuario;
 import clases_modelo.*;
-import java.util.ArrayList;
+
 
 
 /**
@@ -13,13 +13,22 @@ import java.util.ArrayList;
  */
 public class BaseDeDatos {
     public static SistemaDeDatos sistema = new SistemaDeDatos();
-    public static BdParaInicioSesion login = new BdParaInicioSesion();
-    public static ArrayList<Clientes> clientesPendientes = new ArrayList();
-    public static ArrayList<String> usuariosPendientes = new ArrayList();
-    public static ArrayList<String> contraseñasPendientes = new ArrayList();
-    public static ArrayList<String> tiposDeCuentaPendientes = new ArrayList();
+  //  public static BdParaInicioSesion login = new BdParaInicioSesion();
     public static int contadorParaId = 0;
-    public static int IDsesionIniciada;
+    public static int IDsesionIniciada;   
+    public static String nroCuentaEnUso;
     
-    
+    BaseDeDatos(){}
+    public static Cuentas buscarCuentaPendientePorID(int id) {
+        Cuentas cuentaSalida=new Cuentas();
+        for (int i = 0; i < sistema.buscarClientePorID(id).cantidadDeProductos(); i++) {
+            if(sistema.buscarClientePorID(id).getProductos(i) instanceof Cuentas cuenta) {
+                if(cuenta.getEstado().equals("Pendiente"))
+                    cuentaSalida = cuenta;
+            }
+        }
+        return cuentaSalida;
+    }
+
 }
+

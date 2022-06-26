@@ -8,6 +8,7 @@ import interfaces_de_usuario.CreacionDeCuenta;
 import interfaces_de_usuario.InicioSesion;
 import interfaces_de_usuario.PanelClientes;
 import interfaces_de_usuario.PanelEmpleados;
+import interfaces_de_usuario.ConsignarRetirarCuenta;
 
 /**
  *
@@ -19,11 +20,11 @@ public class Banco {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         InicioSesion ventana = new InicioSesion();
         //CreacionDeCuenta ventana = new CreacionDeCuenta();
         //PanelEmpleados ventana = new PanelEmpleados();
         //PanelClientes ventana = new PanelClientes();
+        //ConsignarRetirarCuenta ventana = new ConsignarRetirarCuenta();
         ventana.setVisible(true);
     }
     

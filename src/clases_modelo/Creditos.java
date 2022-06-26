@@ -15,7 +15,7 @@ public class Creditos {
     private float monto;
     private int numeroDeCuotas;
     private int cuotasPagadas;
-    private boolean estatusDeAprobación;
+    private String estado;
 
     /**
      * @return the ID
@@ -90,12 +90,12 @@ public class Creditos {
     /**
      * @return the estatusDeAprobación
      */
-    public boolean getEstatusDeAprobación() {
-        return estatusDeAprobación;
+    public String getEstado() {
+        return estado;
     }
     
-    public boolean aprobacion() {
-        return true;
+    public void setEstado(String estado) {
+        this.estado=estado;
     }
     
     public void pagoDeCuota(float monto) {

@@ -6,6 +6,7 @@ package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
@@ -21,12 +22,12 @@ public class PanelClientes extends javax.swing.JFrame {
     public PanelClientes() {
         this.setContentPane(new PlantillaInterfacesGrandes());
         initComponents();
-        incializarVentana();
+        actualizarVentana();
     }
     
-    Clientes clienteSesionIniciada = BaseDeDatos.sistema.getCliente(BaseDeDatos.IDsesionIniciada);
+    Clientes clienteSesionIniciada = BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada);
     String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
-    ArrayList <Cuentas>cuentasCliente = new ArrayList();
+    static ArrayList <Cuentas>cuentasCliente = new ArrayList();
     int contador = 0;
 
     /**
@@ -51,30 +52,69 @@ public class PanelClientes extends javax.swing.JFrame {
         lbl2NroCuenta = new javax.swing.JLabel();
         lbl2Saldo = new javax.swing.JLabel();
         lbl2TipoCuenta = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jPanel1.setBackground(jTabbedPane2.getBackground());
+
+        tagSaldo.setForeground(new java.awt.Color(0, 0, 0));
         tagSaldo.setText("Saldo");
 
+        lbl1NroCuenta.setForeground(new java.awt.Color(0, 0, 0));
         lbl1NroCuenta.setText("esto es una prueba");
+        lbl1NroCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl1NroCuentaMouseClicked(evt);
+            }
+        });
 
+        lbl1Saldo.setForeground(new java.awt.Color(0, 0, 0));
         lbl1Saldo.setText("esto es una preuba");
 
+        bienvenidaUsuario.setForeground(new java.awt.Color(0, 0, 0));
         bienvenidaUsuario.setText(bienvenida);
 
+        tagNroCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tagNroCuenta.setText("Número de cuenta");
 
+        tagTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tagTipoCuenta.setText("Tipo de cuenta");
 
+        lbl1TipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         lbl1TipoCuenta.setText("jLabel9");
 
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Saldo total");
 
+        lbl2NroCuenta.setForeground(new java.awt.Color(0, 0, 0));
         lbl2NroCuenta.setText("jLabel2");
+        lbl2NroCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl2NroCuentaMouseClicked(evt);
+            }
+        });
 
+        lbl2Saldo.setForeground(new java.awt.Color(0, 0, 0));
         lbl2Saldo.setText("jLabel3");
 
+        lbl2TipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         lbl2TipoCuenta.setText("jLabel2");
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("Actualizar");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,14 +122,14 @@ public class PanelClientes extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl1NroCuenta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl1TipoCuenta))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbl1NroCuenta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl1TipoCuenta))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lbl1Saldo)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,14 +141,18 @@ public class PanelClientes extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(lbl2NroCuenta)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl2Saldo))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(tagTipoCuenta))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl2TipoCuenta)))))
+                                    .addComponent(lbl2Saldo))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(55, 55, 55)
+                                    .addComponent(jLabel3)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(30, 30, 30)
+                                    .addComponent(tagTipoCuenta))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl2TipoCuenta))))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,7 +160,9 @@ public class PanelClientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(bienvenidaUsuario)
-                .addGap(79, 79, 79)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tagSaldo)
                     .addComponent(tagNroCuenta)
@@ -132,7 +178,9 @@ public class PanelClientes extends javax.swing.JFrame {
                     .addComponent(lbl2Saldo)
                     .addComponent(lbl2TipoCuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
 
@@ -141,19 +189,30 @@ public class PanelClientes extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Posición Consolidada", jPanel1);
 
+        jLabel2.setText("Cerrar sesion");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(110, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(158, Short.MAX_VALUE))
         );
@@ -161,16 +220,31 @@ public class PanelClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void actualizarCuentas() {
-        int pos = 0;
-        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaCuentas(); i++) {
-            if(cuentasCliente.get(pos).getID() == BaseDeDatos.sistema.getCuenta(i).getID()) {
-                BaseDeDatos.sistema.setCuenta(cuentasCliente.get(pos),i);
-                pos++;
-            }
-                
+    
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setVisible(false);
+        new InicioSesion().setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void lbl1NroCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1NroCuentaMouseClicked
+        new ConsignarRetirarCuenta().setVisible(true);
+        BaseDeDatos.nroCuentaEnUso = lbl1NroCuenta.getText();
+    }//GEN-LAST:event_lbl1NroCuentaMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        actualizarVentana();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void lbl2NroCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2NroCuentaMouseClicked
+        if(lbl2NroCuenta.getText().equals("Haga clic si desea pedir una nueva cuenta")) {
+            Cuentas segundaCuenta = new Cuentas();
+            segundaCuenta.setID(clienteSesionIniciada.getID());
+            segundaCuenta.crearNumeroCuenta();
+            segundaCuenta.setSaldo(0);
+            segundaCuenta.setEstado("Pendiente");
         }
-    }
+    }//GEN-LAST:event_lbl2NroCuentaMouseClicked
+
     public String pronombreSaludo() {
         if (clienteSesionIniciada.getSexo().equals("Masculino"))
             return "Sr. ";
@@ -178,14 +252,15 @@ public class PanelClientes extends javax.swing.JFrame {
             return "Sra. ";
     }
     
-    public final void incializarVentana() {
+    public final void actualizarVentana() {
         buscarCuentas();
         llenarEtiquetas();
     }
     public void buscarCuentas() {
-        for (int i = 0; i < BaseDeDatos.sistema.tamañoListaCuentas() -1; i++) {
-            if(BaseDeDatos.sistema.getCuenta(i).getID() == clienteSesionIniciada.getID())
-                cuentasCliente.add(BaseDeDatos.sistema.getCuenta(i));
+        cuentasCliente.clear();
+        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
+            if (BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProductos(i) instanceof Cuentas cuenta)
+                cuentasCliente.add(cuenta);
         }
     }
     
@@ -244,6 +319,9 @@ public class PanelClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidaUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lbl1NroCuenta;

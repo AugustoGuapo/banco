@@ -14,7 +14,7 @@ public class Cdt {
     private int plazo;
     private float montoDepositado;
     private float montoARetirar;
-    private boolean estado;
+    private String estado;
 
     /**
      * @return the ID
@@ -110,14 +110,14 @@ public class Cdt {
     /**
      * @return the estado
      */
-    public boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
     
