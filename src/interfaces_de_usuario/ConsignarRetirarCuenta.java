@@ -6,6 +6,7 @@ package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
      */
     public ConsignarRetirarCuenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     Clientes clienteUsado = BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada);
@@ -35,9 +37,13 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
         btnRetirar = new javax.swing.JButton();
         tbxMonto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        btnConsignar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnConsignar.setForeground(new java.awt.Color(0, 0, 0));
         btnConsignar.setText("Consignar");
         btnConsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +51,8 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
             }
         });
 
+        btnRetirar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnRetirar.setForeground(new java.awt.Color(0, 0, 0));
         btnRetirar.setText("Retirar");
         btnRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,13 +60,33 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
             }
         });
 
+        tbxMonto.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMonto.setForeground(new java.awt.Color(0, 0, 0));
         tbxMonto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tbxMontoKeyTyped(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Introduzca el monto");
+
+        jLabel2.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("X");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,7 +95,7 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(btnConsignar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(btnRetirar)
                 .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
@@ -76,15 +104,21 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
                     .addComponent(tbxMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tbxMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsignar)
                     .addComponent(btnRetirar))
@@ -130,6 +164,18 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRetirarActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        jLabel2.setForeground(Color.red);
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        jLabel2.setForeground(Color.black);
+    }//GEN-LAST:event_jLabel2MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -170,6 +216,7 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
     private javax.swing.JButton btnConsignar;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField tbxMonto;
     // End of variables declaration//GEN-END:variables
 }

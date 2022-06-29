@@ -5,7 +5,6 @@
 package clases_modelo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -18,13 +17,11 @@ public class SistemaDeDatos {
     
     
     
+    
     public SistemaDeDatos(){
         listaClientes = new ArrayList();
     }
 
-    
-    
-    
     public void añadirCliente(Clientes cliente) {
         listaClientes.add(cliente);
     }
@@ -45,6 +42,7 @@ public class SistemaDeDatos {
         }
         return cliente;
     }
+
     
     
     
