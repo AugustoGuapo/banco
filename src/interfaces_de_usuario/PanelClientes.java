@@ -5,10 +5,23 @@
 package interfaces_de_usuario;
 
 import clases_modelo.Clientes;
+import clases_modelo.Creditos;
 import clases_modelo.Cuentas;
+import clases_modelo.TarjetaDeCredito;
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.awt.Component;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,12 +36,16 @@ public class PanelClientes extends javax.swing.JFrame {
         this.setContentPane(new PlantillaInterfacesGrandes());
         initComponents();
         actualizarVentana();
+        llenarComboTDC();
+        llenarComboCreditos();
+        this.setLocationRelativeTo(null);
     }
     
     Clientes clienteSesionIniciada = BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada);
     String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
-    static ArrayList <Cuentas>cuentasCliente = new ArrayList();
+    ArrayList <Cuentas>cuentasCliente = new ArrayList();
     int contador = 0;
+    DefaultComboBoxModel mdlComboTDC = new DefaultComboBoxModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,67 +69,160 @@ public class PanelClientes extends javax.swing.JFrame {
         lbl2NroCuenta = new javax.swing.JLabel();
         lbl2Saldo = new javax.swing.JLabel();
         lbl2TipoCuenta = new javax.swing.JLabel();
+        lblSaldoTotal = new javax.swing.JLabel();
+        lblActualizar = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        cbxCreditos = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        tbxMontoCredito = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        cbxCuotasCredito = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnSolicitarCredito = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        panelTDC = new javax.swing.JPanel();
+        cbxTDC = new javax.swing.JComboBox<>();
+        tbxMontoSolicitarTDC = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        cbxCuotasTDC = new javax.swing.JComboBox<>();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        btnSolicitarTDC = new javax.swing.JButton();
+        tbxMontoDeseadoTDC = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        tbxMontoPagarTDC = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        planoTarjeta = new javax.swing.JPanel();
+        lblNroTarjeta4 = new javax.swing.JLabel();
+        lblFechaVencimiento = new javax.swing.JLabel();
+        lblNombreTarjeta = new javax.swing.JLabel();
+        lblNroTarjeta3 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        lblNroTarjeta2 = new javax.swing.JLabel();
+        lblNroTarjeta1 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lblLimiteTDC = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lblCuotaTDC = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        lblFechaPagoTDC = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        lblCuotasRestantesTDC = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        lblDeudaTDC = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
 
         jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
 
         jPanel1.setBackground(jTabbedPane2.getBackground());
 
+        tagSaldo.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tagSaldo.setForeground(new java.awt.Color(0, 0, 0));
         tagSaldo.setText("Saldo");
 
+        lbl1NroCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl1NroCuenta.setForeground(new java.awt.Color(0, 0, 0));
-        lbl1NroCuenta.setText("esto es una prueba");
+        lbl1NroCuenta.setText("0000000000");
+        lbl1NroCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl1NroCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl1NroCuentaMouseClicked(evt);
             }
         });
 
+        lbl1Saldo.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl1Saldo.setForeground(new java.awt.Color(0, 0, 0));
-        lbl1Saldo.setText("esto es una preuba");
+        lbl1Saldo.setText("aqui ira el saldo");
 
+        bienvenidaUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         bienvenidaUsuario.setForeground(new java.awt.Color(0, 0, 0));
         bienvenidaUsuario.setText(bienvenida);
 
+        tagNroCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tagNroCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tagNroCuenta.setText("Número de cuenta");
 
+        tagTipoCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tagTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tagTipoCuenta.setText("Tipo de cuenta");
 
+        lbl1TipoCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl1TipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
-        lbl1TipoCuenta.setText("jLabel9");
+        lbl1TipoCuenta.setText("Ahorros");
 
+        jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Saldo total");
 
+        lbl2NroCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl2NroCuenta.setForeground(new java.awt.Color(0, 0, 0));
-        lbl2NroCuenta.setText("jLabel2");
+        lbl2NroCuenta.setText("0000000000");
+        lbl2NroCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl2NroCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl2NroCuentaMouseClicked(evt);
             }
         });
 
+        lbl2Saldo.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl2Saldo.setForeground(new java.awt.Color(0, 0, 0));
-        lbl2Saldo.setText("jLabel3");
+        lbl2Saldo.setText("aqui ira el saldo");
 
+        lbl2TipoCuenta.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         lbl2TipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
-        lbl2TipoCuenta.setText("jLabel2");
+        lbl2TipoCuenta.setText("Corriente");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("jLabel3");
+        lblSaldoTotal.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblSaldoTotal.setForeground(new java.awt.Color(0, 0, 0));
+        lblSaldoTotal.setText("0.0");
 
-        jLabel4.setText("Actualizar");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblActualizar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        lblActualizar.setText("Actualizar");
+        lblActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                lblActualizarMouseClicked(evt);
             }
         });
 
@@ -121,67 +231,65 @@ public class PanelClientes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lbl1NroCuenta)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl1TipoCuenta))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lbl1Saldo)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tagNroCuenta)
-                                        .addGap(251, 251, 251)
-                                        .addComponent(tagSaldo))
-                                    .addComponent(bienvenidaUsuario))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lbl2NroCuenta)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl2Saldo))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(jLabel3)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(tagTipoCuenta))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl2TipoCuenta))))))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(bienvenidaUsuario))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(496, 496, 496)
+                .addComponent(lblActualizar))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(tagNroCuenta)
+                .addGap(243, 243, 243)
+                .addComponent(tagSaldo)
+                .addGap(52, 52, 52)
+                .addComponent(tagTipoCuenta))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lbl1NroCuenta)
+                .addGap(214, 214, 214)
+                .addComponent(lbl1Saldo)
+                .addGap(89, 89, 89)
+                .addComponent(lbl1TipoCuenta))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lbl2NroCuenta)
+                .addGap(214, 214, 214)
+                .addComponent(lbl2Saldo)
+                .addGap(81, 81, 81)
+                .addComponent(lbl2TipoCuenta))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80)
+                .addComponent(lblSaldoTotal))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(52, 52, 52)
                 .addComponent(bienvenidaUsuario)
                 .addGap(57, 57, 57)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tagSaldo)
+                .addComponent(lblActualizar)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tagNroCuenta)
+                    .addComponent(tagSaldo)
                     .addComponent(tagTipoCuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl1NroCuenta)
                     .addComponent(lbl1Saldo)
                     .addComponent(lbl1TipoCuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl2NroCuenta)
                     .addComponent(lbl2Saldo)
                     .addComponent(lbl2TipoCuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(lblSaldoTotal))
+                .addContainerGap())
         );
 
         if (cuentasCliente.size()==1)
@@ -189,10 +297,524 @@ public class PanelClientes extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Posición Consolidada", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        cbxCreditos.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxCreditos.setForeground(new java.awt.Color(0, 0, 0));
+        cbxCreditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Monto");
+
+        jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("jLabel4");
+
+        jLabel9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Cuota");
+
+        jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("jLabel10");
+
+        jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Fecha de pago");
+
+        jLabel12.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("jLabel12");
+
+        jLabel13.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Cuotas restantes");
+
+        jLabel14.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("jLabel14");
+
+        tbxMontoCredito.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMontoCredito.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel15.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Monto a solicitar");
+
+        cbxCuotasCredito.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxCuotasCredito.setForeground(new java.awt.Color(0, 0, 0));
+        cbxCuotasCredito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
+        cbxCuotasCredito.setSelectedIndex(-1);
+
+        jLabel16.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Numero de cuotas");
+
+        jLabel5.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Tasa de interés");
+
+        jLabel17.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("jLabel17");
+
+        btnSolicitarCredito.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnSolicitarCredito.setForeground(new java.awt.Color(0, 0, 0));
+        btnSolicitarCredito.setText("Solicitar crédito");
+        btnSolicitarCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolicitarCreditoActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Seleccione su credito");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9))
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel12)))
+                .addGap(60, 60, 60)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cbxCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel16)
+                            .addComponent(cbxCuotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel17)
+                            .addComponent(btnSolicitarCredito)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tbxMontoCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel18)
+                        .addGap(41, 41, 41))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel11)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tbxMontoCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel12))
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxCuotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel13)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addComponent(btnSolicitarCredito)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Creditos", jPanel2);
+
+        panelTDC.setBackground(new java.awt.Color(255, 255, 255));
+        panelTDC.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cbxTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxTDC.setForeground(new java.awt.Color(0, 0, 0));
+        cbxTDC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxTDC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTDCActionPerformed(evt);
+            }
+        });
+        panelTDC.add(cbxTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+
+        tbxMontoSolicitarTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMontoSolicitarTDC.setForeground(new java.awt.Color(0, 0, 0));
+        panelTDC.add(tbxMontoSolicitarTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 89, -1));
+
+        jLabel27.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel27.setText("Monto a solicitar");
+        panelTDC.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
+
+        cbxCuotasTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxCuotasTDC.setForeground(new java.awt.Color(0, 0, 0));
+        cbxCuotasTDC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
+        cbxCuotasTDC.setSelectedIndex(-1);
+        panelTDC.add(cbxCuotasTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 98, -1));
+
+        jLabel28.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel28.setText("Numero de cuotas");
+        panelTDC.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel29.setText("Tasa de interés");
+        panelTDC.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel30.setText("2.25%");
+        panelTDC.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Solicitar crédito");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelTDC.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel31.setText("Seleccione su tarjeta");
+        panelTDC.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+
+        btnSolicitarTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnSolicitarTDC.setForeground(new java.awt.Color(0, 0, 0));
+        btnSolicitarTDC.setText("Solicitar Tarjeta de crédito");
+        btnSolicitarTDC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolicitarTDCActionPerformed(evt);
+            }
+        });
+        panelTDC.add(btnSolicitarTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, -1));
+
+        tbxMontoDeseadoTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMontoDeseadoTDC.setForeground(new java.awt.Color(0, 0, 0));
+        panelTDC.add(tbxMontoDeseadoTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 89, -1));
+
+        jLabel50.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel50.setText("Monto deseado");
+        panelTDC.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Monto a pagar");
+        panelTDC.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+
+        tbxMontoPagarTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMontoPagarTDC.setForeground(new java.awt.Color(0, 0, 0));
+        panelTDC.add(tbxMontoPagarTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 90, -1));
+
+        jButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Pagar");
+        panelTDC.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
+
+        planoTarjeta.setBackground(new java.awt.Color(255, 255, 255));
+        planoTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNroTarjeta4.setFont(new java.awt.Font("Halter", 0, 16)); // NOI18N
+        lblNroTarjeta4.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroTarjeta4.setText("0000");
+        planoTarjeta.add(lblNroTarjeta4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+
+        lblFechaVencimiento.setFont(new java.awt.Font("Halter", 0, 10)); // NOI18N
+        lblFechaVencimiento.setForeground(new java.awt.Color(255, 255, 255));
+        lblFechaVencimiento.setText("00/00");
+        planoTarjeta.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
+
+        lblNombreTarjeta.setFont(new java.awt.Font("Poppins Medium", 0, 16)); // NOI18N
+        lblNombreTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreTarjeta.setText("JOHN DOE");
+        planoTarjeta.add(lblNombreTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        lblNroTarjeta3.setFont(new java.awt.Font("Halter", 0, 16)); // NOI18N
+        lblNroTarjeta3.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroTarjeta3.setText("0000");
+        planoTarjeta.add(lblNroTarjeta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Visa_Logo.png"))); // NOI18N
+        planoTarjeta.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 90, 50));
+
+        jLabel48.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel48.setFont(new java.awt.Font("Poppins Medium", 0, 10)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel48.setText(lblNroTarjeta1.getText());
+        planoTarjeta.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+
+        jLabel49.setFont(new java.awt.Font("Halter", 0, 10)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel49.setText("VENCE");
+        planoTarjeta.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
+
+        lblNroTarjeta2.setFont(new java.awt.Font("Halter", 0, 16)); // NOI18N
+        lblNroTarjeta2.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroTarjeta2.setText("0000");
+        planoTarjeta.add(lblNroTarjeta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+
+        lblNroTarjeta1.setFont(new java.awt.Font("Halter", 0, 16)); // NOI18N
+        lblNroTarjeta1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroTarjeta1.setText("0000");
+        planoTarjeta.add(lblNroTarjeta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+
+        jLabel51.setFont(new java.awt.Font("Halter", 0, 5)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel51.setText("MES/AÑO");
+        planoTarjeta.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Halter", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tarjeta_de_credito.png"))); // NOI18N
+        planoTarjeta.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 237));
+
+        jLabel19.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("Límite de crédito");
+        planoTarjeta.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        lblLimiteTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblLimiteTDC.setForeground(new java.awt.Color(0, 0, 0));
+        lblLimiteTDC.setText("10000000.00");
+        planoTarjeta.add(lblLimiteTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Cuota");
+        planoTarjeta.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
+
+        lblCuotaTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblCuotaTDC.setForeground(new java.awt.Color(0, 0, 0));
+        lblCuotaTDC.setText("1000000.00");
+        planoTarjeta.add(lblCuotaTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel23.setText("Fecha de pago");
+        planoTarjeta.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        lblFechaPagoTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblFechaPagoTDC.setForeground(new java.awt.Color(0, 0, 0));
+        lblFechaPagoTDC.setText("25/12/99");
+        planoTarjeta.add(lblFechaPagoTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel25.setText("Cuotas restantes");
+        planoTarjeta.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
+
+        lblCuotasRestantesTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblCuotasRestantesTDC.setForeground(new java.awt.Color(0, 0, 0));
+        lblCuotasRestantesTDC.setText("11");
+        planoTarjeta.add(lblCuotasRestantesTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+
+        jLabel46.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel46.setText("Deuda");
+        planoTarjeta.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+
+        lblDeudaTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblDeudaTDC.setForeground(new java.awt.Color(0, 0, 0));
+        lblDeudaTDC.setText("10000000.00");
+        planoTarjeta.add(lblDeudaTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+
+        panelTDC.add(planoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 380));
+
+        jTabbedPane2.addTab("Tarjetas de crédito", panelTDC);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jComboBox5.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel32.setText("Monto");
+
+        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel33.setText("jLabel4");
+
+        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel34.setText("Cuota");
+
+        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel35.setText("jLabel10");
+
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel36.setText("Fecha de pago");
+
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel37.setText("jLabel12");
+
+        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel38.setText("Cuotas restantes");
+
+        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel39.setText("jLabel14");
+
+        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel40.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel40.setText("Monto a solicitar");
+
+        jComboBox6.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
+        jComboBox6.setSelectedIndex(-1);
+
+        jLabel41.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel41.setText("Numero de cuotas");
+
+        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel42.setText("Tasa de interés");
+
+        jLabel43.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel43.setText("jLabel17");
+
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("Solicitar crédito");
+
+        jLabel44.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel44.setText("Seleccione su credito");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel34))
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel36))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel37)))
+                .addGap(60, 60, 60)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel41)
+                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel42)
+                            .addComponent(jLabel43)
+                            .addComponent(jButton3)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel44)
+                        .addGap(41, 41, 41))))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel36)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel33)
+                                .addComponent(jLabel37))
+                            .addComponent(jLabel41))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel38)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel42)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel39)
+                    .addComponent(jLabel43))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("CDT", jPanel7);
+
+        jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel2.setText("Cerrar sesion");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
             }
         });
 
@@ -200,40 +822,117 @@ public class PanelClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(688, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(32, 32, 32))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void llenarComboCreditos() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
+            Object producto = clienteSesionIniciada.getProductos(i);
+            if(producto instanceof Creditos credito)
+                if(credito.getEstado().equals("Activo"))
+                mdlComboTDC.addElement(credito.getMonto());
+        }
+        modelo.addElement("Solicitar credito");
+        cbxCreditos.setModel(modelo);
+        cbxCreditos.setSelectedIndex(-1);
+    }
     
+    private void llenarComboTDC() {
+        for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
+            Object producto = clienteSesionIniciada.getProductos(i);
+            if(producto instanceof TarjetaDeCredito tdc)
+                if(tdc.getEstado().equals("Activo"))
+                mdlComboTDC.addElement(tdc.getNumeroDeTarjeta().split(" ")[3]);
+        }
+        mdlComboTDC.addElement("Solicitar tarjeta");
+        cbxTDC.setModel(mdlComboTDC);
+        cbxTDC.setSelectedIndex(-1);
+    }
+    private void cambiarVisibilidadComponentes(Component[] arreglo, boolean estado) {
+        for (Component componente : arreglo) {
+            componente.setVisible(estado);
+        }
+    }
+    
+    private void labelsPanelTDC() {
+        int indiceSeleccionado = cbxTDC.getSelectedIndex();
+        int buscador = 0;
+        Component[] componentesSolicitud = {btnSolicitarTDC, tbxMontoDeseadoTDC, jLabel50};
+        Component[] componentesFueraPlano = {tbxMontoSolicitarTDC, jLabel27, cbxCuotasTDC, jLabel28, jLabel29, 
+            jButton2, jLabel7, tbxMontoPagarTDC, jButton1, jLabel30};
+        if(indiceSeleccionado == -1) {
+            cambiarVisibilidadComponentes(componentesSolicitud, false);
+            cambiarVisibilidadComponentes(componentesFueraPlano, false);
+            planoTarjeta.setVisible(false);
+        }
+        else if(cbxTDC.getItemAt(indiceSeleccionado).equals("Solicitar tarjeta")) {
+            cambiarVisibilidadComponentes(componentesFueraPlano, false);
+            cambiarVisibilidadComponentes(componentesSolicitud, true);
+            planoTarjeta.setVisible(false);
+        }
+        else if (indiceSeleccionado >=0) {
+            cambiarVisibilidadComponentes(componentesSolicitud, false);
+            cambiarVisibilidadComponentes(componentesFueraPlano, true);
+            planoTarjeta.setVisible(true);
+           for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
+               Object producto = clienteSesionIniciada.getProductos(i);
+               if (producto instanceof TarjetaDeCredito tdc && indiceSeleccionado == buscador) {
+                   String[] numeroTarjeta = tdc.getNumeroDeTarjeta().split(" ");
+                   lblNroTarjeta1.setText(numeroTarjeta[0]);
+                   lblNroTarjeta2.setText(numeroTarjeta[1]);
+                   lblNroTarjeta3.setText(numeroTarjeta[2]);
+                   lblNroTarjeta4.setText(numeroTarjeta[3]);
+                   lblNombreTarjeta.setText(clienteSesionIniciada.getNombre());
+                   lblFechaVencimiento.setText(tdc.getFechaDeVencimiento().format(DateTimeFormatter.ofPattern("MM/yy")));
+                   lblDeudaTDC.setText(String.format("%.2f", tdc.getMontoAdeudado()));
+                   lblCuotaTDC.setText(String.valueOf(tdc.getValorCuota()));
+                   lblCuotasRestantesTDC.setText(String.valueOf(tdc.getNroCuotasAdeudadas()));
+                   lblFechaPagoTDC.setText(String.valueOf(tdc.getFechaProximoPago()));
+                   lblLimiteTDC.setText(String.format("%.2f",tdc.getMontoTotal()));
+                   break;
+               }
+               else if(producto instanceof TarjetaDeCredito && indiceSeleccionado!=buscador)
+                   buscador++;
+           } 
+        }
+
+    }
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         this.setVisible(false);
         new InicioSesion().setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void lbl1NroCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1NroCuentaMouseClicked
-        new ConsignarRetirarCuenta().setVisible(true);
-        BaseDeDatos.nroCuentaEnUso = lbl1NroCuenta.getText();
-    }//GEN-LAST:event_lbl1NroCuentaMouseClicked
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+       jLabel2.setForeground(Color.red);
+    }//GEN-LAST:event_jLabel2MouseEntered
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        jLabel2.setForeground(Color.black);
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void lblActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActualizarMouseClicked
         actualizarVentana();
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_lblActualizarMouseClicked
 
     private void lbl2NroCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2NroCuentaMouseClicked
         if(lbl2NroCuenta.getText().equals("Haga clic si desea pedir una nueva cuenta")) {
@@ -242,8 +941,74 @@ public class PanelClientes extends javax.swing.JFrame {
             segundaCuenta.crearNumeroCuenta();
             segundaCuenta.setSaldo(0);
             segundaCuenta.setEstado("Pendiente");
+            tipoSegundaCuenta(segundaCuenta);
+            BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(segundaCuenta);
+            actualizarVentana();
+        }
+        else if (lbl2NroCuenta.getText().equals("Su cuenta se encuentra pendiente por aprobación")) {
+        }
+        else {
+            BaseDeDatos.nroCuentaEnUso = lbl2NroCuenta.getText();
+            new ConsignarRetirarCuenta().setVisible(true);
         }
     }//GEN-LAST:event_lbl2NroCuentaMouseClicked
+
+    private void lbl1NroCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1NroCuentaMouseClicked
+        new ConsignarRetirarCuenta().setVisible(true);
+        BaseDeDatos.nroCuentaEnUso = lbl1NroCuenta.getText();
+    }//GEN-LAST:event_lbl1NroCuentaMouseClicked
+
+    private void cbxTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTDCActionPerformed
+        labelsPanelTDC();
+    }//GEN-LAST:event_cbxTDCActionPerformed
+
+    private void btnSolicitarTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarTDCActionPerformed
+        TarjetaDeCredito tdc = new TarjetaDeCredito();
+        tdc.setMontoTotal(Float.parseFloat(tbxMontoDeseadoTDC.getText()));
+        tdc.setEstado("Pendiente");
+        tdc.setFechaDeVencimiento(LocalDate.now().plusYears(10));
+        tdc.generarCVV();
+        tdc.generarNumeroTarjeta();
+        BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(tdc);
+    }//GEN-LAST:event_btnSolicitarTDCActionPerformed
+
+    private void btnSolicitarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCreditoActionPerformed
+        Creditos credito = new Creditos();
+        credito.setMonto(Float.parseFloat(tbxMontoCredito.getText()));
+        credito.setEstado("Pendiente");
+        credito.setNumeroDeCuotas((cbxCuotasCredito.getSelectedIndex()+1)*12);
+        credito.setTasaDeInteres((float)2.25);
+        credito.setCuotasPagadas(0);
+        BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(credito);
+    }//GEN-LAST:event_btnSolicitarCreditoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int indiceSeleccionado = cbxTDC.getSelectedIndex();
+        int buscador = 0;
+        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
+            if(BaseDeDatos.sistema.buscarClientePorID(i).getProductos(i) instanceof TarjetaDeCredito tdc) {
+                if(indiceSeleccionado == buscador) {
+                    if(tdc.getMontoTotal()<=Integer.parseInt(tbxMontoSolicitarTDC.getText())+tdc.getMontoAdeudado()){
+                        tdc.setMontoAdeudado(Float.parseFloat(tbxMontoSolicitarTDC.getText()));
+                        tdc.calcularCuotas((cbxCuotasTDC.getSelectedIndex()+1)*12);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "No puede solicitar un monto mayor a su límite");
+                    }
+                        
+                }
+                else
+                    buscador++;
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tipoSegundaCuenta(Cuentas segundaCuenta) {
+        if(lbl1TipoCuenta.getText().equals("Ahorros"))
+            segundaCuenta.setTipoDeCuenta("Corriente");
+        else
+            segundaCuenta.setTipoDeCuenta("Ahorros");
+    }
 
     public String pronombreSaludo() {
         if (clienteSesionIniciada.getSexo().equals("Masculino"))
@@ -254,7 +1019,27 @@ public class PanelClientes extends javax.swing.JFrame {
     
     public final void actualizarVentana() {
         buscarCuentas();
-        llenarEtiquetas();
+        llenarEtiquetasPosicionConsolidad();
+        mostrarSaldoTotal();
+    }
+    
+    public void llenarEtiquetasTarjetaDeCredito() {
+        
+    }
+    
+    public void mostrarSaldoTotal() {
+        float saldo1= Float.parseFloat(lbl1Saldo.getText());
+        float saldo2;
+        boolean isSaldo2= lbl2Saldo.getText() == null;
+        float salida;
+        if(isSaldo2) 
+            salida = saldo1;
+        else {
+            saldo2= Float.parseFloat(lbl2Saldo.getText());
+            salida = saldo1+saldo2;
+        }
+            
+        lblSaldoTotal.setText(String.format("%.2f\n",salida).replace(",", "."));
     }
     public void buscarCuentas() {
         cuentasCliente.clear();
@@ -264,20 +1049,28 @@ public class PanelClientes extends javax.swing.JFrame {
         }
     }
     
-    public void llenarEtiquetas() {
+    public void llenarEtiquetasPosicionConsolidad() {
        javax.swing.JLabel[] etiquetasCuenta1 = {lbl1NroCuenta, lbl1Saldo,lbl1TipoCuenta};
        javax.swing.JLabel[] etiquetasCuenta2 = {lbl2NroCuenta, lbl2Saldo, lbl2TipoCuenta};
        javax.swing.JLabel[][] etiquetas = {etiquetasCuenta1, etiquetasCuenta2};
         for (int i = 0; i < cuentasCliente.size(); i++) {
             etiquetas[i][0].setText(cuentasCliente.get(i).getNumeroCuenta());
-            etiquetas[i][1].setText(String.valueOf(cuentasCliente.get(i).getSaldo()));
+            etiquetas[i][1].setText(String.format("%.2f\n", cuentasCliente.get(i).getSaldo()).replace(",", "."));
             etiquetas[i][2].setText(cuentasCliente.get(i).getTipoDeCuenta());
         }
         if (cuentasCliente.size()==1) {
-            for (int i = 0; i < 3; i++) {
-                etiquetasCuenta2[i].setText(null);
-            }
+            limpiarEtiquetas(etiquetasCuenta2);
             lbl2NroCuenta.setText("Haga clic si desea pedir una nueva cuenta");
+        }
+        else if (cuentasCliente.get(1).getEstado().equals("Pendiente")) {
+            limpiarEtiquetas(etiquetasCuenta2);
+            lbl2NroCuenta.setText("Su cuenta se encuentra pendiente");
+        }
+    }
+
+    private void limpiarEtiquetas(JLabel[] etiquetasCuenta2) {
+        for (int i = 0; i < etiquetasCuenta2.length; i++) {
+            etiquetasCuenta2[i].setText(null);
         }
     }
 
@@ -318,20 +1111,94 @@ public class PanelClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidaUsuario;
+    private javax.swing.JButton btnSolicitarCredito;
+    private javax.swing.JButton btnSolicitarTDC;
+    private javax.swing.JComboBox<String> cbxCreditos;
+    private javax.swing.JComboBox<String> cbxCuotasCredito;
+    private javax.swing.JComboBox<String> cbxCuotasTDC;
+    private javax.swing.JComboBox<String> cbxTDC;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lbl1NroCuenta;
     private javax.swing.JLabel lbl1Saldo;
     private javax.swing.JLabel lbl1TipoCuenta;
     private javax.swing.JLabel lbl2NroCuenta;
     private javax.swing.JLabel lbl2Saldo;
     private javax.swing.JLabel lbl2TipoCuenta;
+    private javax.swing.JLabel lblActualizar;
+    private javax.swing.JLabel lblCuotaTDC;
+    private javax.swing.JLabel lblCuotasRestantesTDC;
+    private javax.swing.JLabel lblDeudaTDC;
+    private javax.swing.JLabel lblFechaPagoTDC;
+    private javax.swing.JLabel lblFechaVencimiento;
+    private javax.swing.JLabel lblLimiteTDC;
+    private javax.swing.JLabel lblNombreTarjeta;
+    private javax.swing.JLabel lblNroTarjeta1;
+    private javax.swing.JLabel lblNroTarjeta2;
+    private javax.swing.JLabel lblNroTarjeta3;
+    private javax.swing.JLabel lblNroTarjeta4;
+    private javax.swing.JLabel lblSaldoTotal;
+    private javax.swing.JPanel panelTDC;
+    private javax.swing.JPanel planoTarjeta;
     private javax.swing.JLabel tagNroCuenta;
     private javax.swing.JLabel tagSaldo;
     private javax.swing.JLabel tagTipoCuenta;
+    private javax.swing.JTextField tbxMontoCredito;
+    private javax.swing.JTextField tbxMontoDeseadoTDC;
+    private javax.swing.JTextField tbxMontoPagarTDC;
+    private javax.swing.JTextField tbxMontoSolicitarTDC;
     // End of variables declaration//GEN-END:variables
 }

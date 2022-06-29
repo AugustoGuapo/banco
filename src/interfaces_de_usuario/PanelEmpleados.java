@@ -4,11 +4,13 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.Cdt;
 import clases_modelo.Clientes;
+import clases_modelo.Creditos;
 import clases_modelo.Cuentas;
+import clases_modelo.TarjetaDeCredito;
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 
 
@@ -23,16 +25,25 @@ public class PanelEmpleados extends javax.swing.JFrame {
      */
     public PanelEmpleados() {
         initComponents();
-        llenarComboBox();
-        jComboBox1.setSelectedIndex(-1);
-        jTextArea1.setText("");
+        this.setLocationRelativeTo(null);
+        llenarComboClientesPendientes();
+        llenarComboClientesActivos();
+        cbxClientesActivos.setSelectedIndex(-1);
+        cbxClientesPendientes.setSelectedIndex(-1);
+        txaClientesPendientes.setText("");
     }
-    Clientes clienteSeleccionado;
-    String ID = "0";
-    int indiceClienteSeleccionado;
-    int idClienteSeleccionado;
+    Clientes clientePendienteSeleccionado;
+    int indiceClientePendienteSeleccionado;
+    int idClientePendienteSeleccionado;
+    Clientes clienteActivoSeleccionado;
+    int indiceClienteActivoSeleccionado;
+    int idClienteActivoSeleccionado;
     ArrayList<Integer> indicesClientesPendientes = new ArrayList();
-    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+    ArrayList<Integer> indicesClientesActivos = new ArrayList();
+    ArrayList<Integer> indicesProductosPendientesClienteActivo = new ArrayList();
+    DefaultComboBoxModel mdlClientesPendientes = new DefaultComboBoxModel();
+    DefaultComboBoxModel mdlClientesActivos = new DefaultComboBoxModel();
+    DefaultComboBoxModel mdlProductosPendientesClientesActivos = new DefaultComboBoxModel();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,53 +57,67 @@ public class PanelEmpleados extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txaClientesPendientes = new javax.swing.JTextArea();
+        btnAprobarClientesPendientes = new javax.swing.JButton();
+        cbxClientesPendientes = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        btnRechazarClientesPendientes = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaClientesActivos = new javax.swing.JTextArea();
+        btnAprobarClientesActivos = new javax.swing.JButton();
+        cbxClientesActivos = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        btnRechazarClientesActivos = new javax.swing.JButton();
+        cbxProductosPendientesClientesActivos = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
 
-        jButton2.setText("Aprobar");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+
+        txaClientesPendientes.setColumns(20);
+        txaClientesPendientes.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        txaClientesPendientes.setRows(5);
+        jScrollPane1.setViewportView(txaClientesPendientes);
+
+        btnAprobarClientesPendientes.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnAprobarClientesPendientes.setForeground(new java.awt.Color(0, 0, 0));
+        btnAprobarClientesPendientes.setText("Aprobar");
+        btnAprobarClientesPendientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAprobarClientesPendientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAprobarClientesPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAprobarClientesPendientesActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxClientesPendientes.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        cbxClientesPendientes.setForeground(new java.awt.Color(0, 0, 0));
+        cbxClientesPendientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxClientesPendientes.setSelectedIndex(-1);
+        cbxClientesPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxClientesPendientesActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cuentas pendientes por aprobar");
 
-        jButton3.setText("Rechazar");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnRechazarClientesPendientes.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnRechazarClientesPendientes.setForeground(new java.awt.Color(0, 0, 0));
+        btnRechazarClientesPendientes.setText("Rechazar");
+        btnRechazarClientesPendientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRechazarClientesPendientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRechazarClientesPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnRechazarClientesPendientesActionPerformed(evt);
             }
         });
 
@@ -102,7 +127,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxClientesPendientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(389, 389, 389))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,9 +139,9 @@ public class PanelEmpleados extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnAprobarClientesPendientes)
                                 .addGap(107, 107, 107)
-                                .addComponent(jButton3)))))
+                                .addComponent(btnRechazarClientesPendientes)))))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -125,102 +150,135 @@ public class PanelEmpleados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(8, 8, 8)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxClientesPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAprobarClientesPendientes)
+                    .addComponent(btnRechazarClientesPendientes))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Nuevos clientes", jPanel2);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jScrollPane3.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton4.setText("jButton2");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        txaClientesActivos.setColumns(20);
+        txaClientesActivos.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        txaClientesActivos.setRows(5);
+        jScrollPane3.setViewportView(txaClientesActivos);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton5.setText("jButton1");
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnAprobarClientesActivos.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnAprobarClientesActivos.setForeground(new java.awt.Color(0, 0, 0));
+        btnAprobarClientesActivos.setText("Aprobar");
+        btnAprobarClientesActivos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAprobarClientesActivos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAprobarClientesActivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnAprobarClientesActivosActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Creditos solicitados");
+        cbxClientesActivos.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        cbxClientesActivos.setForeground(new java.awt.Color(0, 0, 0));
+        cbxClientesActivos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxClientesActivos.setSelectedIndex(-1);
+        cbxClientesActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClientesActivosActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("jButton3");
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Clientes");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton4)
+        btnRechazarClientesActivos.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnRechazarClientesActivos.setForeground(new java.awt.Color(0, 0, 0));
+        btnRechazarClientesActivos.setText("Rechazar");
+        btnRechazarClientesActivos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRechazarClientesActivos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRechazarClientesActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRechazarClientesActivosActionPerformed(evt);
+            }
+        });
+
+        cbxProductosPendientesClientesActivos.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        cbxProductosPendientesClientesActivos.setForeground(new java.awt.Color(0, 0, 0));
+        cbxProductosPendientesClientesActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProductosPendientesClientesActivosActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Productos pendientes");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(cbxClientesActivos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxProductosPendientesClientesActivos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(191, 191, 191))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel4)
+                        .addGap(156, 156, 156)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(btnAprobarClientesActivos)
                                 .addGap(107, 107, 107)
-                                .addComponent(jButton6))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel2))
-                .addContainerGap())
+                                .addComponent(btnRechazarClientesActivos)))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxClientesActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxProductosPendientesClientesActivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton6))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAprobarClientesActivos)
+                    .addComponent(btnRechazarClientesActivos))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Productos pendientes", jPanel3);
+        jTabbedPane1.addTab("Productos pendientes", jPanel5);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Base de datos clientes", jPanel4);
-
+        jLabel3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Cerrar sesión");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
             }
         });
 
@@ -244,7 +302,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(49, 49, 49)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -261,70 +319,192 @@ public class PanelEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).setEstado("Activo");
-        BaseDeDatos.buscarCuentaPendientePorID(idClienteSeleccionado).setEstado("Activo");
-        llenarComboBox();
-        jTextArea1.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void eliminarClientePendiente() {
-        BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).setEstado("Inactivo");
-        BaseDeDatos.buscarCuentaPendientePorID(idClienteSeleccionado).setEstado("Inactivo");
+        BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).setEstado("Inactivo");
+        BaseDeDatos.buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Inactivo");
     }
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        indiceClienteSeleccionado = jComboBox1.getSelectedIndex();
-        eliminarClientePendiente();
-        jTextArea1.setText("");
-        llenarComboBox();
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         new InicioSesion().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if(jComboBox1.getSelectedIndex()!=-1) {
-            llenarTextArea();
-            indiceClienteSeleccionado = indicesClientesPendientes.get(jComboBox1.getSelectedIndex());
-            idClienteSeleccionado = BaseDeDatos.sistema.getCliente(indiceClienteSeleccionado).getID();
+    private void btnRechazarClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarClientesActivosActionPerformed
+        String estadoNuevo = "Inactivo";
+        cambiarEstadoProductosPendientesClientesActivos(estadoNuevo);          
+        llenarComboProductosPendientesClientesActivos();
+    }//GEN-LAST:event_btnRechazarClientesActivosActionPerformed
+
+    private void cbxClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClientesActivosActionPerformed
+        if(cbxClientesActivos.getSelectedIndex()!=-1) {
+            if(!indicesClientesActivos.isEmpty()) {
+                clienteActivoSeleccionado = BaseDeDatos.sistema.getCliente(indicesClientesActivos.get(cbxClientesActivos.getSelectedIndex()));
+                indiceClienteActivoSeleccionado = indicesClientesActivos.get(cbxClientesActivos.getSelectedIndex());
+                idClienteActivoSeleccionado = BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).getID();
+            }
+            llenarComboProductosPendientesClientesActivos();  
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbxClientesActivosActionPerformed
+
+    private void llenarComboProductosPendientesClientesActivos() {
+        mdlProductosPendientesClientesActivos.removeAllElements();
+        indicesProductosPendientesClienteActivo.clear();
+        for (int i = 0; i < clienteActivoSeleccionado.cantidadDeProductos(); i++) {
+            Object producto = clienteActivoSeleccionado.getProductos(i);
+            if (producto instanceof Cuentas cuenta){
+                if(cuenta.getEstado().equals("Pendiente")) {
+                    indicesProductosPendientesClienteActivo.add(i);
+                    mdlProductosPendientesClientesActivos.addElement("Cuenta"); 
+                } 
+            }
+            else if(producto instanceof Creditos credito) {
+                if(credito.getEstado().equals("Pendiente")) {
+                    indicesProductosPendientesClienteActivo.add(i);
+                    mdlProductosPendientesClientesActivos.addElement("Crédito");
+                }
+            }
+                
+            else if(producto instanceof TarjetaDeCredito tdc) {
+                if(tdc.getEstado().equals("Pendiente")) {
+                    indicesProductosPendientesClienteActivo.add(i);
+                    mdlProductosPendientesClientesActivos.addElement("Tarjeta de crédito");
+                }  
+            }
+                 
+            else if(producto instanceof Cdt cdt) {
+                if(cdt.getEstado().equals("Pendiente")) {
+                    indicesProductosPendientesClienteActivo.add(i);
+                    mdlProductosPendientesClientesActivos.addElement("CDT");
+                }    
+            }      
+        }
+        cbxProductosPendientesClientesActivos.setModel(mdlProductosPendientesClientesActivos);
+        cbxProductosPendientesClientesActivos.setSelectedIndex(-1);
+    }
+    private void btnAprobarClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarClientesActivosActionPerformed
+        String estadoNuevo = "Activo";
+        cambiarEstadoProductosPendientesClientesActivos(estadoNuevo);                
+        llenarComboProductosPendientesClientesActivos();    
+    }//GEN-LAST:event_btnAprobarClientesActivosActionPerformed
+
+    private void cambiarEstadoProductosPendientesClientesActivos(String estadoACambiar) {
+        Object producto = clienteActivoSeleccionado.getProductos(indicesProductosPendientesClienteActivo
+                .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
+        if (producto instanceof Cuentas cuenta)
+            cuenta.setEstado(estadoACambiar);
+        else if(producto instanceof Creditos credito)
+            credito.setEstado(estadoACambiar);
+        else if(producto instanceof TarjetaDeCredito tdc)
+            tdc.setEstado(estadoACambiar);
+        else if(producto instanceof Cdt cdt)
+            cdt.setEstado(estadoACambiar);
+    }
+
+    private void btnRechazarClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarClientesPendientesActionPerformed
+        indiceClientePendienteSeleccionado = indicesClientesPendientes.get(cbxClientesPendientes.getSelectedIndex());
+        eliminarClientePendiente();
+        llenarComboClientesPendientes();
+        txaClientesPendientes.setText("");
+    }//GEN-LAST:event_btnRechazarClientesPendientesActionPerformed
+
+    private void cbxClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClientesPendientesActionPerformed
+        if(cbxClientesPendientes.getSelectedIndex()!=-1) {
+            llenarTextArea();
+            indiceClientePendienteSeleccionado = indicesClientesPendientes.get(cbxClientesPendientes.getSelectedIndex());
+            idClientePendienteSeleccionado = BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).getID();
+        }
+    }//GEN-LAST:event_cbxClientesPendientesActionPerformed
+
+    private void btnAprobarClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarClientesPendientesActionPerformed
+        BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).setEstado("Activo");
+        BaseDeDatos.buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Activo");
+        llenarComboClientesPendientes();
+        llenarComboClientesActivos();
+        txaClientesPendientes.setText("");
+    }//GEN-LAST:event_btnAprobarClientesPendientesActionPerformed
+
+    private void cbxProductosPendientesClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProductosPendientesClientesActivosActionPerformed
+        txaClientesActivos.setText("");
+        llenarTxaClientesActivos();
+    }//GEN-LAST:event_cbxProductosPendientesClientesActivosActionPerformed
+
+    private void llenarTxaClientesActivos() {
+        if(cbxProductosPendientesClientesActivos.getSelectedIndex()!=-1) {
+            Object producto = clienteActivoSeleccionado.getProductos(indicesProductosPendientesClienteActivo
+                .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
+            if (producto instanceof Cuentas cuenta) {
+                Object[] atributos = {clienteActivoSeleccionado.getNombre(),cuenta.getNumeroCuenta(), cuenta.getTipoDeCuenta()};
+                txaClientesActivos.setText(String.format("Nombre: %s\nNumero de cuenta: %s\nTipo de cuenta: %s", atributos));
+            }
+            else if(producto instanceof Creditos credito){
+                Object[] atributos = {clienteActivoSeleccionado.getNombre(),credito.getMonto()};
+                txaClientesActivos.setText(String.format("Nombre: %s\nMonto solicitado: %s", atributos));
+            }
+            else if(producto instanceof TarjetaDeCredito tdc) {
+                Object[] atributos = {clienteActivoSeleccionado.getNombre(),tdc.getNumeroDeTarjeta(), tdc.getMontoTotal()};
+                txaClientesActivos.setText(String.format("Nombre: %s\nNumero de tarjeta: %s\nMonto solicitado: %s", atributos));
+            }
+            else if(producto instanceof Cdt cdt) {
+                Object[] atributos = {clienteActivoSeleccionado.getNombre(),cdt.getMontoDepositado(), cdt.getPlazo(), cdt.getTasaDeInteres()};
+                txaClientesActivos.setText(String.format("Nombre: %s\nMonto depositado: %s\nPlazo: %s\nTasa de interés: %s", atributos));
+            }
+        }
+        
+    }
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        jLabel3.setForeground(Color.red);
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        jLabel3.setForeground(Color.black);
+    }//GEN-LAST:event_jLabel3MouseExited
     
     private void buscarIndicesClientesPendientes() {
-        indicesClientesPendientes.clear();
+        indicesClientesPendientes = new ArrayList();
         for (int i = 0; i<BaseDeDatos.sistema.cantClientes(); i++) {
             if(BaseDeDatos.sistema.getCliente(i).getEstado().equals("Pendiente"))
             indicesClientesPendientes.add(i);
         }
     }
+    private void buscarIndicesClientesActivos() {
+        indicesClientesActivos = new ArrayList();
+        for (int i = 0; i<BaseDeDatos.sistema.cantClientes(); i++) {
+            if(BaseDeDatos.sistema.getCliente(i).getEstado().equals("Activo"))
+            indicesClientesActivos.add(i);
+        }
+    }
     
-    private void llenarComboBox() {
-        jComboBox1.removeAllItems();
-        modelo.removeAllElements();
+    private void llenarComboClientesPendientes() {
+        cbxClientesPendientes.removeAllItems();
+        mdlClientesPendientes.removeAllElements();
         buscarIndicesClientesPendientes();
         for (Integer i : indicesClientesPendientes) {
-            modelo.addElement(BaseDeDatos.sistema.getCliente(i).getNombre());
+            mdlClientesPendientes.addElement(BaseDeDatos.sistema.getCliente(i).getNombre());
         }
-        jComboBox1.setModel(modelo);
-        jComboBox1.setSelectedIndex(-1);
-
+        cbxClientesPendientes.setModel(mdlClientesPendientes);
+        cbxClientesPendientes.setSelectedIndex(-1);
+    }
+    
+    private void llenarComboClientesActivos() {
+        cbxClientesActivos.removeAllItems();
+        mdlClientesActivos.removeAllElements();
+        buscarIndicesClientesActivos();
+        for (Integer i : indicesClientesActivos) {
+            mdlClientesActivos.addElement(BaseDeDatos.sistema.getCliente(i).getNombre());
+        }
+        cbxClientesActivos.setModel(mdlClientesActivos);
+        cbxClientesActivos.setSelectedIndex(-1);
     }
     
     private void llenarTextArea() {
-        if(jComboBox1.getSelectedIndex()!=-1){
-        clienteSeleccionado = BaseDeDatos.sistema.getCliente(indicesClientesPendientes.get(jComboBox1.getSelectedIndex()));
-        String[] atributos = {clienteSeleccionado.getNombre(), clienteSeleccionado.getFechaDeNacimiento().toString(), 
-            clienteSeleccionado.getNumeroDeDocumento(), clienteSeleccionado.getSexo(), 
-            clienteSeleccionado.getCorreoElectronico(), clienteSeleccionado.getNumeroTelefono(), 
-            BaseDeDatos.buscarCuentaPendientePorID(clienteSeleccionado.getID()).getTipoDeCuenta()};
-        String datosCliente = String.format("""
+        if(cbxClientesPendientes.getSelectedIndex()!=-1){
+        clientePendienteSeleccionado = BaseDeDatos.sistema.getCliente(indicesClientesPendientes.get(cbxClientesPendientes.getSelectedIndex()));
+        String[] atributos = {clientePendienteSeleccionado.getNombre(), clientePendienteSeleccionado.getFechaDeNacimiento().toString(), 
+            clientePendienteSeleccionado.getNumeroDeDocumento(), clientePendienteSeleccionado.getSexo(), 
+            clientePendienteSeleccionado.getCorreoElectronico(), clientePendienteSeleccionado.getNumeroTelefono(), 
+            BaseDeDatos.buscarCuentaPendientePorID(clientePendienteSeleccionado.getID()).getTipoDeCuenta()};
+        String datosCliente = String.format("""                                            
                                       Nombre: %s
                                       Fecha de Nacimiento: %s
                                       N\u00famero de documento: %s
@@ -332,7 +512,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
                                       Correo electr\u00f3nico: %s
                                       N\u00famero de tel\u00e9fono: %s
                                       Tipo de cuenta: %s""", (Object[]) atributos);
-        jTextArea1.setText(datosCliente);            
+        txaClientesPendientes.setText(datosCliente);            
         }
 
     }
@@ -374,24 +554,24 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnAprobarClientesActivos;
+    private javax.swing.JButton btnAprobarClientesPendientes;
+    private javax.swing.JButton btnRechazarClientesActivos;
+    private javax.swing.JButton btnRechazarClientesPendientes;
+    private javax.swing.JComboBox<String> cbxClientesActivos;
+    private javax.swing.JComboBox<String> cbxClientesPendientes;
+    private javax.swing.JComboBox<String> cbxProductosPendientesClientesActivos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea txaClientesActivos;
+    private javax.swing.JTextArea txaClientesPendientes;
     // End of variables declaration//GEN-END:variables
 }

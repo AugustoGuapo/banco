@@ -7,12 +7,8 @@ package interfaces_de_usuario;
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
 import java.awt.Color;
-
-import java.text.Format;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
@@ -33,6 +29,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     public CreacionDeCuenta() {
         initComponents();
         this.setSize(400, 500);
+        this.setLocationRelativeTo(null);
     }
 
     Clientes clienteNuevo = new Clientes();
@@ -83,10 +80,19 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jPanel1.setAutoscrolls(true);
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre completo");
 
+        tbxNombre.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxNombre.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nro de documento");
 
+        tbxDocumento.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxDocumento.setForeground(new java.awt.Color(0, 0, 0));
         tbxDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbxDocumentoActionPerformed(evt);
@@ -98,14 +104,26 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Correo electrónico");
 
+        tbxEmail.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxEmail.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de nacimiento");
 
+        dtcFechaNacimiento.setForeground(new java.awt.Color(0, 0, 0));
         dtcFechaNacimiento.setMaxSelectableDate(restarAños(LocalDate.now()));
 
+        jLabel5.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Número telefónico");
 
+        tbxNumTelefono.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxNumTelefono.setForeground(new java.awt.Color(0, 0, 0));
         tbxNumTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tbxNumTelefonoKeyReleased(evt);
@@ -115,12 +133,26 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Contraseña");
 
+        jPasswordField1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Repetir contraseña");
 
+        jPasswordField2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Formulario para nuevos clientes");
 
+        jButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Enviar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +160,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Regresar");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,9 +169,13 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Sexo");
 
         rbtSexo.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Masculino");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +189,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         rbtSexo.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Femenino");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,9 +198,13 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Tipo de cuenta");
 
         rbtCuenta.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setText("Corriente");
         jRadioButton3.setAutoscrolls(true);
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +214,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         rbtCuenta.add(jRadioButton4);
+        jRadioButton4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setText("Ahorros");
         jRadioButton4.setAutoscrolls(true);
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +224,12 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Nombre de usuario");
+
+        tbxUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxUsuario.setForeground(new java.awt.Color(0, 0, 0));
 
         jPanel1.setSize(400,500);
 
@@ -187,58 +238,60 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel10)
-                .addGap(56, 56, 56)
-                .addComponent(jRadioButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jRadioButton3)
-                .addGap(44, 44, 44))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel9))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel10)
+                        .addGap(56, 56, 56)
+                        .addComponent(jRadioButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(jRadioButton3)
+                        .addGap(16, 16, 16))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel8)
-                            .addComponent(jButton1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(213, 213, 213)
-                                .addComponent(jRadioButton2))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel12))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tbxNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tbxEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tbxUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tbxNumTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel12))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jRadioButton1)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tbxNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tbxEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tbxUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(dtcFechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tbxNumTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                        .addComponent(jButton1)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addGap(213, 213, 213)
+                                            .addComponent(jRadioButton2))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addGap(13, 13, 13))))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel8)
-                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -289,9 +342,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addGap(38, 38, 38))
+                .addGap(44, 44, 44))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -311,6 +364,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             clienteNuevo = new Clientes();
             cuentaNueva = new Cuentas();
             BaseDeDatos.contadorParaId++;
+            JOptionPane.showMessageDialog(this, "Ha realizado su solicitud con éxito");
+            this.setVisible(false);
+            new InicioSesion().setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(CreacionDeCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }

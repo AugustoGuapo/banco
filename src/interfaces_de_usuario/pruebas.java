@@ -71,10 +71,7 @@ public class pruebas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
-            jTextArea1.append(BaseDeDatos.sistema.getCliente(i).getNombre());
-            jTextArea1.append(String.valueOf(BaseDeDatos.sistema.getCliente(i).getID())+"\n");
-        }
+        jTextArea1.setText(BaseDeDatos.sistema.getCliente(BaseDeDatos.contadorParaId-1).getNombre());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
