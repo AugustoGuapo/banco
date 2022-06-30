@@ -4,6 +4,9 @@
  */
 package clases_modelo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author user
@@ -14,8 +17,28 @@ public class Creditos {
     private float tasaDeInteres;
     private float monto;
     private int numeroDeCuotas;
-    private int cuotasPagadas;
+    private int cuotasAdeudadas;
     private String estado;
+    private LocalDate fechaProximoPago;
+    private float valorCuota;
+    
+    
+    public void calcularCuota() {
+        valorCuota=monto/numeroDeCuotas;
+    }
+    
+    public float getValorCuota() {
+        return valorCuota;
+    }
+   public String getFechaProximoPago(String label) {
+        if(fechaProximoPago != null)
+            return fechaProximoPago.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+        return "---";
+    }
+    
+    public LocalDate getFechaProximoPago() {
+        return fechaProximoPago;
+    }
 
     /**
      * @return the ID
@@ -56,7 +79,7 @@ public class Creditos {
      * @param monto the monto to set
      */
     public void setMonto(float monto) {
-        this.monto = monto;
+        this.monto = (float) (monto*1.225);
     }
 
     /**
@@ -74,17 +97,17 @@ public class Creditos {
     }
 
     /**
-     * @return the cuotasPagadas
+     * @return the cuotasAdeudadas
      */
-    public int getCuotasPagadas() {
-        return cuotasPagadas;
+    public int getCuotasAdeudadas() {
+        return cuotasAdeudadas;
     }
 
     /**
-     * @param cuotasPagadas the cuotasPagadas to set
+     * @param cuotasAdeudadas the cuotasAdeudadas to set
      */
-    public void setCuotasPagadas(int cuotasPagadas) {
-        this.cuotasPagadas = cuotasPagadas;
+    public void setCuotasAdeudadas(int cuotasAdeudadas) {
+        this.cuotasAdeudadas = cuotasAdeudadas;
     }
 
     /**

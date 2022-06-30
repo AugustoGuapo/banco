@@ -6,13 +6,11 @@ package interfaces_de_usuario;
 
 import java.time.LocalDate;
 import clases_modelo.*;
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 /**
  *
  * @author user
@@ -296,7 +294,6 @@ public class InicioSesion extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        UIManager.setLookAndFeel(new FlatIntelliJLaf());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new InicioSesion().setVisible(true);

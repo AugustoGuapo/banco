@@ -21,11 +21,10 @@ public class Clientes {
     private String sexo;
     private String estado;
     private Credenciales credenciales;
-    private ArrayList<Object> productos;
+    private ArrayList<Object> productos = new ArrayList();
 
     public Clientes() {
         credenciales = new Credenciales();
-        productos = new ArrayList();
     }
     /**
      * @return the systemID

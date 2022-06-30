@@ -26,10 +26,14 @@ public class TarjetaDeCredito {
     private String estado;
     private LocalDate fechaProximoPago;
 
-    public String getFechaProximoPago() {
+    public String getFechaProximoPago(String label) {
         if(fechaProximoPago != null)
             return fechaProximoPago.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
         return "---";
+    }
+    
+    public LocalDate getFechaProximoPago() {
+        return fechaProximoPago;
     }
     
     public void setFechaProximoPago(LocalDate fecha) {
@@ -127,7 +131,7 @@ public class TarjetaDeCredito {
      * @param montoAdeudado the montoAdeudado to set
      */
     public void setMontoAdeudado(float montoAdeudado) {
-        this.montoAdeudado = montoAdeudado;
+        this.montoAdeudado = (float) (montoAdeudado*1.225);
     }
 
     /**
@@ -160,12 +164,14 @@ public class TarjetaDeCredito {
     
     
     public float calcularCuotas(int nroCuotas) {
-        float cuota = (float) (montoAdeudado*(1.225))/nroCuotas;
+        float cuota = (float) (montoAdeudado)/nroCuotas;
         return cuota;
     }
     
     public void pagoCuota(float monto) {
         montoAdeudado-=monto;
+        nroCuotasPagadas+=1;
+        nroCuotasAdeudadas-=1;
     }
     
 

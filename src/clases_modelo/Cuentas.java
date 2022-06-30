@@ -96,7 +96,7 @@ public class Cuentas {
         return posiciones;
     }
     
-        public void crearNumeroCuenta() {
+    public void crearNumeroCuenta() {
         String salida="";
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
