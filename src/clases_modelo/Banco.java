@@ -9,6 +9,9 @@ import interfaces_de_usuario.InicioSesion;
 import interfaces_de_usuario.PanelClientes;
 import interfaces_de_usuario.PanelEmpleados;
 import interfaces_de_usuario.ConsignarRetirarCuenta;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
@@ -26,6 +29,7 @@ public class Banco {
         //PanelClientes ventana = new PanelClientes();
         //ConsignarRetirarCuenta ventana = new ConsignarRetirarCuenta();
         ventana.setVisible(true);
+        //System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
     }
     
 }

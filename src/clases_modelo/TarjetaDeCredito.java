@@ -5,6 +5,9 @@
 package clases_modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Random;
 
 /**
  *
@@ -19,8 +22,30 @@ public class TarjetaDeCredito {
     private float montoAdeudado;
     private int nroCuotasAdeudadas;
     private int nroCuotasPagadas;
+    private float valorCuota;
     private String estado;
+    private LocalDate fechaProximoPago;
 
+    public String getFechaProximoPago() {
+        if(fechaProximoPago != null)
+            return fechaProximoPago.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+        return "---";
+    }
+    
+    public void setFechaProximoPago(LocalDate fecha) {
+        fechaProximoPago = fecha;
+    }
+    
+    
+    public float getValorCuota() {
+        return valorCuota;
+    }
+    
+    public void setValorCuota(int nroCuotas) {
+        valorCuota=calcularCuotas(nroCuotas);
+    } 
+    
+    
     /**
      * @return the ID
      */
@@ -133,12 +158,9 @@ public class TarjetaDeCredito {
         this.nroCuotasPagadas = nroCuotasPagadas;
     }
     
-        public boolean solicitud() {
-        return true;
-    }
     
     public float calcularCuotas(int nroCuotas) {
-        float cuota = (float) (montoAdeudado*(nroCuotas*2.2875))/nroCuotas;
+        float cuota = (float) (montoAdeudado*(1.225))/nroCuotas;
         return cuota;
     }
     
@@ -146,26 +168,6 @@ public class TarjetaDeCredito {
         montoAdeudado-=monto;
     }
     
-    private int contarTDCs(TarjetaDeCredito[] arreglo, String id) {
-        int salida=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID() == ID)
-                salida++;
-        }
-        return salida;
-    }
-    
-    public int[] buscarTDCs(TarjetaDeCredito[] arreglo, String id) {
-        int[] posiciones = new int[contarTDCs(arreglo, id)];
-        int posicion=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID() == ID) {
-                posiciones[posicion]=i;
-                posicion++;
-            }  
-        }
-        return posiciones;
-    }
 
     /**
      * @return the estado
@@ -179,5 +181,27 @@ public class TarjetaDeCredito {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    
+    public void generarNumeroTarjeta() {
+        String salida="";
+        Random random = new Random();
+        for (int i = 0; i < 4; i++) {
+            if(i!=0)
+                salida+=" ";
+            for (int j = 0; j < 4; j++) {
+                salida+= String.valueOf(random.nextInt(9));
+            }
+        }
+        numeroDeTarjeta = salida;
+    }
+    
+    public void generarCVV() {
+        String salida ="";
+        Random random = new Random();
+        for (int i = 0; i < 3; i++) {
+            salida = String.valueOf(random.nextInt(9));
+        }
+        CVV=salida;
     }
 }
