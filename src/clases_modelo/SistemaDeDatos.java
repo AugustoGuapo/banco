@@ -13,13 +13,11 @@ import java.util.ArrayList;
 public class SistemaDeDatos {
     
     private ArrayList<Clientes> listaClientes;
-    
-    
-    
-    
-    
+    private ArrayList<Empleados> listaEmpleados;
+
     public SistemaDeDatos(){
         listaClientes = new ArrayList();
+        listaEmpleados = new ArrayList();
     }
 
     public void añadirCliente(Clientes cliente) {
@@ -41,6 +39,14 @@ public class SistemaDeDatos {
                 cliente = listaClientes.get(i);
         }
         return cliente;
+    }
+    
+   public void añadirEmpleado(Empleados empleado) {
+        listaEmpleados.add(empleado);
+    }
+    
+    public Empleados getEmpleado(int pos) {
+        return listaEmpleados.get(pos);
     }
 
     

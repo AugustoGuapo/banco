@@ -138,7 +138,7 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
 
     private void btnConsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsignarActionPerformed
         for (int i = 0; i < clienteUsado.cantidadDeProductos(); i++) {
-            if(clienteUsado.getProductos(i) instanceof Cuentas cuenta)
+            if(clienteUsado.getProducto(i) instanceof Cuentas cuenta)
                 if(cuenta.getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso)) {
                 cuenta.consignar(Float.parseFloat(tbxMonto.getText()));
                 break;
@@ -148,9 +148,8 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsignarActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        
         for (int i = 0; i < clienteUsado.cantidadDeProductos(); i++) {
-            if(clienteUsado.getProductos(i) instanceof Cuentas cuenta)
+            if(clienteUsado.getProducto(i) instanceof Cuentas cuenta)
                 if(cuenta.getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso))
                     if(cuenta.getSaldo() >  Float.parseFloat(tbxMonto.getText())) {
                         cuenta.retirar(Float.parseFloat(tbxMonto.getText()));

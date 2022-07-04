@@ -38,8 +38,7 @@ public class PanelClientes extends javax.swing.JFrame {
     Clientes clienteSesionIniciada = BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada);
     String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
     ArrayList <Cuentas>cuentasCliente = new ArrayList();
-    int contador = 0;
-    DefaultComboBoxModel mdlComboTDC = new DefaultComboBoxModel();
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +82,7 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         btnSolicitarCredito = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnPagarCredito = new javax.swing.JButton();
         panelTDC = new javax.swing.JPanel();
         cbxTDC = new javax.swing.JComboBox<>();
         tbxMontoSolicitarTDC = new javax.swing.JTextField();
@@ -97,7 +96,7 @@ public class PanelClientes extends javax.swing.JFrame {
         btnSolicitarTDC = new javax.swing.JButton();
         tbxMontoDeseadoTDC = new javax.swing.JTextField();
         jLabel50 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPagarTDC = new javax.swing.JButton();
         planoTarjeta = new javax.swing.JPanel();
         lblNroTarjeta4 = new javax.swing.JLabel();
         lblFechaVencimiento = new javax.swing.JLabel();
@@ -121,23 +120,9 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         lblDeudaTDC = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel40 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel44 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,43 +208,35 @@ public class PanelClientes extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(214, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80)
+                .addComponent(lblSaldoTotal)
+                .addGap(281, 281, 281))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl2NroCuenta)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl2NroCuenta)
+                            .addComponent(lbl1NroCuenta)
+                            .addComponent(tagNroCuenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl1NroCuenta)
-                                        .addGap(74, 74, 74))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tagNroCuenta)
-                                        .addGap(42, 42, 42)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tagSaldo)
-                                        .addGap(52, 52, 52)
-                                        .addComponent(tagTipoCuenta))
-                                    .addComponent(lblActualizar)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lbl2Saldo)
-                                            .addComponent(lbl1Saldo))
-                                        .addGap(81, 81, 81)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lbl1TipoCuenta)
-                                            .addComponent(lbl2TipoCuenta)))))
+                                .addComponent(tagSaldo)
+                                .addGap(52, 52, 52)
+                                .addComponent(tagTipoCuenta))
+                            .addComponent(lblActualizar)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(80, 80, 80)
-                                .addComponent(lblSaldoTotal)
-                                .addGap(137, 137, 137)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl2Saldo)
+                                    .addComponent(lbl1Saldo))
+                                .addGap(81, 81, 81)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl1TipoCuenta)
+                                    .addComponent(lbl2TipoCuenta))))
                         .addGap(144, 144, 144))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(bienvenidaUsuario)
@@ -353,7 +330,6 @@ public class PanelClientes extends javax.swing.JFrame {
         cbxCuotasCredito.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         cbxCuotasCredito.setForeground(new java.awt.Color(0, 0, 0));
         cbxCuotasCredito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
-        cbxCuotasCredito.setSelectedIndex(-1);
 
         jLabel16.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
@@ -380,9 +356,14 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Seleccione su credito");
 
-        jButton4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Pagar crédito");
+        btnPagarCredito.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnPagarCredito.setForeground(new java.awt.Color(0, 0, 0));
+        btnPagarCredito.setText("Pagar crédito");
+        btnPagarCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarCreditoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -405,7 +386,11 @@ public class PanelClientes extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(lblFechaPagoCredito))))
+                            .addComponent(lblFechaPagoCredito)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPagarCredito)
+                        .addGap(55, 55, 55)))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -421,8 +406,7 @@ public class PanelClientes extends javax.swing.JFrame {
                             .addComponent(btnSolicitarCredito)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tbxMontoCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton4))
+                                .addComponent(tbxMontoCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addGap(41, 41, 41))))
@@ -465,11 +449,14 @@ public class PanelClientes extends javax.swing.JFrame {
                     .addComponent(lblCuotaCredito)
                     .addComponent(lblCuotasRestantes)
                     .addComponent(jLabel17))
-                .addGap(18, 18, 18)
-                .addComponent(btnSolicitarCredito)
-                .addGap(28, 28, 28)
-                .addComponent(jButton4)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSolicitarCredito))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btnPagarCredito)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Creditos", jPanel2);
@@ -499,7 +486,6 @@ public class PanelClientes extends javax.swing.JFrame {
         cbxCuotasTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         cbxCuotasTDC.setForeground(new java.awt.Color(0, 0, 0));
         cbxCuotasTDC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
-        cbxCuotasTDC.setSelectedIndex(-1);
         panelTDC.add(cbxCuotasTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 98, -1));
 
         jLabel28.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
@@ -551,15 +537,15 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel50.setText("Monto deseado");
         panelTDC.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Pagar una cuota");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPagarTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnPagarTDC.setForeground(new java.awt.Color(0, 0, 0));
+        btnPagarTDC.setText("Pagar una cuota");
+        btnPagarTDC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPagarTDCActionPerformed(evt);
             }
         });
-        panelTDC.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+        panelTDC.add(btnPagarTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
 
         planoTarjeta.setBackground(new java.awt.Color(255, 255, 255));
         planoTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -673,160 +659,16 @@ public class PanelClientes extends javax.swing.JFrame {
         jTabbedPane2.addTab("Tarjetas de crédito", panelTDC);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 117, -1, -1));
 
-        jComboBox5.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jComboBox5.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caricatura-en-el-sitio-de-construcción-constructor-piedra-pone-una-pared-ladrillo-lugar-la-composición-con-un-profesional-173566168.jpg"))); // NOI18N
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 440, 330));
 
-        jLabel32.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel32.setText("Monto");
-
-        jLabel33.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel33.setText("jLabel4");
-
-        jLabel34.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel34.setText("Cuota");
-
-        jLabel35.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel35.setText("jLabel10");
-
-        jLabel36.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel36.setText("Fecha de pago");
-
-        jLabel37.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel37.setText("jLabel12");
-
-        jLabel38.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel38.setText("Cuotas restantes");
-
-        jLabel39.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel39.setText("jLabel14");
-
-        jTextField3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-
-        jLabel40.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel40.setText("Monto a solicitar");
-
-        jComboBox6.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jComboBox6.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "24", "36", "48", "60" }));
-        jComboBox6.setSelectedIndex(-1);
-
-        jLabel41.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel41.setText("Numero de cuotas");
-
-        jLabel42.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel42.setText("Tasa de interés");
-
-        jLabel43.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel43.setText("jLabel17");
-
-        jButton3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Solicitar crédito");
-
-        jLabel44.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel44.setText("Seleccione su credito");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel38)
-                            .addComponent(jLabel39)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel33)
-                            .addComponent(jLabel35)
-                            .addComponent(jLabel34))
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel36))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel37)))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel41)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel42)
-                            .addComponent(jLabel43)
-                            .addComponent(jButton3)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel44)
-                        .addGap(41, 41, 41))))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel44)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel36)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel33)
-                                .addComponent(jLabel37))
-                            .addComponent(jLabel41))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel34)
-                            .addComponent(jLabel38)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel42)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel39)
-                    .addComponent(jLabel43))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("¡Este sitio se encuentra en construcción!");
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
 
         jTabbedPane2.addTab("CDT", jPanel7);
 
@@ -874,10 +716,10 @@ public class PanelClientes extends javax.swing.JFrame {
     private void llenarComboCreditos() {
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-            Object producto = clienteSesionIniciada.getProductos(i);
+            Object producto = clienteSesionIniciada.getProducto(i);
             if(producto instanceof Creditos credito)
                 if(credito.getEstado().equals("Activo"))
-                mdlComboTDC.addElement(credito.getMonto());
+                modelo.addElement(credito.getMonto());
         }
         modelo.addElement("Solicitar credito");
         cbxCreditos.setModel(modelo);
@@ -885,8 +727,9 @@ public class PanelClientes extends javax.swing.JFrame {
     }
     
     private void llenarComboTDC() {
+        DefaultComboBoxModel mdlComboTDC = new DefaultComboBoxModel();
         for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-            Object producto = clienteSesionIniciada.getProductos(i);
+            Object producto = clienteSesionIniciada.getProducto(i);
             if(producto instanceof TarjetaDeCredito tdc)
                 if(tdc.getEstado().equals("Activo"))
                 mdlComboTDC.addElement(tdc.getNumeroDeTarjeta().split(" ")[3]);
@@ -906,7 +749,7 @@ public class PanelClientes extends javax.swing.JFrame {
         int buscador = 0;
         Component[] componentesSolicitud = {btnSolicitarTDC, tbxMontoDeseadoTDC, jLabel50};
         Component[] componentesFueraPlano = {tbxMontoSolicitarTDC, jLabel27, cbxCuotasTDC, jLabel28, jLabel29, 
-            jButton2, jButton1, jLabel30};
+            jButton2, btnPagarTDC, jLabel30};
         if(indiceSeleccionado == -1) {
             cambiarVisibilidadComponentes(componentesSolicitud, false);
             cambiarVisibilidadComponentes(componentesFueraPlano, false);
@@ -922,8 +765,9 @@ public class PanelClientes extends javax.swing.JFrame {
             cambiarVisibilidadComponentes(componentesFueraPlano, true);
             planoTarjeta.setVisible(true);
            for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-               Object producto = clienteSesionIniciada.getProductos(i);
-               if (producto instanceof TarjetaDeCredito tdc && indiceSeleccionado == buscador) {
+               Object producto = clienteSesionIniciada.getProducto(i);
+               if(producto instanceof TarjetaDeCredito tdc && tdc.getEstado().equals("Activo")){
+                   if (indiceSeleccionado == buscador) {
                    String[] numeroTarjeta = tdc.getNumeroDeTarjeta().split(" ");
                    lblNroTarjeta1.setText(numeroTarjeta[0]);
                    lblNroTarjeta2.setText(numeroTarjeta[1]);
@@ -936,17 +780,25 @@ public class PanelClientes extends javax.swing.JFrame {
                    lblCuotasRestantesTDC.setText(String.valueOf(tdc.getNroCuotasAdeudadas()));
                    lblFechaPagoTDC.setText(String.valueOf(tdc.getFechaProximoPago("Para label")));
                    lblLimiteTDC.setText(String.format("%.2f",tdc.getMontoTotal()).replace(",", "."));
+                   if(tdc.getNroCuotasAdeudadas()==0) {
+                       btnPagarTDC.setEnabled(false);
+                   }
+                   else
+                       btnPagarTDC.setEnabled(true);
                    break;
-               }
+                   }
                else if(producto instanceof TarjetaDeCredito && indiceSeleccionado!=buscador)
                    buscador++;
+               }
            } 
         }
-        if(Float.parseFloat(lblDeudaTDC.getText())>0) {
+        if(Float.parseFloat(lblDeudaTDC.getText())>500) {
             jButton2.setEnabled(false);
         }
         else
             jButton2.setEnabled(true);
+        
+        
     }
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         this.setVisible(false);
@@ -1009,73 +861,90 @@ public class PanelClientes extends javax.swing.JFrame {
         Creditos credito = new Creditos();
         credito.setMonto(Float.parseFloat(tbxMontoCredito.getText()));
         credito.setEstado("Pendiente");
-        credito.setNumeroDeCuotas((cbxCuotasCredito.getSelectedIndex()+1)*12);
         credito.setTasaDeInteres((float)2.25);
-        credito.setCuotasAdeudadas(0);
+        credito.setCuotasAdeudadas((cbxCuotasCredito.getSelectedIndex()+1)*12);
+        credito.setFechaProximoPago(LocalDate.now().plusMonths(1));
+        credito.calcularCuota();
         BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(credito);
     }//GEN-LAST:event_btnSolicitarCreditoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int indiceSeleccionado = cbxTDC.getSelectedIndex();
         int buscador = 0;
-        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProductos(i) instanceof TarjetaDeCredito tdc) {
-                if(indiceSeleccionado == buscador) {
-                    if(tdc.getMontoTotal()>=Integer.parseInt(tbxMontoSolicitarTDC.getText())+tdc.getMontoAdeudado()){
-                        tdc.setMontoAdeudado(Float.parseFloat(tbxMontoSolicitarTDC.getText()));
-                        tdc.setNroCuotasAdeudadas((cbxCuotasTDC.getSelectedIndex()+1)*12);
-                        tdc.setValorCuota((cbxCuotasTDC.getSelectedIndex()+1)*12);
-                        tdc.setFechaProximoPago(LocalDate.now().plusMonths(1));
-                        jButton2.setEnabled(false);
-                        cbxCuotasTDC.setSelectedIndex(-1);
-                        tbxMontoSolicitarTDC.setText(null);
-                        labelsPanelTDC();
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "No puede solicitar un monto mayor a su límite");
-                    }
-                        
+        
+         for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
+            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
+                if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
+                    cuenta.consignar(Float.parseFloat(tbxMontoSolicitarTDC.getText()));
                 }
-                else
-                    buscador++;
+            }
+         }
+        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
+            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof TarjetaDeCredito tdc) {
+                if(tdc.getEstado().equals("Activo")) {
+                    if(indiceSeleccionado == buscador) {
+                        if(tdc.getMontoTotal()>=Float.parseFloat(tbxMontoSolicitarTDC.getText())){
+                            tdc.setMontoAdeudado(Float.parseFloat(tbxMontoSolicitarTDC.getText()));
+                            tdc.setNroCuotasAdeudadas((cbxCuotasTDC.getSelectedIndex()+1)*12);
+                            tdc.setValorCuota((cbxCuotasTDC.getSelectedIndex()+1)*12);
+                            tdc.setFechaProximoPago(LocalDate.now().plusMonths(1));
+                            jButton2.setEnabled(false);
+                            cbxCuotasTDC.setSelectedIndex(0);
+                            tbxMontoSolicitarTDC.setText(null);
+                            labelsPanelTDC();
+                            break;
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(this, "No puede solicitar un monto mayor a su límite");
+                        }   
+                    }
+                    else
+                        buscador++;
+                }
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPagarTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarTDCActionPerformed
         int indiceSeleccionado = cbxTDC.getSelectedIndex();
         int buscador = 0;
         
         for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProductos(i) instanceof Cuentas cuenta) {
+            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
                 if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
                     if(cuenta.getSaldo() > Float.parseFloat(lblCuotaTDC.getText())) {
                         cuenta.retirar(Float.parseFloat(lblCuotaTDC.getText()));
                         for (int j = 0; j < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); j++) {
-                            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProductos(j) instanceof TarjetaDeCredito tdc) {
+                            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(j) instanceof TarjetaDeCredito tdc && tdc.getEstado().equals("Activo")) {
                                 if(indiceSeleccionado == buscador) {
                                     tdc.pagoCuota(Float.parseFloat(lblCuotaTDC.getText()));
                                     tdc.setFechaProximoPago(tdc.getFechaProximoPago().plusMonths(1));
+                                    labelsPanelTDC();
+                                    break;
                                 }
+                                else
+                                    buscador++;
                             } 
                         }
-                        labelsPanelTDC();
-                        break;
                     }
                     else
                         JOptionPane.showMessageDialog(this, "Fondos insuficientes");
                 }
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPagarTDCActionPerformed
 
     private void cbxCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCreditosActionPerformed
+        labelsPanelCreditos();
+    }//GEN-LAST:event_cbxCreditosActionPerformed
+
+    private void labelsPanelCreditos() {
         int indiceSeleccionado = cbxCreditos.getSelectedIndex();
         int buscador = 0;
-        Component[] componentesSolicitudCredito = {tbxMontoCredito, jLabel15, cbxCuotasCredito, jLabel16, 
+        Component[] componentesSolicitudCredito = {tbxMontoCredito, jLabel15, cbxCuotasCredito, jLabel16,
             jLabel5, jLabel17, btnSolicitarCredito};
         Component[] componentesCreditoSeleccionado = {jLabel3, lblDeudaCredito, jLabel9, lblCuotaCredito, jLabel11,lblFechaPagoCredito,
-            jLabel13,lblCuotasRestantes};
+            jLabel13,lblCuotasRestantes,btnPagarCredito};
         if(cbxCreditos.getSelectedIndex() == -1) {
             cambiarVisibilidadComponentes(componentesSolicitudCredito, false);
             cambiarVisibilidadComponentes(componentesCreditoSeleccionado, false);
@@ -1088,19 +957,52 @@ public class PanelClientes extends javax.swing.JFrame {
             cambiarVisibilidadComponentes(componentesSolicitudCredito, false);
             cambiarVisibilidadComponentes(componentesCreditoSeleccionado, true);
             for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-                if(clienteSesionIniciada.getProductos(i) instanceof Creditos credito && buscador == indiceSeleccionado) {
-                    lblCuotaCredito.setText(String.valueOf(credito.getMonto()));
-                    lblFechaPagoCredito.setText(String.valueOf(credito.getFechaProximoPago("Para label")));
-                    lblCuotaCredito.setText(String.valueOf(credito.getValorCuota()));
-                    lblCuotasRestantes.setText(String.valueOf(credito.getCuotasAdeudadas()));
-                }
-                else if(clienteSesionIniciada.getProductos(i) instanceof Creditos credito && buscador != indiceSeleccionado) {
+                if(clienteSesionIniciada.getProducto(i) instanceof Creditos credito && credito.getEstado().equals("Activo")) {
+                    if(buscador == indiceSeleccionado) {
+                        lblDeudaCredito.setText(String.format("%.2f",credito.getMonto()));
+                        lblFechaPagoCredito.setText(String.valueOf(credito.getFechaProximoPago("Para label")));
+                        lblCuotaCredito.setText(String.valueOf(credito.getValorCuota()));
+                        lblCuotasRestantes.setText(String.valueOf(credito.getCuotasAdeudadas()));
+                        break;
+                    }
+                    else  {
                     buscador++;
+                    }
                 }
             }
         }
-            
-    }//GEN-LAST:event_cbxCreditosActionPerformed
+    }
+
+    private void btnPagarCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarCreditoActionPerformed
+        int indiceSeleccionado = cbxCreditos.getSelectedIndex();
+        int buscador = 0;
+        
+        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
+            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
+                if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
+                    if(cuenta.getSaldo() > Float.parseFloat(lblCuotaCredito.getText())) {
+                        cuenta.retirar(Float.parseFloat(lblCuotaCredito.getText()));
+                        for (int j = 0; j < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); j++) {
+                            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(j) 
+                                    instanceof Creditos credito && credito.getEstado().equals("Activo")) {
+                                if(indiceSeleccionado == buscador) {
+                                    credito.pagoCuota(Float.parseFloat(lblCuotaCredito.getText()));
+                                    credito.setFechaProximoPago(credito.getFechaProximoPago().plusMonths(1));
+                                    break;
+                                }
+                                else
+                                    buscador++;
+                            } 
+                        }
+                        labelsPanelCreditos();
+                        break;
+                    }
+                    else
+                        JOptionPane.showMessageDialog(this, "Fondos insuficientes");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnPagarCreditoActionPerformed
 
     private void tipoSegundaCuenta(Cuentas segundaCuenta) {
         if(lbl1TipoCuenta.getText().equals("Ahorros"))
@@ -1118,7 +1020,7 @@ public class PanelClientes extends javax.swing.JFrame {
     
     public final void actualizarVentana() {
         buscarCuentas();
-        llenarEtiquetasPosicionConsolidad();
+        llenarEtiquetasPosicionConsolidado();
         mostrarSaldoTotal();
     }
     
@@ -1143,12 +1045,12 @@ public class PanelClientes extends javax.swing.JFrame {
     public void buscarCuentas() {
         cuentasCliente.clear();
         for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if (BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProductos(i) instanceof Cuentas cuenta)
+            if (BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta)
                 cuentasCliente.add(cuenta);
         }
     }
     
-    public void llenarEtiquetasPosicionConsolidad() {
+    public void llenarEtiquetasPosicionConsolidado() {
        javax.swing.JLabel[] etiquetasCuenta1 = {lbl1NroCuenta, lbl1Saldo,lbl1TipoCuenta};
        javax.swing.JLabel[] etiquetasCuenta2 = {lbl2NroCuenta, lbl2Saldo, lbl2TipoCuenta};
        javax.swing.JLabel[][] etiquetas = {etiquetasCuenta1, etiquetasCuenta2};
@@ -1212,18 +1114,15 @@ public class PanelClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidaUsuario;
+    private javax.swing.JButton btnPagarCredito;
+    private javax.swing.JButton btnPagarTDC;
     private javax.swing.JButton btnSolicitarCredito;
     private javax.swing.JButton btnSolicitarTDC;
     private javax.swing.JComboBox<String> cbxCreditos;
     private javax.swing.JComboBox<String> cbxCuotasCredito;
     private javax.swing.JComboBox<String> cbxCuotasTDC;
     private javax.swing.JComboBox<String> cbxTDC;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1242,19 +1141,7 @@ public class PanelClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
@@ -1263,12 +1150,13 @@ public class PanelClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lbl1NroCuenta;
     private javax.swing.JLabel lbl1Saldo;
     private javax.swing.JLabel lbl1TipoCuenta;

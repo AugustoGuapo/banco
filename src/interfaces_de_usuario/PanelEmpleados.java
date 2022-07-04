@@ -350,7 +350,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         mdlProductosPendientesClientesActivos.removeAllElements();
         indicesProductosPendientesClienteActivo.clear();
         for (int i = 0; i < clienteActivoSeleccionado.cantidadDeProductos(); i++) {
-            Object producto = clienteActivoSeleccionado.getProductos(i);
+            Object producto = clienteActivoSeleccionado.getProducto(i);
             if (producto instanceof Cuentas cuenta){
                 if(cuenta.getEstado().equals("Pendiente")) {
                     indicesProductosPendientesClienteActivo.add(i);
@@ -388,7 +388,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAprobarClientesActivosActionPerformed
 
     private void cambiarEstadoProductosPendientesClientesActivos(String estadoACambiar) {
-        Object producto = clienteActivoSeleccionado.getProductos(indicesProductosPendientesClienteActivo
+       Object producto = clienteActivoSeleccionado.getProducto(indicesProductosPendientesClienteActivo
                 .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
         if (producto instanceof Cuentas cuenta)
             cuenta.setEstado(estadoACambiar);
@@ -430,7 +430,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void llenarTxaClientesActivos() {
         if(cbxProductosPendientesClientesActivos.getSelectedIndex()!=-1) {
-            Object producto = clienteActivoSeleccionado.getProductos(indicesProductosPendientesClienteActivo
+            Object producto = clienteActivoSeleccionado.getProducto(indicesProductosPendientesClienteActivo
                 .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
             if (producto instanceof Cuentas cuenta) {
                 Object[] atributos = {clienteActivoSeleccionado.getNombre(),cuenta.getNumeroCuenta(), cuenta.getTipoDeCuenta()};

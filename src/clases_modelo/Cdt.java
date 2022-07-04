@@ -15,6 +15,8 @@ public class Cdt {
     private float montoDepositado;
     private float montoARetirar;
     private String estado;
+    
+    public Cdt(){};
 
     /**
      * @return the ID

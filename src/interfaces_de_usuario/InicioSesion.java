@@ -9,7 +9,6 @@ import clases_modelo.*;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
@@ -223,7 +222,15 @@ public class InicioSesion extends javax.swing.JFrame {
             } 
             
         }
-        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");   
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
+        for (int i = 0; i < 1; i++) {
+            Empleados aux = BaseDeDatos.sistema.getEmpleado(i);
+            if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))){
+                new PanelEmpleados().setVisible(true);
+                this.setVisible(false);
+            }
+                
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

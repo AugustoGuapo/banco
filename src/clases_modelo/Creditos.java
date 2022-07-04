@@ -24,7 +24,7 @@ public class Creditos {
     
     
     public void calcularCuota() {
-        valorCuota=monto/numeroDeCuotas;
+        valorCuota=monto/cuotasAdeudadas;
     }
     
     public float getValorCuota() {
@@ -38,6 +38,10 @@ public class Creditos {
     
     public LocalDate getFechaProximoPago() {
         return fechaProximoPago;
+    }
+    
+    public void setFechaProximoPago(LocalDate fecha) {
+        fechaProximoPago=fecha;
     }
 
     /**
@@ -121,8 +125,9 @@ public class Creditos {
         this.estado=estado;
     }
     
-    public void pagoDeCuota(float monto) {
+    public void pagoCuota(float monto) {
         this.monto-=monto;
+        cuotasAdeudadas-=1;
     }
 
     /**
@@ -139,24 +144,4 @@ public class Creditos {
         this.tasaDeInteres = tasaDeInteres;
     }
     
-    private int contarCreditos(Creditos[] arreglo, String id) {
-        int salida=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID() == ID)
-                salida++;
-        }
-        return salida;
-    }
-    
-    public int[] buscarCreditos(Creditos[] arreglo, String id) {
-        int[] posiciones = new int[contarCreditos(arreglo, id)];
-        int posicion=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID() == ID) {
-                posiciones[posicion]=i;
-                posicion++;
-            }  
-        }
-        return posiciones;
-    }
 }

@@ -165,9 +165,12 @@ public class CambioDeContraseña extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         InicioSesion is = new InicioSesion();
         for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
-            if(BaseDeDatos.sistema.getCliente(i).getCredenciales().getUsuario().equals(jTextField1.getText())) {
-                if (Arrays.equals(jPasswordField1.getPassword(), jPasswordField2.getPassword())) {
-                    BaseDeDatos.sistema.getCliente(i).getCredenciales().setContraseña(String.valueOf(jPasswordField1.getPassword()));
+            if(BaseDeDatos.sistema.getCliente(i).getCredenciales()
+                    .getUsuario().equals(jTextField1.getText())) {
+                if (Arrays.equals(jPasswordField1.getPassword(),
+                        jPasswordField2.getPassword())) {
+                    BaseDeDatos.sistema.getCliente(i).getCredenciales()
+                            .setContraseña(String.valueOf(jPasswordField1.getPassword()));
                     JOptionPane.showMessageDialog(rootPane, "¡Cambio de contraseña exitoso!");
                     is.setVisible(true);
                     this.setVisible(false);

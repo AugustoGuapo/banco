@@ -19,6 +19,7 @@ public class Empleados {
     private String numeroTelefono;
     private float valorHora;
     private int horasTrabajadas;
+    private Credenciales credenciales;
 
     /**
      * @return the ID
@@ -137,5 +138,19 @@ public class Empleados {
      */
     public float calculatePayment() {
         return horasTrabajadas*valorHora;
+    }
+
+    /**
+     * @return the credenciales
+     */
+    public Credenciales getCredenciales() {
+        return credenciales;
+    }
+
+    /**
+     * @param credenciales the credenciales to set
+     */
+    public void setCredenciales(Credenciales credenciales) {
+        this.credenciales = credenciales;
     }
 }

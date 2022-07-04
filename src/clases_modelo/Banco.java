@@ -4,19 +4,11 @@
  */
 package clases_modelo;
 
-import interfaces_de_usuario.CreacionDeCuenta;
+
 import interfaces_de_usuario.InicioSesion;
-import interfaces_de_usuario.PanelClientes;
-import interfaces_de_usuario.PanelEmpleados;
-import interfaces_de_usuario.ConsignarRetirarCuenta;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import interfaces_de_usuario.BaseDeDatos;
 
 
-/**
- *
- * @author user
- */
 public class Banco {
 
     /**
@@ -24,12 +16,13 @@ public class Banco {
      */
     public static void main(String[] args) {
         InicioSesion ventana = new InicioSesion();
-        //CreacionDeCuenta ventana = new CreacionDeCuenta();
-        //PanelEmpleados ventana = new PanelEmpleados();
-        //PanelClientes ventana = new PanelClientes();
-        //ConsignarRetirarCuenta ventana = new ConsignarRetirarCuenta();
         ventana.setVisible(true);
-        //System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
+        Empleados empleado = new Empleados();
+        empleado.setNombre("Empleado prueba");
+        Credenciales credenciales = new Credenciales();
+        credenciales.setUsuario("123456");
+        credenciales.setContraseña("123456");
+        empleado.setCredenciales(credenciales);
+        BaseDeDatos.sistema.añadirEmpleado(empleado);
     }
-    
 }

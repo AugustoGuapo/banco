@@ -156,7 +156,7 @@ public class Clientes {
      * @return the productos at 
      * @param pos
      */
-    public Object getProductos(int pos) {
+    public Object getProducto(int pos) {
         return productos.get(pos);
     }
 
@@ -170,5 +170,7 @@ public class Clientes {
     public int cantidadDeProductos() {
         return productos.size();
     }
-    
+    public void eliminarProducto(int indice) {
+        productos.remove(indice);
+    }
 }

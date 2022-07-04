@@ -62,7 +62,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardarCliente = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -151,12 +151,12 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Formulario para nuevos clientes");
 
-        jButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarCliente.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnGuardarCliente.setForeground(new java.awt.Color(0, 0, 0));
+        btnGuardarCliente.setText("Enviar");
+        btnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarClienteActionPerformed(evt);
             }
         });
 
@@ -277,7 +277,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                                                 .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                        .addComponent(jButton1)
+                                        .addComponent(btnGuardarCliente)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel11)
                                             .addGap(213, 213, 213)
@@ -341,7 +341,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                     .addComponent(jRadioButton4)
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnGuardarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(44, 44, 44))
@@ -357,12 +357,10 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel9MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
         try {
             recogerDatosCliente();
             recogerDatosCuenta();
-            clienteNuevo = new Clientes();
-            cuentaNueva = new Cuentas();
             BaseDeDatos.contadorParaId++;
             JOptionPane.showMessageDialog(this, "Ha realizado su solicitud con éxito");
             this.setVisible(false);
@@ -370,7 +368,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(CreacionDeCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void recogerDatosCuenta() {
         cuentaNueva.setTipoDeCuenta(rbtCuenta.getSelection().getActionCommand());
@@ -545,8 +543,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardarCliente;
     private com.toedter.calendar.JDateChooser dtcFechaNacimiento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -22,7 +22,7 @@ public class BaseDeDatos {
     public static Cuentas buscarCuentaPendientePorID(int id) {
         Cuentas cuentaSalida=new Cuentas();
         for (int i = 0; i < sistema.buscarClientePorID(id).cantidadDeProductos(); i++) {
-            if(sistema.buscarClientePorID(id).getProductos(i) instanceof Cuentas cuenta) {
+            if(sistema.buscarClientePorID(id).getProducto(i) instanceof Cuentas cuenta) {
                 if(cuenta.getEstado().equals("Pendiente"))
                     cuentaSalida = cuenta;
             }

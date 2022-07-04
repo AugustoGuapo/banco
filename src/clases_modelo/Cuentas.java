@@ -75,27 +75,6 @@ public class Cuentas {
         saldo-=monto;
     }
     
-    private int contarCuentas(Cuentas[] arreglo, String id) {
-        int salida=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if(arreglo[i].getID() == ID)
-                salida++;
-        }
-        return salida;
-    }
-    
-    public int[] buscarCuentas(Cuentas[] arreglo, String id) {
-        int[] posiciones = new int[contarCuentas(arreglo, id)];
-        int posicion=0;
-        for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].getID() == ID) {
-                posiciones[posicion]=i;
-                posicion++;
-            }  
-        }
-        return posiciones;
-    }
-    
     public void crearNumeroCuenta() {
         String salida="";
         Random random = new Random();
@@ -118,4 +97,4 @@ public class Cuentas {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-}
+} 

@@ -21,7 +21,6 @@ public class TarjetaDeCredito {
     private float montoTotal;
     private float montoAdeudado;
     private int nroCuotasAdeudadas;
-    private int nroCuotasPagadas;
     private float valorCuota;
     private String estado;
     private LocalDate fechaProximoPago;
@@ -147,22 +146,7 @@ public class TarjetaDeCredito {
     public void setNroCuotasAdeudadas(int nroCuotasAdeudadas) {
         this.nroCuotasAdeudadas = nroCuotasAdeudadas;
     }
-
-    /**
-     * @return the nroCuotasPagadas
-     */
-    public int getNroCuotasPagadas() {
-        return nroCuotasPagadas;
-    }
-
-    /**
-     * @param nroCuotasPagadas the nroCuotasPagadas to set
-     */
-    public void setNroCuotasPagadas(int nroCuotasPagadas) {
-        this.nroCuotasPagadas = nroCuotasPagadas;
-    }
-    
-    
+     
     public float calcularCuotas(int nroCuotas) {
         float cuota = (float) (montoAdeudado)/nroCuotas;
         return cuota;
@@ -170,7 +154,6 @@ public class TarjetaDeCredito {
     
     public void pagoCuota(float monto) {
         montoAdeudado-=monto;
-        nroCuotasPagadas+=1;
         nroCuotasAdeudadas-=1;
     }
     
