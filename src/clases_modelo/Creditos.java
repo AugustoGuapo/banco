@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
  *
  * @author user
  */
-public class Creditos {
+public class Creditos extends Productos {
     private int ID;
-    private String tipoDeCredito;
+    private String tipoDeCredito= "Creditooo";
     private float tasaDeInteres;
     private float monto;
     private int numeroDeCuotas;
@@ -21,10 +21,11 @@ public class Creditos {
     private String estado;
     private LocalDate fechaProximoPago;
     private float valorCuota;
+    private float montoAdeudado;
     
     
     public void calcularCuota() {
-        valorCuota=monto/cuotasAdeudadas;
+        setValorCuota(monto/cuotasAdeudadas);
     }
     
     public float getValorCuota() {
@@ -83,7 +84,9 @@ public class Creditos {
      * @param monto the monto to set
      */
     public void setMonto(float monto) {
-        this.monto = (float) (monto*1.225);
+        this.monto = monto;
+        if(montoAdeudado<0.1)
+            montoAdeudado=(float)(monto*1.225);
     }
 
     /**
@@ -126,7 +129,7 @@ public class Creditos {
     }
     
     public void pagoCuota(float monto) {
-        this.monto-=monto;
+        this.montoAdeudado-=monto;
         cuotasAdeudadas-=1;
     }
 
@@ -142,6 +145,27 @@ public class Creditos {
      */
     public void setTasaDeInteres(float tasaDeInteres) {
         this.tasaDeInteres = tasaDeInteres;
+    }
+
+    /**
+     * @param valorCuota the valorCuota to set
+     */
+    public void setValorCuota(float valorCuota) {
+        this.valorCuota = valorCuota;
+    }
+
+    /**
+     * @return the montoAdeudado
+     */
+    public float getMontoAdeudado() {
+        return montoAdeudado;
+    }
+
+    /**
+     * @param montoAdeudado the montoAdeudado to set
+     */
+    public void setMontoAdeudado(float montoAdeudado) {
+        this.montoAdeudado = montoAdeudado;
     }
     
 }

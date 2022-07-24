@@ -8,7 +8,7 @@ package clases_modelo;
  *
  * @author user
  */
-public class Cdt {
+public class Cdt extends Productos {
     private int ID;
     private float tasaDeInteres;
     private int plazo;

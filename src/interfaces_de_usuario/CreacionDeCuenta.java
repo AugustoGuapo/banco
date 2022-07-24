@@ -4,9 +4,14 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.AccesoAleatorio;
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
+import com.google.gson.Gson;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -75,6 +80,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(getPreferredSize());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setAutoscrolls(true);
@@ -86,6 +96,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         tbxNombre.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tbxNombre.setForeground(new java.awt.Color(0, 0, 0));
+        tbxNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tbxNombreKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -110,6 +125,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         tbxEmail.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tbxEmail.setForeground(new java.awt.Color(0, 0, 0));
+        tbxEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tbxEmailKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -137,15 +157,23 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Contraseña");
 
-        jPasswordField1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Repetir contraseña");
 
-        jPasswordField2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
+        jPasswordField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField2KeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -230,6 +258,11 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         tbxUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         tbxUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        tbxUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tbxUsuarioKeyTyped(evt);
+            }
+        });
 
         jPanel1.setSize(400,500);
 
@@ -363,6 +396,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             recogerDatosCuenta();
             BaseDeDatos.contadorParaId++;
             JOptionPane.showMessageDialog(this, "Ha realizado su solicitud con éxito");
+            BaseDeDatos.guardarCambios();
             this.setVisible(false);
             new InicioSesion().setVisible(true);
         } catch (Exception ex) {
@@ -375,7 +409,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         cuentaNueva.setEstado("Pendiente");
         cuentaNueva.setID(BaseDeDatos.contadorParaId);
         cuentaNueva.crearNumeroCuenta();
-        clienteNuevo.añadirProductos(cuentaNueva);
+        BaseDeDatos.sistema.setCuentas(cuentaNueva);
     }
 
     private void recogerDatosCliente() throws Exception {
@@ -395,12 +429,13 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private void agregarCorreoElectronico() throws Exception {
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         Pattern patternEmail = Pattern.compile(regexEmail, Pattern.CASE_INSENSITIVE);
-        if (patternEmail.matcher(tbxEmail.getText()).matches()) {
+            if (patternEmail.matcher(tbxEmail.getText()).matches()) {
             clienteNuevo.setCorreoElectronico(tbxEmail.getText());
-        } else {
+            }
+            else {
             JOptionPane.showMessageDialog(this, "Email invalido");
             throw new Exception("Email invalido");
-        }
+            }
     }
 
     private void agregarDocumentoIdentidad() throws Exception {
@@ -469,7 +504,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private void tbxDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxDocumentoKeyTyped
         int key = evt.getKeyChar();
         boolean numeros = key >= 48 && key <= 57;
-        if (!numeros || tbxNumTelefono.getText().length()==10) {
+        if (!numeros || tbxDocumento.getText().length()==10) {
             evt.consume();
         }
     }//GEN-LAST:event_tbxDocumentoKeyTyped
@@ -489,6 +524,37 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         if(tbxNumTelefono.getText().length()==10)
             tbxNumTelefono.setForeground(Color.black);
     }//GEN-LAST:event_tbxNumTelefonoKeyReleased
+
+    private void tbxNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxNombreKeyTyped
+        if (tbxNombre.getText().length() > 50) 
+            evt.consume();
+    }//GEN-LAST:event_tbxNombreKeyTyped
+
+    private void tbxEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxEmailKeyTyped
+        if (tbxEmail.getText().length() > 50) 
+            evt.consume();
+    }//GEN-LAST:event_tbxEmailKeyTyped
+
+    private void tbxUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbxUsuarioKeyTyped
+        if (tbxUsuario.getText().length() > 30)
+            evt.consume();
+    }//GEN-LAST:event_tbxUsuarioKeyTyped
+
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        if (jPasswordField1.getPassword().length > 30)
+            evt.consume();
+    }//GEN-LAST:event_jPasswordField1KeyTyped
+
+    private void jPasswordField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField2KeyTyped
+        if (jPasswordField2.getPassword().length > 30)
+            evt.consume();
+    }//GEN-LAST:event_jPasswordField2KeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
     private LocalDate convertirFecha(Date fecha) {
         return fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }

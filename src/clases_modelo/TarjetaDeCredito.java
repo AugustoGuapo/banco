@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author user
  */
-public class TarjetaDeCredito {
+public class TarjetaDeCredito extends Productos {
     private int ID;
     private String numeroDeTarjeta;
     private LocalDate fechaDeVencimiento;
@@ -23,10 +23,10 @@ public class TarjetaDeCredito {
     private int nroCuotasAdeudadas;
     private float valorCuota;
     private String estado;
-    private LocalDate fechaProximoPago;
+    private LocalDate fechaProximoPago=LocalDate.parse("2005-01-01");
 
-    public String getFechaProximoPago(String label) {
-        if(fechaProximoPago != null)
+    public String getFechaProximoPagoTexto() {
+        if(!fechaProximoPago.equals(LocalDate.parse("2005-01-01")))
             return fechaProximoPago.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
         return "---";
     }
@@ -45,7 +45,7 @@ public class TarjetaDeCredito {
     }
     
     public void setValorCuota(int nroCuotas) {
-        valorCuota=calcularCuotas(nroCuotas);
+        setValorCuota(calcularCuotas(nroCuotas));
     } 
     
     
@@ -192,5 +192,12 @@ public class TarjetaDeCredito {
             salida = String.valueOf(random.nextInt(9));
         }
         CVV=salida;
+    }
+
+    /**
+     * @param valorCuota the valorCuota to set
+     */
+    public void setValorCuota(float valorCuota) {
+        this.valorCuota = valorCuota;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author user
  */
-public class Cuentas {
+public class Cuentas extends Productos{
     private int ID;
     private String numeroCuenta;
     private String tipoDeCuenta;
@@ -20,6 +20,7 @@ public class Cuentas {
     /**
      * @return the ID
      */
+    @Override
     public int getID() {
         return ID;
     }
@@ -38,6 +39,12 @@ public class Cuentas {
         return numeroCuenta;
     }
 
+    /**
+     * @param numeroCuenta  the numeroCuenta to set
+     */
+    public void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta=numeroCuenta;
+    }
 
     /**
      * @return the tipoDeCuenta
@@ -87,6 +94,7 @@ public class Cuentas {
     /**
      * @return the estado
      */
+    @Override
     public String getEstado() {
         return estado;
     }

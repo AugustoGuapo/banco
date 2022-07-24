@@ -14,10 +14,18 @@ public class SistemaDeDatos {
     
     private ArrayList<Clientes> listaClientes;
     private ArrayList<Empleados> listaEmpleados;
+    private ArrayList<Cuentas> listaCuentas;
+    private ArrayList<Creditos> listaCreditos;
+    private ArrayList<Cdt> listaCdt;
+    private ArrayList<TarjetaDeCredito> listaTdc;
 
     public SistemaDeDatos(){
         listaClientes = new ArrayList();
         listaEmpleados = new ArrayList();
+        listaCuentas= new ArrayList();
+        listaCreditos = new ArrayList();
+        listaCdt = new ArrayList();
+        listaTdc = new ArrayList();
     }
 
     public void añadirCliente(Clientes cliente) {
@@ -41,16 +49,60 @@ public class SistemaDeDatos {
         return cliente;
     }
     
-   public void añadirEmpleado(Empleados empleado) {
+    public void añadirEmpleado(Empleados empleado) {
         listaEmpleados.add(empleado);
     }
     
-    public Empleados getEmpleado(int pos) {
-        return listaEmpleados.get(pos);
+    public Empleados getEmpleado(int i) {
+        return listaEmpleados.get(i);
+    }
+    
+    public void setCuentas(Cuentas entrada) {
+        listaCuentas.add(entrada);
     }
 
-    
-    
-    
-    
+    public Cuentas getCuentas(int pos) {
+        return listaCuentas.get(pos);
+    }
+
+    public int getCantCuentas() {
+        return listaCuentas.size();
+    }
+
+    public void setCreditos(Creditos entrada) {
+        listaCreditos.add(entrada);
+    }
+
+    public Creditos getCreditos(int pos) {
+        return listaCreditos.get(pos);
+    }
+
+    public int getCantCreditos() {
+        return listaCreditos.size();
+    }
+
+    public void setCdt(Cdt entrada) {
+        listaCdt.add(entrada);
+    }
+
+    public Cdt getCdt(int pos) {
+        return listaCdt.get(pos);
+    }
+
+    public int getCantCdt() {
+        return listaCdt.size();
+    }
+
+    public void setTdc(TarjetaDeCredito entrada) {
+        listaTdc.add(entrada);
+    }
+
+    public TarjetaDeCredito getTdc(int pos) {
+        return listaTdc.get(pos);
+    }
+
+    public int getCantTdc() {
+        return listaTdc.size();
+    }
+
 }

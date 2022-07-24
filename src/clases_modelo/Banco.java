@@ -7,6 +7,9 @@ package clases_modelo;
 
 import interfaces_de_usuario.InicioSesion;
 import interfaces_de_usuario.BaseDeDatos;
+import java.io.File;
+import java.io.IOException;
+
 
 
 public class Banco {
@@ -24,5 +27,10 @@ public class Banco {
         credenciales.setContraseña("123456");
         empleado.setCredenciales(credenciales);
         BaseDeDatos.sistema.añadirEmpleado(empleado);
+        BaseDeDatos.cargarDatos();
+        AccesoAleatorio id = new AccesoAleatorio(8);
+        //new PruebaDeArchivosCreacionCuenta().setVisible(true);
+        //new PruebaVisualizacionDatosFicheros().setVisible(true);
+
     }
 }

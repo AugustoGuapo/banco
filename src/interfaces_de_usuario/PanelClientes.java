@@ -91,7 +91,7 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnSolicitarAdelantoTDC = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         btnSolicitarTDC = new javax.swing.JButton();
         tbxMontoDeseadoTDC = new javax.swing.JTextField();
@@ -503,15 +503,15 @@ public class PanelClientes extends javax.swing.JFrame {
         jLabel30.setText("2.25%");
         panelTDC.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Solicitar crédito");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSolicitarAdelantoTDC.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnSolicitarAdelantoTDC.setForeground(new java.awt.Color(0, 0, 0));
+        btnSolicitarAdelantoTDC.setText("Solicitar crédito");
+        btnSolicitarAdelantoTDC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSolicitarAdelantoTDCActionPerformed(evt);
             }
         });
-        panelTDC.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
+        panelTDC.add(btnSolicitarAdelantoTDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
 
         jLabel31.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(0, 0, 0));
@@ -715,9 +715,9 @@ public class PanelClientes extends javax.swing.JFrame {
 
     private void llenarComboCreditos() {
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-            Object producto = clienteSesionIniciada.getProducto(i);
-            if(producto instanceof Creditos credito)
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCreditos(); i++) {
+            Object producto = BaseDeDatos.sistema.getCreditos(i);
+            if(producto instanceof Creditos credito && credito.getID() == BaseDeDatos.IDsesionIniciada)
                 if(credito.getEstado().equals("Activo"))
                 modelo.addElement(credito.getMonto());
         }
@@ -728,9 +728,9 @@ public class PanelClientes extends javax.swing.JFrame {
     
     private void llenarComboTDC() {
         DefaultComboBoxModel mdlComboTDC = new DefaultComboBoxModel();
-        for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-            Object producto = clienteSesionIniciada.getProducto(i);
-            if(producto instanceof TarjetaDeCredito tdc)
+        for (int i = 0; i < BaseDeDatos.sistema.getCantTdc(); i++) {
+            Object producto = BaseDeDatos.sistema.getTdc(i);
+            if(producto instanceof TarjetaDeCredito tdc && tdc.getID()==BaseDeDatos.IDsesionIniciada)
                 if(tdc.getEstado().equals("Activo"))
                 mdlComboTDC.addElement(tdc.getNumeroDeTarjeta().split(" ")[3]);
         }
@@ -749,7 +749,7 @@ public class PanelClientes extends javax.swing.JFrame {
         int buscador = 0;
         Component[] componentesSolicitud = {btnSolicitarTDC, tbxMontoDeseadoTDC, jLabel50};
         Component[] componentesFueraPlano = {tbxMontoSolicitarTDC, jLabel27, cbxCuotasTDC, jLabel28, jLabel29, 
-            jButton2, btnPagarTDC, jLabel30};
+            btnSolicitarAdelantoTDC, btnPagarTDC, jLabel30};
         if(indiceSeleccionado == -1) {
             cambiarVisibilidadComponentes(componentesSolicitud, false);
             cambiarVisibilidadComponentes(componentesFueraPlano, false);
@@ -764,9 +764,9 @@ public class PanelClientes extends javax.swing.JFrame {
             cambiarVisibilidadComponentes(componentesSolicitud, false);
             cambiarVisibilidadComponentes(componentesFueraPlano, true);
             planoTarjeta.setVisible(true);
-           for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-               Object producto = clienteSesionIniciada.getProducto(i);
-               if(producto instanceof TarjetaDeCredito tdc && tdc.getEstado().equals("Activo")){
+           for (int i = 0; i < BaseDeDatos.sistema.getCantTdc(); i++) {
+               Object producto = BaseDeDatos.sistema.getTdc(i);
+               if(producto instanceof TarjetaDeCredito tdc && tdc.getEstado().equals("Activo") && tdc.getID() ==BaseDeDatos.IDsesionIniciada){
                    if (indiceSeleccionado == buscador) {
                    String[] numeroTarjeta = tdc.getNumeroDeTarjeta().split(" ");
                    lblNroTarjeta1.setText(numeroTarjeta[0]);
@@ -778,7 +778,7 @@ public class PanelClientes extends javax.swing.JFrame {
                    lblDeudaTDC.setText(String.format("%.2f", tdc.getMontoAdeudado()).replace(",", "."));
                    lblCuotaTDC.setText(String.format("%.2f", tdc.getValorCuota()).replace(",", "."));
                    lblCuotasRestantesTDC.setText(String.valueOf(tdc.getNroCuotasAdeudadas()));
-                   lblFechaPagoTDC.setText(String.valueOf(tdc.getFechaProximoPago("Para label")));
+                   lblFechaPagoTDC.setText(String.valueOf(tdc.getFechaProximoPagoTexto()));
                    lblLimiteTDC.setText(String.format("%.2f",tdc.getMontoTotal()).replace(",", "."));
                    if(tdc.getNroCuotasAdeudadas()==0) {
                        btnPagarTDC.setEnabled(false);
@@ -787,20 +787,21 @@ public class PanelClientes extends javax.swing.JFrame {
                        btnPagarTDC.setEnabled(true);
                    break;
                    }
-               else if(producto instanceof TarjetaDeCredito && indiceSeleccionado!=buscador)
+               else if(producto instanceof TarjetaDeCredito && tdc.getID() == BaseDeDatos.IDsesionIniciada && indiceSeleccionado!=buscador)
                    buscador++;
                }
            } 
         }
         if(Float.parseFloat(lblDeudaTDC.getText())>500) {
-            jButton2.setEnabled(false);
+            btnSolicitarAdelantoTDC.setEnabled(false);
         }
         else
-            jButton2.setEnabled(true);
+            btnSolicitarAdelantoTDC.setEnabled(true);
         
         
     }
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        BaseDeDatos.guardarCambios();
         this.setVisible(false);
         new InicioSesion().setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -825,7 +826,7 @@ public class PanelClientes extends javax.swing.JFrame {
             segundaCuenta.setSaldo(0);
             segundaCuenta.setEstado("Pendiente");
             tipoSegundaCuenta(segundaCuenta);
-            BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(segundaCuenta);
+            BaseDeDatos.sistema.setCuentas(segundaCuenta);
             actualizarVentana();
         }
         else if (lbl2NroCuenta.getText().equals("Su cuenta se encuentra pendiente por aprobación")) {
@@ -852,7 +853,8 @@ public class PanelClientes extends javax.swing.JFrame {
         tdc.setFechaDeVencimiento(LocalDate.now().plusYears(10));
         tdc.generarCVV();
         tdc.generarNumeroTarjeta();
-        BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(tdc);
+        tdc.setID(clienteSesionIniciada.getID());
+        BaseDeDatos.sistema.setTdc(tdc);
         tbxMontoDeseadoTDC.setText(null);
         cbxTDC.setSelectedIndex(-1);
     }//GEN-LAST:event_btnSolicitarTDCActionPerformed
@@ -865,22 +867,23 @@ public class PanelClientes extends javax.swing.JFrame {
         credito.setCuotasAdeudadas((cbxCuotasCredito.getSelectedIndex()+1)*12);
         credito.setFechaProximoPago(LocalDate.now().plusMonths(1));
         credito.calcularCuota();
-        BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).añadirProductos(credito);
+        credito.setID(clienteSesionIniciada.getID());
+        BaseDeDatos.sistema.setCreditos(credito);
     }//GEN-LAST:event_btnSolicitarCreditoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSolicitarAdelantoTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarAdelantoTDCActionPerformed
         int indiceSeleccionado = cbxTDC.getSelectedIndex();
         int buscador = 0;
         
-         for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
+         for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            Cuentas cuenta = BaseDeDatos.sistema.getCuentas(i);
                 if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
                     cuenta.consignar(Float.parseFloat(tbxMontoSolicitarTDC.getText()));
                 }
-            }
          }
-        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof TarjetaDeCredito tdc) {
+        for (int i = 0; i < BaseDeDatos.sistema.getCantTdc(); i++) {
+            TarjetaDeCredito tdc = BaseDeDatos.sistema.getTdc(i);
+            if(tdc.getID() == clienteSesionIniciada.getID()) {
                 if(tdc.getEstado().equals("Activo")) {
                     if(indiceSeleccionado == buscador) {
                         if(tdc.getMontoTotal()>=Float.parseFloat(tbxMontoSolicitarTDC.getText())){
@@ -888,7 +891,7 @@ public class PanelClientes extends javax.swing.JFrame {
                             tdc.setNroCuotasAdeudadas((cbxCuotasTDC.getSelectedIndex()+1)*12);
                             tdc.setValorCuota((cbxCuotasTDC.getSelectedIndex()+1)*12);
                             tdc.setFechaProximoPago(LocalDate.now().plusMonths(1));
-                            jButton2.setEnabled(false);
+                            btnSolicitarAdelantoTDC.setEnabled(false);
                             cbxCuotasTDC.setSelectedIndex(0);
                             tbxMontoSolicitarTDC.setText(null);
                             labelsPanelTDC();
@@ -903,19 +906,21 @@ public class PanelClientes extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSolicitarAdelantoTDCActionPerformed
 
     private void btnPagarTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarTDCActionPerformed
         int indiceSeleccionado = cbxTDC.getSelectedIndex();
         int buscador = 0;
         
-        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            Cuentas cuenta = BaseDeDatos.sistema.getCuentas(i);
+            if(cuenta.getID() == clienteSesionIniciada.getID()) {
                 if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
                     if(cuenta.getSaldo() > Float.parseFloat(lblCuotaTDC.getText())) {
                         cuenta.retirar(Float.parseFloat(lblCuotaTDC.getText()));
-                        for (int j = 0; j < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); j++) {
-                            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(j) instanceof TarjetaDeCredito tdc && tdc.getEstado().equals("Activo")) {
+                        for (int j = 0; j < BaseDeDatos.sistema.getCantTdc(); j++) {
+                            TarjetaDeCredito tdc = BaseDeDatos.sistema.getTdc(j);
+                            if(tdc.getID()==clienteSesionIniciada.getID() && tdc.getEstado().equals("Activo")) {
                                 if(indiceSeleccionado == buscador) {
                                     tdc.pagoCuota(Float.parseFloat(lblCuotaTDC.getText()));
                                     tdc.setFechaProximoPago(tdc.getFechaProximoPago().plusMonths(1));
@@ -956,10 +961,11 @@ public class PanelClientes extends javax.swing.JFrame {
         else {
             cambiarVisibilidadComponentes(componentesSolicitudCredito, false);
             cambiarVisibilidadComponentes(componentesCreditoSeleccionado, true);
-            for (int i = 0; i < clienteSesionIniciada.cantidadDeProductos(); i++) {
-                if(clienteSesionIniciada.getProducto(i) instanceof Creditos credito && credito.getEstado().equals("Activo")) {
+            for (int i = 0; i < BaseDeDatos.sistema.getCantCreditos(); i++) {
+                Creditos credito = BaseDeDatos.sistema.getCreditos(i);
+                if(credito.getID() == clienteSesionIniciada.getID() && credito.getEstado().equals("Activo")) {
                     if(buscador == indiceSeleccionado) {
-                        lblDeudaCredito.setText(String.format("%.2f",credito.getMonto()));
+                        lblDeudaCredito.setText(String.format("%.2f",credito.getMontoAdeudado()));
                         lblFechaPagoCredito.setText(String.valueOf(credito.getFechaProximoPago("Para label")));
                         lblCuotaCredito.setText(String.valueOf(credito.getValorCuota()));
                         lblCuotasRestantes.setText(String.valueOf(credito.getCuotasAdeudadas()));
@@ -977,14 +983,15 @@ public class PanelClientes extends javax.swing.JFrame {
         int indiceSeleccionado = cbxCreditos.getSelectedIndex();
         int buscador = 0;
         
-        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta) {
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            Cuentas cuenta = BaseDeDatos.sistema.getCuentas(i);
+            if(cuenta.getID()==clienteSesionIniciada.getID()) {
                 if(cuenta.getNumeroCuenta().equals(lbl1NroCuenta.getText())) {
                     if(cuenta.getSaldo() > Float.parseFloat(lblCuotaCredito.getText())) {
                         cuenta.retirar(Float.parseFloat(lblCuotaCredito.getText()));
-                        for (int j = 0; j < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); j++) {
-                            if(BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(j) 
-                                    instanceof Creditos credito && credito.getEstado().equals("Activo")) {
+                        for (int j = 0; j < BaseDeDatos.sistema.getCantCreditos(); j++) {
+                            Creditos credito = BaseDeDatos.sistema.getCreditos(j);
+                            if(credito.getID() == clienteSesionIniciada.getID()&& credito.getEstado().equals("Activo")) {
                                 if(indiceSeleccionado == buscador) {
                                     credito.pagoCuota(Float.parseFloat(lblCuotaCredito.getText()));
                                     credito.setFechaProximoPago(credito.getFechaProximoPago().plusMonths(1));
@@ -1044,9 +1051,9 @@ public class PanelClientes extends javax.swing.JFrame {
     }
     public void buscarCuentas() {
         cuentasCliente.clear();
-        for (int i = 0; i < BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).cantidadDeProductos(); i++) {
-            if (BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada).getProducto(i) instanceof Cuentas cuenta)
-                cuentasCliente.add(cuenta);
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            if (BaseDeDatos.sistema.getCuentas(i).getID() == BaseDeDatos.IDsesionIniciada)
+                cuentasCliente.add(BaseDeDatos.sistema.getCuentas(i));
         }
     }
     
@@ -1116,13 +1123,13 @@ public class PanelClientes extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaUsuario;
     private javax.swing.JButton btnPagarCredito;
     private javax.swing.JButton btnPagarTDC;
+    private javax.swing.JButton btnSolicitarAdelantoTDC;
     private javax.swing.JButton btnSolicitarCredito;
     private javax.swing.JButton btnSolicitarTDC;
     private javax.swing.JComboBox<String> cbxCreditos;
     private javax.swing.JComboBox<String> cbxCuotasCredito;
     private javax.swing.JComboBox<String> cbxCuotasTDC;
     private javax.swing.JComboBox<String> cbxTDC;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

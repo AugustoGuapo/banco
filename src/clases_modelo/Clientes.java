@@ -21,7 +21,7 @@ public class Clientes {
     private String sexo;
     private String estado;
     private Credenciales credenciales;
-    private ArrayList<Object> productos = new ArrayList();
+    //private ArrayList<Object> productos = new ArrayList();
 
     public Clientes() {
         credenciales = new Credenciales();
@@ -155,14 +155,14 @@ public class Clientes {
     /**
      * @return the productos at 
      * @param pos
-     */
+     *
     public Object getProducto(int pos) {
         return productos.get(pos);
     }
 
-    /**
+    **
      * @param productos the productos to set
-     */
+     *
     public void añadirProductos(Object productos) {
         this.productos.add(productos);
     }
@@ -173,4 +173,5 @@ public class Clientes {
     public void eliminarProducto(int indice) {
         productos.remove(indice);
     }
+    */
 }

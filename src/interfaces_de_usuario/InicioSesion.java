@@ -7,6 +7,9 @@ package interfaces_de_usuario;
 import java.time.LocalDate;
 import clases_modelo.*;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -226,7 +229,11 @@ public class InicioSesion extends javax.swing.JFrame {
         for (int i = 0; i < 1; i++) {
             Empleados aux = BaseDeDatos.sistema.getEmpleado(i);
             if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))){
-                new PanelEmpleados().setVisible(true);
+                try {
+                    new PanelEmpleados().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.setVisible(false);
             }
                 
@@ -247,7 +254,11 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new PanelEmpleados().setVisible(true);
+        try {
+            new PanelEmpleados().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 

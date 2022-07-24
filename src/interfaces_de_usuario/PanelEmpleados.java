@@ -4,13 +4,19 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.AccesoAleatorio;
 import clases_modelo.Cdt;
 import clases_modelo.Clientes;
 import clases_modelo.Creditos;
 import clases_modelo.Cuentas;
+import clases_modelo.Productos;
 import clases_modelo.TarjetaDeCredito;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 
 
@@ -23,9 +29,11 @@ public class PanelEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form PanelEmpleados
      */
-    public PanelEmpleados() {
+    public PanelEmpleados() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
+        //llenarClientes();
+        //llenarProductos();
         llenarComboClientesPendientes();
         llenarComboClientesActivos();
         cbxClientesActivos.setSelectedIndex(-1);
@@ -38,9 +46,11 @@ public class PanelEmpleados extends javax.swing.JFrame {
     Clientes clienteActivoSeleccionado;
     int indiceClienteActivoSeleccionado;
     int idClienteActivoSeleccionado;
+    AccesoAleatorio rafCliente = new AccesoAleatorio(1024);
+    AccesoAleatorio rafCuenta = new AccesoAleatorio(1024);
     ArrayList<Integer> indicesClientesPendientes = new ArrayList();
     ArrayList<Integer> indicesClientesActivos = new ArrayList();
-    ArrayList<Integer> indicesProductosPendientesClienteActivo = new ArrayList();
+    ArrayList<Integer> indicesProductosPendientesClientesActivos = new ArrayList();
     DefaultComboBoxModel mdlClientesPendientes = new DefaultComboBoxModel();
     DefaultComboBoxModel mdlClientesActivos = new DefaultComboBoxModel();
     DefaultComboBoxModel mdlProductosPendientesClientesActivos = new DefaultComboBoxModel();
@@ -321,10 +331,11 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void eliminarClientePendiente() {
         BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).setEstado("Inactivo");
-        BaseDeDatos.buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Inactivo");
+        buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Inactivo");
     }
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        BaseDeDatos.guardarCambios();
         new InicioSesion().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
@@ -348,36 +359,70 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void llenarComboProductosPendientesClientesActivos() {
         mdlProductosPendientesClientesActivos.removeAllElements();
-        indicesProductosPendientesClienteActivo.clear();
+        indicesProductosPendientesClientesActivos.clear();
+        
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            Cuentas cuenta = BaseDeDatos.sistema.getCuentas(i);
+            if(cuenta.getID() == clienteActivoSeleccionado.getID() && cuenta.getEstado().equals("Pendiente")) {
+                indicesProductosPendientesClientesActivos.add(i);
+                mdlProductosPendientesClientesActivos.addElement("Cuenta");
+            }
+        }
+        
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCreditos(); i++) {
+            Creditos credito = BaseDeDatos.sistema.getCreditos(i);
+            if(credito.getID() == clienteActivoSeleccionado.getID() && credito.getEstado().equals("Pendiente")) {
+                indicesProductosPendientesClientesActivos.add(i);
+                mdlProductosPendientesClientesActivos.addElement("Credito");
+            }
+        }
+   
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCdt(); i++) {
+            Cdt cdt = BaseDeDatos.sistema.getCdt(i);
+            if(cdt.getID() == clienteActivoSeleccionado.getID() && cdt.getEstado().equals("Pendiente")) {
+                indicesProductosPendientesClientesActivos.add(i);
+                mdlProductosPendientesClientesActivos.addElement("Cdt");
+            }
+        }
+        
+        for (int i = 0; i < BaseDeDatos.sistema.getCantTdc(); i++) {
+            TarjetaDeCredito tdc = BaseDeDatos.sistema.getTdc(i);
+            if(tdc.getID() == clienteActivoSeleccionado.getID() && tdc.getEstado().equals("Pendiente")) {
+                indicesProductosPendientesClientesActivos.add(i);
+                mdlProductosPendientesClientesActivos.addElement("Tarjeta de crédito");
+            }
+        }
+        /*
         for (int i = 0; i < clienteActivoSeleccionado.cantidadDeProductos(); i++) {
             Object producto = clienteActivoSeleccionado.getProducto(i);
             if (producto instanceof Cuentas cuenta){
                 if(cuenta.getEstado().equals("Pendiente")) {
-                    indicesProductosPendientesClienteActivo.add(i);
+                    indicesProductosPendientesClientesActivos.add(i);
                     mdlProductosPendientesClientesActivos.addElement("Cuenta"); 
                 } 
             }
             else if(producto instanceof Creditos credito) {
                 if(credito.getEstado().equals("Pendiente")) {
-                    indicesProductosPendientesClienteActivo.add(i);
+                    indicesProductosPendientesClientesActivos.add(i);
                     mdlProductosPendientesClientesActivos.addElement("Crédito");
                 }
             }
                 
             else if(producto instanceof TarjetaDeCredito tdc) {
                 if(tdc.getEstado().equals("Pendiente")) {
-                    indicesProductosPendientesClienteActivo.add(i);
+                    indicesProductosPendientesClientesActivos.add(i);
                     mdlProductosPendientesClientesActivos.addElement("Tarjeta de crédito");
                 }  
             }
                  
             else if(producto instanceof Cdt cdt) {
                 if(cdt.getEstado().equals("Pendiente")) {
-                    indicesProductosPendientesClienteActivo.add(i);
+                    indicesProductosPendientesClientesActivos.add(i);
                     mdlProductosPendientesClientesActivos.addElement("CDT");
                 }    
             }      
         }
+        */
         cbxProductosPendientesClientesActivos.setModel(mdlProductosPendientesClientesActivos);
         cbxProductosPendientesClientesActivos.setSelectedIndex(-1);
     }
@@ -388,16 +433,43 @@ public class PanelEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAprobarClientesActivosActionPerformed
 
     private void cambiarEstadoProductosPendientesClientesActivos(String estadoACambiar) {
-       Object producto = clienteActivoSeleccionado.getProducto(indicesProductosPendientesClienteActivo
-                .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
+        Productos producto;
+        producto = buscarProducto();
         if (producto instanceof Cuentas cuenta)
             cuenta.setEstado(estadoACambiar);
-        else if(producto instanceof Creditos credito)
+        else if(producto instanceof Creditos credito) {
             credito.setEstado(estadoACambiar);
+            consignarCredito(credito);
+        }
+            
         else if(producto instanceof TarjetaDeCredito tdc)
             tdc.setEstado(estadoACambiar);
         else if(producto instanceof Cdt cdt)
             cdt.setEstado(estadoACambiar);
+    }
+
+    private void consignarCredito(Creditos credito) {
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            if(BaseDeDatos.sistema.getCuentas(i).getID() == clienteActivoSeleccionado.getID()) {
+                BaseDeDatos.sistema.getCuentas(i).consignar(credito.getMonto());
+                break;
+            }
+        }
+    }
+
+    private Productos buscarProducto() {
+        Productos producto;
+        String itemSeleccionado =(String) cbxProductosPendientesClientesActivos.getSelectedItem();
+        int indiceSeleccionado = cbxProductosPendientesClientesActivos.getSelectedIndex();
+        if(itemSeleccionado.equals("Cuenta"))
+            producto = BaseDeDatos.sistema.getCuentas(indicesProductosPendientesClientesActivos.get(indiceSeleccionado));
+        else if (itemSeleccionado.equals("Credito"))
+            producto = BaseDeDatos.sistema.getCreditos(indicesProductosPendientesClientesActivos.get(indiceSeleccionado));
+        else if (itemSeleccionado.equals("Cdt"))
+            producto = BaseDeDatos.sistema.getCdt(indicesProductosPendientesClientesActivos.get(indiceSeleccionado));
+        else
+            producto = BaseDeDatos.sistema.getTdc(indicesProductosPendientesClientesActivos.get(indiceSeleccionado));
+        return producto;
     }
 
     private void btnRechazarClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarClientesPendientesActionPerformed
@@ -417,7 +489,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void btnAprobarClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarClientesPendientesActionPerformed
         BaseDeDatos.sistema.getCliente(indiceClientePendienteSeleccionado).setEstado("Activo");
-        BaseDeDatos.buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Activo");
+        buscarCuentaPendientePorID(idClientePendienteSeleccionado).setEstado("Activo");
         llenarComboClientesPendientes();
         llenarComboClientesActivos();
         txaClientesPendientes.setText("");
@@ -430,8 +502,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     private void llenarTxaClientesActivos() {
         if(cbxProductosPendientesClientesActivos.getSelectedIndex()!=-1) {
-            Object producto = clienteActivoSeleccionado.getProducto(indicesProductosPendientesClienteActivo
-                .get(cbxProductosPendientesClientesActivos.getSelectedIndex()));
+            Productos producto = buscarProducto();
             if (producto instanceof Cuentas cuenta) {
                 Object[] atributos = {clienteActivoSeleccionado.getNombre(),cuenta.getNumeroCuenta(), cuenta.getTipoDeCuenta()};
                 txaClientesActivos.setText(String.format("Nombre: %s\nNumero de cuenta: %s\nTipo de cuenta: %s", atributos));
@@ -503,7 +574,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         String[] atributos = {clientePendienteSeleccionado.getNombre(), clientePendienteSeleccionado.getFechaDeNacimiento().toString(), 
             clientePendienteSeleccionado.getNumeroDeDocumento(), clientePendienteSeleccionado.getSexo(), 
             clientePendienteSeleccionado.getCorreoElectronico(), clientePendienteSeleccionado.getNumeroTelefono(), 
-            BaseDeDatos.buscarCuentaPendientePorID(clientePendienteSeleccionado.getID()).getTipoDeCuenta()};
+            buscarCuentaPendientePorID(clientePendienteSeleccionado.getID()).getTipoDeCuenta()};
         String datosCliente = String.format("""                                            
                                       Nombre: %s
                                       Fecha de Nacimiento: %s
@@ -517,6 +588,16 @@ public class PanelEmpleados extends javax.swing.JFrame {
 
     }
     
+    
+    private Cuentas buscarCuentaPendientePorID(int id) {
+        Cuentas salida=new Cuentas();
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            Productos producto = BaseDeDatos.sistema.getCuentas(i);
+            if(producto.getID()==id && producto.getEstado().equals("Pendiente") && producto instanceof Cuentas cuenta)
+                salida=cuenta;
+                }
+        return salida;
+    }
 
     /**
      * @param args the command line arguments
@@ -548,7 +629,11 @@ public class PanelEmpleados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelEmpleados().setVisible(true);
+                try {
+                    new PanelEmpleados().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -137,22 +137,21 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_tbxMontoKeyTyped
 
     private void btnConsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsignarActionPerformed
-        for (int i = 0; i < clienteUsado.cantidadDeProductos(); i++) {
-            if(clienteUsado.getProducto(i) instanceof Cuentas cuenta)
-                if(cuenta.getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso)) {
-                cuenta.consignar(Float.parseFloat(tbxMonto.getText()));
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+                if(BaseDeDatos.sistema.getCuentas(i).getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso)) {
+                BaseDeDatos.sistema.getCuentas(i).consignar(Float.parseFloat(tbxMonto.getText()));
                 break;
             } 
         }
+        BaseDeDatos.guardarCambios();
         this.setVisible(false);
     }//GEN-LAST:event_btnConsignarActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        for (int i = 0; i < clienteUsado.cantidadDeProductos(); i++) {
-            if(clienteUsado.getProducto(i) instanceof Cuentas cuenta)
-                if(cuenta.getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso))
-                    if(cuenta.getSaldo() >  Float.parseFloat(tbxMonto.getText())) {
-                        cuenta.retirar(Float.parseFloat(tbxMonto.getText()));
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+                if(BaseDeDatos.sistema.getCuentas(i).getNumeroCuenta().equals(BaseDeDatos.nroCuentaEnUso))
+                    if(BaseDeDatos.sistema.getCuentas(i).getSaldo() >  Float.parseFloat(tbxMonto.getText())) {
+                        BaseDeDatos.sistema.getCuentas(i).retirar(Float.parseFloat(tbxMonto.getText()));
                         break;
                     }
                     else {
@@ -160,6 +159,7 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
                         return;
                     }
         }
+        BaseDeDatos.guardarCambios();
         this.setVisible(false);
     }//GEN-LAST:event_btnRetirarActionPerformed
 
