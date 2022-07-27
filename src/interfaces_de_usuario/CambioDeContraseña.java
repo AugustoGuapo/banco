@@ -47,6 +47,11 @@ public class CambioDeContraseña extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(400, 500));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -172,6 +177,7 @@ public class CambioDeContraseña extends javax.swing.JFrame {
                     BaseDeDatos.sistema.getCliente(i).getCredenciales()
                             .setContraseña(String.valueOf(jPasswordField1.getPassword()));
                     JOptionPane.showMessageDialog(rootPane, "¡Cambio de contraseña exitoso!");
+                    BaseDeDatos.guardarCambios();
                     is.setVisible(true);
                     this.setVisible(false);
                 }
@@ -194,6 +200,12 @@ public class CambioDeContraseña extends javax.swing.JFrame {
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         jLabel5.setForeground(Color.black);
     }//GEN-LAST:event_jLabel5MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

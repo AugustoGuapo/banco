@@ -29,11 +29,9 @@ public class PanelEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form PanelEmpleados
      */
-    public PanelEmpleados() throws IOException {
+    public PanelEmpleados() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //llenarClientes();
-        //llenarProductos();
         llenarComboClientesPendientes();
         llenarComboClientesActivos();
         cbxClientesActivos.setSelectedIndex(-1);
@@ -46,8 +44,6 @@ public class PanelEmpleados extends javax.swing.JFrame {
     Clientes clienteActivoSeleccionado;
     int indiceClienteActivoSeleccionado;
     int idClienteActivoSeleccionado;
-    AccesoAleatorio rafCliente = new AccesoAleatorio(1024);
-    AccesoAleatorio rafCuenta = new AccesoAleatorio(1024);
     ArrayList<Integer> indicesClientesPendientes = new ArrayList();
     ArrayList<Integer> indicesClientesActivos = new ArrayList();
     ArrayList<Integer> indicesProductosPendientesClientesActivos = new ArrayList();
@@ -84,6 +80,11 @@ public class PanelEmpleados extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
@@ -344,6 +345,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         String estadoNuevo = "Inactivo";
         cambiarEstadoProductosPendientesClientesActivos(estadoNuevo);          
         llenarComboProductosPendientesClientesActivos();
+        BaseDeDatos.guardarCambios();
     }//GEN-LAST:event_btnRechazarClientesActivosActionPerformed
 
     private void cbxClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClientesActivosActionPerformed
@@ -429,7 +431,8 @@ public class PanelEmpleados extends javax.swing.JFrame {
     private void btnAprobarClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarClientesActivosActionPerformed
         String estadoNuevo = "Activo";
         cambiarEstadoProductosPendientesClientesActivos(estadoNuevo);                
-        llenarComboProductosPendientesClientesActivos();    
+        llenarComboProductosPendientesClientesActivos();
+        BaseDeDatos.guardarCambios();
     }//GEN-LAST:event_btnAprobarClientesActivosActionPerformed
 
     private void cambiarEstadoProductosPendientesClientesActivos(String estadoACambiar) {
@@ -439,13 +442,17 @@ public class PanelEmpleados extends javax.swing.JFrame {
             cuenta.setEstado(estadoACambiar);
         else if(producto instanceof Creditos credito) {
             credito.setEstado(estadoACambiar);
-            consignarCredito(credito);
+            if(estadoACambiar.equals("Activo"))
+                consignarCredito(credito);
         }
-            
         else if(producto instanceof TarjetaDeCredito tdc)
             tdc.setEstado(estadoACambiar);
-        else if(producto instanceof Cdt cdt)
+        else if(producto instanceof Cdt cdt) {
             cdt.setEstado(estadoACambiar);
+            if(estadoACambiar.equals(("Inactivo")))
+                pagarCdt(cdt);
+        }
+            
     }
 
     private void consignarCredito(Creditos credito) {
@@ -453,6 +460,14 @@ public class PanelEmpleados extends javax.swing.JFrame {
             if(BaseDeDatos.sistema.getCuentas(i).getID() == clienteActivoSeleccionado.getID()) {
                 BaseDeDatos.sistema.getCuentas(i).consignar(credito.getMonto());
                 break;
+            }
+        }
+    }
+    
+    private void pagarCdt(Cdt cdt) {
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCuentas(); i++) {
+            if(BaseDeDatos.sistema.getCuentas(i).getID() == clienteActivoSeleccionado.getID()) {
+                BaseDeDatos.sistema.getCuentas(i).consignar(cdt.getMontoDepositado());
             }
         }
     }
@@ -477,6 +492,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         eliminarClientePendiente();
         llenarComboClientesPendientes();
         txaClientesPendientes.setText("");
+        BaseDeDatos.guardarCambios();
     }//GEN-LAST:event_btnRechazarClientesPendientesActionPerformed
 
     private void cbxClientesPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClientesPendientesActionPerformed
@@ -493,6 +509,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         llenarComboClientesPendientes();
         llenarComboClientesActivos();
         txaClientesPendientes.setText("");
+        BaseDeDatos.guardarCambios();
     }//GEN-LAST:event_btnAprobarClientesPendientesActionPerformed
 
     private void cbxProductosPendientesClientesActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProductosPendientesClientesActivosActionPerformed
@@ -530,6 +547,12 @@ public class PanelEmpleados extends javax.swing.JFrame {
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         jLabel3.setForeground(Color.black);
     }//GEN-LAST:event_jLabel3MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
     
     private void buscarIndicesClientesPendientes() {
         indicesClientesPendientes = new ArrayList();
@@ -629,11 +652,7 @@ public class PanelEmpleados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
                     new PanelEmpleados().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(PanelEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         });
     }

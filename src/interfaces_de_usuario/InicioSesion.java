@@ -65,6 +65,11 @@ public class InicioSesion extends javax.swing.JFrame {
         );
         setLocationByPlatform(true);
         setSize(new java.awt.Dimension(400, 500));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
 
@@ -209,6 +214,14 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        for (int i = 0; i < 1; i++) {
+            Empleados aux = BaseDeDatos.sistema.getEmpleado(i);
+            if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))){
+                    new PanelEmpleados().setVisible(true);
+                    this.setVisible(false);
+                    return;
+            }    
+        }
         for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
             Clientes aux =BaseDeDatos.sistema.getCliente(i);
             if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))) {
@@ -226,18 +239,6 @@ public class InicioSesion extends javax.swing.JFrame {
             
         }
         JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta");
-        for (int i = 0; i < 1; i++) {
-            Empleados aux = BaseDeDatos.sistema.getEmpleado(i);
-            if(aux.getCredenciales().verificarUsuarioContraseña(jTextField1.getText(), String.valueOf(jPasswordField1.getPassword()))){
-                try {
-                    new PanelEmpleados().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.setVisible(false);
-            }
-                
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -254,11 +255,7 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        try {
-            new PanelEmpleados().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new PanelEmpleados().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -277,6 +274,12 @@ public class InicioSesion extends javax.swing.JFrame {
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         jLabel4.setForeground(Color.black);
     }//GEN-LAST:event_jLabel4MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

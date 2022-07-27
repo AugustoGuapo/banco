@@ -4,6 +4,7 @@
  */
 package interfaces_de_usuario;
 
+import clases_modelo.Cdt;
 import clases_modelo.Clientes;
 import clases_modelo.Creditos;
 import clases_modelo.Cuentas;
@@ -12,6 +13,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
@@ -32,12 +34,14 @@ public class PanelClientes extends javax.swing.JFrame {
         actualizarVentana();
         llenarComboTDC();
         llenarComboCreditos();
+        llenarComboCdt();
         this.setLocationRelativeTo(null);
     }
     
     Clientes clienteSesionIniciada = BaseDeDatos.sistema.buscarClientePorID(BaseDeDatos.IDsesionIniciada);
     String bienvenida = "Bienvenido " + pronombreSaludo() + clienteSesionIniciada.getNombre();
     ArrayList <Cuentas>cuentasCliente = new ArrayList();
+    Cdt cdtSeleccionado;
     
 
     /**
@@ -121,12 +125,28 @@ public class PanelClientes extends javax.swing.JFrame {
         lblDeudaTDC = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        cbxCdt = new javax.swing.JComboBox<>();
+        panelCobroCdt = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        lblMontoCobrarCdt = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lblDiasRestantesCdt = new javax.swing.JLabel();
+        btnCobrarCdt = new javax.swing.JButton();
+        panelSolicitudCdt = new javax.swing.JPanel();
+        tbxMontoCdt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        cbxPlazoCdt = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        btnSolicitarCdt = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setForeground(new java.awt.Color(0, 0, 0));
@@ -407,7 +427,7 @@ public class PanelClientes extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tbxMontoCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addGap(41, 41, 41))))
         );
@@ -456,7 +476,7 @@ public class PanelClientes extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(btnPagarCredito)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Creditos", jPanel2);
@@ -662,13 +682,134 @@ public class PanelClientes extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 117, -1, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caricatura-en-el-sitio-de-construcción-constructor-piedra-pone-una-pared-ladrillo-lugar-la-composición-con-un-profesional-173566168.jpg"))); // NOI18N
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 440, 330));
+        cbxCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxCdt.setForeground(new java.awt.Color(0, 0, 0));
+        cbxCdt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxCdt.setSelectedIndex(-1);
+        cbxCdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCdtActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cbxCdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        panelCobroCdt.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Monto por cobrar");
+
+        lblMontoCobrarCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblMontoCobrarCdt.setForeground(new java.awt.Color(0, 0, 0));
+        lblMontoCobrarCdt.setText("jLabel12");
+
+        jLabel14.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Dias restantes");
+
+        lblDiasRestantesCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblDiasRestantesCdt.setForeground(new java.awt.Color(0, 0, 0));
+        lblDiasRestantesCdt.setText("jLabel20");
+
+        btnCobrarCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnCobrarCdt.setForeground(new java.awt.Color(0, 0, 0));
+        btnCobrarCdt.setText("Cobrar");
+        btnCobrarCdt.setEnabled(false);
+        btnCobrarCdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobrarCdtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCobroCdtLayout = new javax.swing.GroupLayout(panelCobroCdt);
+        panelCobroCdt.setLayout(panelCobroCdtLayout);
+        panelCobroCdtLayout.setHorizontalGroup(
+            panelCobroCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCobroCdtLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(panelCobroCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel10)
+                    .addComponent(lblMontoCobrarCdt)
+                    .addComponent(jLabel14)
+                    .addComponent(lblDiasRestantesCdt)
+                    .addComponent(btnCobrarCdt))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelCobroCdtLayout.setVerticalGroup(
+            panelCobroCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCobroCdtLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblMontoCobrarCdt)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDiasRestantesCdt)
+                .addGap(61, 61, 61)
+                .addComponent(btnCobrarCdt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel7.add(panelCobroCdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 220, 340));
+
+        panelSolicitudCdt.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbxMontoCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        tbxMontoCdt.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Monto");
+
+        cbxPlazoCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        cbxPlazoCdt.setForeground(new java.awt.Color(0, 0, 0));
+        cbxPlazoCdt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30", "60", "90", "120", "150", "180", "210", "240", "270", "300", "330", "360" }));
+
+        jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("¡Este sitio se encuentra en construcción!");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
+        jLabel8.setText("Plazo");
+
+        btnSolicitarCdt.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        btnSolicitarCdt.setForeground(new java.awt.Color(0, 0, 0));
+        btnSolicitarCdt.setText("Solicitar CDT");
+        btnSolicitarCdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolicitarCdtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelSolicitudCdtLayout = new javax.swing.GroupLayout(panelSolicitudCdt);
+        panelSolicitudCdt.setLayout(panelSolicitudCdtLayout);
+        panelSolicitudCdtLayout.setHorizontalGroup(
+            panelSolicitudCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSolicitudCdtLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(panelSolicitudCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(tbxMontoCdt, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbxPlazoCdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(btnSolicitarCdt))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelSolicitudCdtLayout.setVerticalGroup(
+            panelSolicitudCdtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSolicitudCdtLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tbxMontoCdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxPlazoCdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSolicitarCdt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel7.add(panelSolicitudCdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 220, 340));
 
         jTabbedPane2.addTab("CDT", jPanel7);
 
@@ -743,7 +884,37 @@ public class PanelClientes extends javax.swing.JFrame {
             componente.setVisible(estado);
         }
     }
-    
+    private void labelsPanelCdt() {
+       var indiceSeleccionado = cbxCdt.getSelectedIndex();
+       var buscador = 0;
+       if(indiceSeleccionado == -1) {
+           panelSolicitudCdt.setVisible(false);
+           panelCobroCdt.setVisible(false);
+       }
+       else if(cbxCdt.getSelectedItem().equals("Solicitar CDT")) {
+           panelSolicitudCdt.setVisible(true);
+           panelCobroCdt.setVisible(false);
+       }
+       else {
+           panelSolicitudCdt.setVisible(false);
+           panelCobroCdt.setVisible(true);
+           for (int i = 0; i < BaseDeDatos.sistema.getCantCdt(); i++) {
+                cdtSeleccionado = BaseDeDatos.sistema.getCdt(i);
+               if (cdtSeleccionado.getEstado().equals("Activo") && cdtSeleccionado.getID() == clienteSesionIniciada.getID()) {
+                   if(indiceSeleccionado==buscador) {
+                       lblMontoCobrarCdt.setText(String.format("%.2f",cdtSeleccionado.getMontoARetirar()));
+                       lblDiasRestantesCdt.setText(String.valueOf(DAYS.between(LocalDate.now(),cdtSeleccionado.getFechaRetiro())));
+                       if(DAYS.between(LocalDate.now(),cdtSeleccionado.getFechaRetiro()) <= 0) {
+                           btnCobrarCdt.setEnabled(true);
+                       }
+                       break;
+                   }
+                   else
+                       buscador++;
+               }      
+           }
+       }
+    }
     private void labelsPanelTDC() {
         int indiceSeleccionado = cbxTDC.getSelectedIndex();
         int buscador = 0;
@@ -828,6 +999,7 @@ public class PanelClientes extends javax.swing.JFrame {
             tipoSegundaCuenta(segundaCuenta);
             BaseDeDatos.sistema.setCuentas(segundaCuenta);
             actualizarVentana();
+            BaseDeDatos.guardarCambios();
         }
         else if (lbl2NroCuenta.getText().equals("Su cuenta se encuentra pendiente por aprobación")) {
         }
@@ -869,6 +1041,7 @@ public class PanelClientes extends javax.swing.JFrame {
         credito.calcularCuota();
         credito.setID(clienteSesionIniciada.getID());
         BaseDeDatos.sistema.setCreditos(credito);
+        cbxCreditos.setSelectedIndex(-1);
     }//GEN-LAST:event_btnSolicitarCreditoActionPerformed
 
     private void btnSolicitarAdelantoTDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarAdelantoTDCActionPerformed
@@ -895,6 +1068,7 @@ public class PanelClientes extends javax.swing.JFrame {
                             cbxCuotasTDC.setSelectedIndex(0);
                             tbxMontoSolicitarTDC.setText(null);
                             labelsPanelTDC();
+                            BaseDeDatos.guardarCambios();
                             break;
                         }
                         else {
@@ -925,6 +1099,7 @@ public class PanelClientes extends javax.swing.JFrame {
                                     tdc.pagoCuota(Float.parseFloat(lblCuotaTDC.getText()));
                                     tdc.setFechaProximoPago(tdc.getFechaProximoPago().plusMonths(1));
                                     labelsPanelTDC();
+                                    BaseDeDatos.guardarCambios();
                                     break;
                                 }
                                 else
@@ -995,6 +1170,11 @@ public class PanelClientes extends javax.swing.JFrame {
                                 if(indiceSeleccionado == buscador) {
                                     credito.pagoCuota(Float.parseFloat(lblCuotaCredito.getText()));
                                     credito.setFechaProximoPago(credito.getFechaProximoPago().plusMonths(1));
+                                    if(credito.getCuotasAdeudadas()<=50) {
+                                        credito.setEstado("Pagado");
+                                        llenarComboCreditos();
+                                    }
+                                    BaseDeDatos.guardarCambios();
                                     break;
                                 }
                                 else
@@ -1010,6 +1190,42 @@ public class PanelClientes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnPagarCreditoActionPerformed
+
+    private void btnSolicitarCdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCdtActionPerformed
+        if(cuentasCliente.get(0).getSaldo() >= Float.parseFloat(tbxMontoCdt.getText())) {
+            cuentasCliente.get(0).retirar(Float.parseFloat(tbxMontoCdt.getText()));
+            Cdt cdt = new Cdt();
+            cdt.setEstado("Pendiente");
+            cdt.setID(clienteSesionIniciada.getID());
+            cdt.setMontoDepositado(Float.parseFloat(tbxMontoCdt.getText()));
+            cdt.setPlazo((cbxPlazoCdt.getSelectedIndex()+1)*30);
+            cdt.calculoMontoFinal();
+            cdt.setFechaRetiro(LocalDate.now().plusDays(cdt.getPlazo()));
+            BaseDeDatos.sistema.setCdt(cdt);
+            BaseDeDatos.guardarCambios();
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Fondos insuficientes");
+        cbxCdt.setSelectedIndex(-1);
+        
+    }//GEN-LAST:event_btnSolicitarCdtActionPerformed
+
+    private void cbxCdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCdtActionPerformed
+        labelsPanelCdt();
+    }//GEN-LAST:event_cbxCdtActionPerformed
+
+    private void btnCobrarCdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarCdtActionPerformed
+        cuentasCliente.get(0).consignar(cdtSeleccionado.getMontoARetirar());
+        cdtSeleccionado.setEstado("Completado");
+        llenarComboCdt();
+        BaseDeDatos.guardarCambios();
+    }//GEN-LAST:event_btnCobrarCdtActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     private void tipoSegundaCuenta(Cuentas segundaCuenta) {
         if(lbl1TipoCuenta.getText().equals("Ahorros"))
@@ -1079,9 +1295,22 @@ public class PanelClientes extends javax.swing.JFrame {
     }
 
     private void limpiarEtiquetas(JLabel[] etiquetasCuenta2) {
-        for (int i = 0; i < etiquetasCuenta2.length; i++) {
-            etiquetasCuenta2[i].setForeground(Color.white);
+        for (JLabel etiquetasCuenta21 : etiquetasCuenta2) {
+            etiquetasCuenta21.setForeground(Color.white);
         }
+    }
+    
+    private void llenarComboCdt() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (int i = 0; i < BaseDeDatos.sistema.getCantCdt(); i++) {
+            Object producto = BaseDeDatos.sistema.getCdt(i);
+            if(producto instanceof Cdt cdt && cdt.getID() == BaseDeDatos.IDsesionIniciada)
+                if(cdt.getEstado().equals("Activo"))
+                modelo.addElement(cdt.getFechaRetiro().toString());
+        }
+        modelo.addElement("Solicitar CDT");
+        cbxCdt.setModel(modelo);
+        cbxCdt.setSelectedIndex(-1);
     }
 
     /**
@@ -1121,18 +1350,24 @@ public class PanelClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidaUsuario;
+    private javax.swing.JButton btnCobrarCdt;
     private javax.swing.JButton btnPagarCredito;
     private javax.swing.JButton btnPagarTDC;
     private javax.swing.JButton btnSolicitarAdelantoTDC;
+    private javax.swing.JButton btnSolicitarCdt;
     private javax.swing.JButton btnSolicitarCredito;
     private javax.swing.JButton btnSolicitarTDC;
+    private javax.swing.JComboBox<String> cbxCdt;
     private javax.swing.JComboBox<String> cbxCreditos;
     private javax.swing.JComboBox<String> cbxCuotasCredito;
     private javax.swing.JComboBox<String> cbxCuotasTDC;
+    private javax.swing.JComboBox<String> cbxPlazoCdt;
     private javax.swing.JComboBox<String> cbxTDC;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1177,21 +1412,26 @@ public class PanelClientes extends javax.swing.JFrame {
     private javax.swing.JLabel lblCuotasRestantesTDC;
     private javax.swing.JLabel lblDeudaCredito;
     private javax.swing.JLabel lblDeudaTDC;
+    private javax.swing.JLabel lblDiasRestantesCdt;
     private javax.swing.JLabel lblFechaPagoCredito;
     private javax.swing.JLabel lblFechaPagoTDC;
     private javax.swing.JLabel lblFechaVencimiento;
     private javax.swing.JLabel lblLimiteTDC;
+    private javax.swing.JLabel lblMontoCobrarCdt;
     private javax.swing.JLabel lblNombreTarjeta;
     private javax.swing.JLabel lblNroTarjeta1;
     private javax.swing.JLabel lblNroTarjeta2;
     private javax.swing.JLabel lblNroTarjeta3;
     private javax.swing.JLabel lblNroTarjeta4;
     private javax.swing.JLabel lblSaldoTotal;
+    private javax.swing.JPanel panelCobroCdt;
+    private javax.swing.JPanel panelSolicitudCdt;
     private javax.swing.JPanel panelTDC;
     private javax.swing.JPanel planoTarjeta;
     private javax.swing.JLabel tagNroCuenta;
     private javax.swing.JLabel tagSaldo;
     private javax.swing.JLabel tagTipoCuenta;
+    private javax.swing.JTextField tbxMontoCdt;
     private javax.swing.JTextField tbxMontoCredito;
     private javax.swing.JTextField tbxMontoDeseadoTDC;
     private javax.swing.JTextField tbxMontoSolicitarTDC;

@@ -20,25 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class BaseDeDatos {
     public static SistemaDeDatos sistema = new SistemaDeDatos();
-    public static int contadorParaId;
-    public static int IDsesionIniciada;   
-    public static String nroCuentaEnUso;
+    public static int contadorParaId; //Mantiene guardado el número de ID para los clientes y puedan seguir la secuencia
+    public static int IDsesionIniciada;   //ID del usuario que acaba de iniciar sesión, se usa para cargar los elementos del panel clientes
+    public static String nroCuentaEnUso; //Variable auxiliar para consignaciones y retiros
     
     BaseDeDatos(){}
-    /*
-        public static Cuentas buscarCuentaPendientePorID(int id) {
-        Cuentas cuentaSalida=new Cuentas();
-        for (int i = 0; i < sistema.buscarClientePorID(id).cantidadDeProductos(); i++) {
-            if(sistema.buscarClientePorID(id).getProducto(i) instanceof Cuentas cuenta) {
-                if(cuenta.getEstado().equals("Pendiente"))
-                    cuentaSalida = cuenta;
-            }
-        }
-        return cuentaSalida;
-    }
-    */
 
-    
+
+    /**
+     * Método que carga los datos de los clientes y todos sus productos a partir de los archivos
+     */
     public static void cargarDatos() {
         try {
             cargarClientes();         
@@ -53,6 +44,9 @@ public class BaseDeDatos {
         }
     }
 
+     /**
+     * Método que guarda los clientes y sus productos a los archivos
+     */
     public static void guardarCambios()  {
         try {
             guardarClientes();
@@ -67,6 +61,9 @@ public class BaseDeDatos {
         }
     }
 
+    /**
+    *
+    */
     private static void guardarCreditos() throws IOException {
         AccesoAleatorio rafCreditos = new AccesoAleatorio(256);
         rafCreditos.crearArchivo(new File("Creditos.dat"));

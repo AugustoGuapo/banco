@@ -116,7 +116,8 @@ public class AccesoAleatorio {
         flujo.writeInt(cdt.getPlazo());
         flujo.writeFloat(cdt.getMontoDepositado());
         flujo.writeFloat(cdt.getMontoARetirar());
-        flujo.writeUTF(cdt.getEstado());
+        flujo.writeUTF(cdt.getEstado()+"\n");
+        flujo.writeUTF(cdt.getFechaRetiro().toString()+"\n");
     }
 
     public Cdt getCdt(int i) throws IOException {
@@ -127,7 +128,8 @@ public class AccesoAleatorio {
         cdt.setPlazo(flujo.readInt());
         cdt.setMontoDepositado(flujo.readFloat());
         cdt.setMontoARetirar(flujo.readFloat());
-        cdt.setEstado(flujo.readUTF());
+        cdt.setEstado(flujo.readUTF().strip());
+        cdt.setFechaRetiro(LocalDate.parse(flujo.readUTF().strip()));
         return cdt;
     }
     
@@ -163,6 +165,7 @@ public class AccesoAleatorio {
     
     public void setCredito(Creditos credito, int i) throws IOException {
         flujo.seek(i*tamañoRegistro);
+        flujo.writeFloat(credito.getMontoAdeudado());
         flujo.writeInt(credito.getID());
         flujo.writeUTF(credito.getTipoDeCredito());
         flujo.writeFloat(credito.getTasaDeInteres());
@@ -177,6 +180,7 @@ public class AccesoAleatorio {
     public Creditos getCredito(int i) throws IOException {
         Creditos credito = new Creditos();
         flujo.seek(i*tamañoRegistro);
+        credito.setMontoAdeudado(flujo.readFloat());
         credito.setID(flujo.readInt());
         credito.setTipoDeCredito(flujo.readUTF());
         credito.setTasaDeInteres(flujo.readFloat());

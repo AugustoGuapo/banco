@@ -41,6 +41,11 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnConsignar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         btnConsignar.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,6 +179,12 @@ public class ConsignarRetirarCuenta extends javax.swing.JFrame {
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         jLabel2.setForeground(Color.black);
     }//GEN-LAST:event_jLabel2MouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        BaseDeDatos.guardarCambios();
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

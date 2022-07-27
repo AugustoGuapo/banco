@@ -4,6 +4,8 @@
  */
 package clases_modelo;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author user
@@ -15,6 +17,7 @@ public class Cdt extends Productos {
     private float montoDepositado;
     private float montoARetirar;
     private String estado;
+    private LocalDate fechaRetiro;
     
     public Cdt(){};
 
@@ -92,6 +95,7 @@ public class Cdt extends Productos {
      * Calcula y hace set al atributo montoARetirar 
      */
    public void calculoMontoFinal() {
+       determinarInteres();
       montoARetirar = montoDepositado*(tasaDeInteres+1);
    }
    
@@ -142,6 +146,20 @@ public class Cdt extends Productos {
             }  
         }
         return posiciones;
+    }
+
+    /**
+     * @return the fechaRetiro
+     */
+    public LocalDate getFechaRetiro() {
+        return fechaRetiro;
+    }
+
+    /**
+     * @param fechaRetiro the fechaRetiro to set
+     */
+    public void setFechaRetiro(LocalDate fechaRetiro) {
+        this.fechaRetiro = fechaRetiro;
     }
 
 

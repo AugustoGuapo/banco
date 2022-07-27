@@ -12,6 +12,10 @@ import java.util.ArrayList;
  */
 public class SistemaDeDatos {
     
+    /**
+     * ArrayList para guardar todos los productos
+     */
+    
     private ArrayList<Clientes> listaClientes;
     private ArrayList<Empleados> listaEmpleados;
     private ArrayList<Cuentas> listaCuentas;

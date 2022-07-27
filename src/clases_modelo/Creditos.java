@@ -25,7 +25,7 @@ public class Creditos extends Productos {
     
     
     public void calcularCuota() {
-        setValorCuota(monto/cuotasAdeudadas);
+        setValorCuota(montoAdeudado/cuotasAdeudadas);
     }
     
     public float getValorCuota() {
