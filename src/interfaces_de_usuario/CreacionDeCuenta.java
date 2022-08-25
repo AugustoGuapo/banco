@@ -4,14 +4,9 @@
  */
 package interfaces_de_usuario;
 
-import clases_modelo.AccesoAleatorio;
 import clases_modelo.Clientes;
 import clases_modelo.Cuentas;
-import com.google.gson.Gson;
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -68,7 +63,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         btnGuardarCliente = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -91,11 +86,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre completo");
 
         tbxNombre.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tbxNombre.setForeground(new java.awt.Color(0, 0, 0));
         tbxNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tbxNombreKeyTyped(evt);
@@ -103,11 +96,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nro de documento");
 
         tbxDocumento.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tbxDocumento.setForeground(new java.awt.Color(0, 0, 0));
         tbxDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbxDocumentoActionPerformed(evt);
@@ -120,11 +111,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Correo electrónico");
 
         tbxEmail.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tbxEmail.setForeground(new java.awt.Color(0, 0, 0));
         tbxEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tbxEmailKeyTyped(evt);
@@ -132,18 +121,14 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de nacimiento");
 
-        dtcFechaNacimiento.setForeground(new java.awt.Color(0, 0, 0));
         dtcFechaNacimiento.setMaxSelectableDate(restarAños(LocalDate.now()));
 
         jLabel5.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Número telefónico");
 
         tbxNumTelefono.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tbxNumTelefono.setForeground(new java.awt.Color(0, 0, 0));
         tbxNumTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tbxNumTelefonoKeyReleased(evt);
@@ -154,10 +139,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Contraseña");
 
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jPasswordField1KeyTyped(evt);
@@ -165,10 +148,8 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Repetir contraseña");
 
-        jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jPasswordField2KeyTyped(evt);
@@ -176,11 +157,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Formulario para nuevos clientes");
 
         btnGuardarCliente.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        btnGuardarCliente.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardarCliente.setText("Enviar");
         btnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,22 +167,26 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Regresar");
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblRegresar.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        lblRegresar.setText("Regresar");
+        lblRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                lblRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblRegresarMouseExited(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Sexo");
 
         rbtSexo.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Masculino");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +201,6 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         rbtSexo.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("Femenino");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,12 +209,10 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Tipo de cuenta");
 
         rbtCuenta.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setText("Corriente");
         jRadioButton3.setAutoscrolls(true);
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +223,6 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
 
         rbtCuenta.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setText("Ahorros");
         jRadioButton4.setAutoscrolls(true);
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -253,11 +232,9 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Nombre de usuario");
 
         tbxUsuario.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
-        tbxUsuario.setForeground(new java.awt.Color(0, 0, 0));
         tbxUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tbxUsuarioKeyTyped(evt);
@@ -283,7 +260,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
+                            .addComponent(lblRegresar)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +353,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
+                .addComponent(lblRegresar)
                 .addGap(44, 44, 44))
         );
 
@@ -385,10 +362,10 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+    private void lblRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseClicked
         new InicioSesion().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel9MouseClicked
+    }//GEN-LAST:event_lblRegresarMouseClicked
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
         try {
@@ -555,14 +532,27 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
         BaseDeDatos.guardarCambios();
         System.exit(0);
     }//GEN-LAST:event_formWindowClosing
+
+    private void lblRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseEntered
+        lblRegresar.setForeground(Color.red);
+    }//GEN-LAST:event_lblRegresarMouseEntered
+
+    private void lblRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegresarMouseExited
+       lblRegresar.setForeground(Color.black);
+    }//GEN-LAST:event_lblRegresarMouseExited
     private LocalDate convertirFecha(Date fecha) {
         return fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
+    /**
+     * 
+     * @return un booleano representando si el usuario es valido para registrar, es decir, que no existe previamente un
+     * cliente con este nombre de usuario
+     */
     private boolean validarUsuario() {
         boolean salida = true;
         for (int i = 0; i < BaseDeDatos.sistema.cantClientes(); i++) {
-            if(tbxUsuario.getText().equals(BaseDeDatos.sistema.getCliente(i).getCredenciales().getUsuario())) 
+            if(tbxUsuario.getText().equalsIgnoreCase(BaseDeDatos.sistema.getCliente(i).getCredenciales().getUsuario())) 
                 salida = false;
         }
         return salida;
@@ -622,7 +612,6 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
@@ -630,6 +619,7 @@ public class CreacionDeCuenta extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JLabel lblRegresar;
     private javax.swing.ButtonGroup rbtCuenta;
     private javax.swing.ButtonGroup rbtSexo;
     private javax.swing.JTextField tbxDocumento;
