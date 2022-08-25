@@ -41,6 +41,6 @@ public class Credenciales {
     }
     
     public boolean verificarUsuarioContraseña(String usuario, String contraseña) {
-        return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
+        return this.usuario.equalsIgnoreCase(usuario) && this.contraseña.equals(contraseña);
     }
 }

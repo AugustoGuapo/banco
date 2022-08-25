@@ -49,6 +49,7 @@ public class BaseDeDatos {
      */
     public static void guardarCambios()  {
         try {
+            verificarCarpeta();
             guardarClientes();
             guardarCuentas();
             guardarCdt();
@@ -66,7 +67,7 @@ public class BaseDeDatos {
     */
     private static void guardarCreditos() throws IOException {
         AccesoAleatorio rafCreditos = new AccesoAleatorio(256);
-        rafCreditos.crearArchivo(new File("Creditos.dat"));
+        rafCreditos.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Creditos.dat"));
         for (int i = 0; i < sistema.getCantCreditos(); i++) {
             rafCreditos.setCredito(sistema.getCreditos(i), i);
         }
@@ -75,7 +76,7 @@ public class BaseDeDatos {
 
     private static void guardarTdc() throws IOException {
         AccesoAleatorio rafTdc = new AccesoAleatorio(256);
-        rafTdc.crearArchivo(new File("Tdc.dat"));
+        rafTdc.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Tdc.dat"));
         for (int i = 0; i < sistema.getCantTdc(); i++) {
             rafTdc.setTdc(sistema.getTdc(i), i);
         }
@@ -84,7 +85,7 @@ public class BaseDeDatos {
 
     private static void guardarCdt() throws IOException {
         AccesoAleatorio rafCdt = new AccesoAleatorio(256);
-        rafCdt.crearArchivo(new File("Cdt.dat"));
+        rafCdt.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Cdt.dat"));
         for (int i = 0; i < sistema.getCantCdt(); i++) {
             rafCdt.setCdt(sistema.getCdt(i), i);
         }
@@ -93,7 +94,7 @@ public class BaseDeDatos {
 
     private static void guardarCuentas() throws IOException {
         AccesoAleatorio rafCuentas = new AccesoAleatorio(256);
-        rafCuentas.crearArchivo(new File("Cuentas.dat"));
+        rafCuentas.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Cuentas.dat"));
         for (int i = 0; i < sistema.getCantCuentas(); i++) {
             rafCuentas.setCuenta(sistema.getCuentas(i), i);
         }
@@ -102,7 +103,7 @@ public class BaseDeDatos {
 
     private static void guardarClientes() throws HeadlessException, IOException {
         AccesoAleatorio rafClientes = new AccesoAleatorio(512);
-        rafClientes.crearArchivo(new File("Clientes.dat"));
+        rafClientes.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Clientes.dat"));
         for (int i = 0; i < sistema.cantClientes(); i++) {
                 rafClientes.setCliente(sistema.getCliente(i),i);
         }
@@ -111,13 +112,13 @@ public class BaseDeDatos {
     
     private static void guardarId() throws IOException {
         AccesoAleatorio id = new AccesoAleatorio(8);
-        id.crearArchivo(new File("id.dat"));
+        id.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\id.dat"));
         id.guardarId(contadorParaId);
         id.cerrar();
     }
     private static void cargarCreditos() throws IOException {
         AccesoAleatorio rafCreditos = new AccesoAleatorio(256);
-        rafCreditos.crearArchivo(new File("Creditos.dat"));
+        rafCreditos.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Creditos.dat"));
         for (int i = 0; i < rafCreditos.getNumeroRegistros(); i++) {
             sistema.setCreditos(rafCreditos.getCredito(i));
         }
@@ -126,7 +127,7 @@ public class BaseDeDatos {
 
     private static void cargarTdc() throws IOException {
         AccesoAleatorio rafTdc = new AccesoAleatorio(256);
-        rafTdc.crearArchivo(new File("Tdc.dat"));
+        rafTdc.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Tdc.dat"));
         for (int i = 0; i < rafTdc.getNumeroRegistros(); i++) {
             sistema.setTdc(rafTdc.getTdc(i));
         }
@@ -135,7 +136,7 @@ public class BaseDeDatos {
 
     private static void cargarCdt() throws IOException {
         AccesoAleatorio rafCdt = new AccesoAleatorio(256);
-        rafCdt.crearArchivo(new File("Cdt.dat"));
+        rafCdt.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Cdt.dat"));
         for (int i = 0; i < rafCdt.getNumeroRegistros(); i++) {
             sistema.setCdt(rafCdt.getCdt(i));
         }
@@ -144,7 +145,7 @@ public class BaseDeDatos {
 
     private static void cargarCuentas() throws IOException {        
         AccesoAleatorio rafCuentas = new AccesoAleatorio(256);
-        rafCuentas.crearArchivo(new File("Cuentas.dat"));
+        rafCuentas.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Cuentas.dat"));
         for (int i = 0; i <rafCuentas.getNumeroRegistros(); i++) {
             sistema.setCuentas(rafCuentas.getCuenta(i));
         }
@@ -153,7 +154,7 @@ public class BaseDeDatos {
 
     private static void cargarClientes() throws IOException {
         AccesoAleatorio rafClientes= new AccesoAleatorio(512);
-        rafClientes.crearArchivo(new File("Clientes.dat"));
+        rafClientes.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\Clientes.dat"));
         for (int i = 0; i < rafClientes.getNumeroRegistros(); i++) {
             sistema.añadirCliente(rafClientes.getCliente(i));
         }
@@ -162,9 +163,17 @@ public class BaseDeDatos {
     
     private static void cargarId() throws IOException {
         AccesoAleatorio id = new AccesoAleatorio(8);
-        id.crearArchivo(new File("id.dat"));
+        id.crearArchivo(new File("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde\\id.dat"));
         contadorParaId= id.cargarId();
         id.cerrar();
+    }
+    
+    private static void verificarCarpeta() {
+        String direccion = "C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\BancoVerde";
+        File carpeta = new File(direccion);
+        if (!carpeta.isDirectory()) {
+            carpeta.mkdir();
+        }
     }
 }
 

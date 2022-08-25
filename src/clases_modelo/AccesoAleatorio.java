@@ -1,11 +1,3 @@
-/*
-TAMAÑO DE OBJETOS:
-Clientes: 231 bytes
-Cuentas: 44 bytes
-Creditos: 36 bytes
-Tarjeta de credito: 82 bytes
-CDT: 32 bytes
-*/
 package clases_modelo;
 
 import java.io.*;
@@ -203,12 +195,6 @@ public class AccesoAleatorio {
         return flujo.readInt();
     }
     
-    public String cambiarTamañoStrings(int longitud, String string) {
-        StringBuilder sb = new StringBuilder(string);
-        sb.setLength(longitud);
-        return sb.toString();
-    }
-
     /**
      * @return the numeroRegistros
      */

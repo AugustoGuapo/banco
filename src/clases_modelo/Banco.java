@@ -31,15 +31,14 @@ public class Banco {
         BaseDeDatos.sistema.añadirEmpleado(empleado);
         BaseDeDatos.cargarDatos();
         reiniciarId();
-
-
     }
     
     
     /**
-     * Método que solo debe utilizarse en caso de borrar todos los archivos .dat creados
-     * se recomienda utilizarlo como una unica instrucción del main, correrlo y para que cree
-     * el archivo que va a llevar cuenta de los ID para los clientes y borrar su ejecución
+     * Método que reinicia a 0 el contador del ID de los clientes, la forma de usarlo es descomentarlo y comentar 
+     * el método "cargarDatos()" de la clase BaseDeDatos, luego cerrar el programa, volver a hacer comentario este método
+     * y descomentar cargarDatos(), se recomienda utilizarlo solo cuando se reinicie por completo los datos del programa (se
+     * borren los archivos .dat).
      */
     public static void reiniciarId() {
         try {
